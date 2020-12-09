@@ -1,7 +1,7 @@
 import { FirestoreService } from './../firestore.service';
 import { LoginService } from '../login.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { getCurrencySymbol } from '@angular/common';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -14,6 +14,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 export class GeneratorComponent implements OnInit, AfterViewInit {
   title = 'Secret Santa Generator';
   isLinear = true;
+  memberList: string[];
   firstFormGroup: FormGroup;
   exclusiveFormGroup: FormGroup;
   detailFormGroup: FormGroup;
@@ -46,15 +47,26 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     { value: true, viewValue: 'Set exclusions' },
   ];
 
-  constructor(private fb: FormBuilder, public LoginService: LoginService, private FirestoreService: FirestoreService) {}
+  constructor(
+    private fb: FormBuilder,
+    public LoginService: LoginService,
+    private FirestoreService: FirestoreService
+  ) {}
 
   ngOnInit(): void {
     this.firstFormGroup = this.fb.group({
       host: this.fb.group({
-        name: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
+        name: ['陳司翰 Max Chen', Validators.required],
+        email: [
+          'max.chen@tpisoftware.com',
+          [Validators.required, Validators.email],
+        ],
       }),
-      memberArray: this.fb.array([this.createItem()]),
+      memberArray: this.fb.array([
+        this.fb.group({ name: 'David', email: 'david@gmail.com' }),
+        this.fb.group({ name: 'Tom', email: 'tom@gmail.com' }),
+        this.createItem(),
+      ]),
     });
     this.exclusiveFormGroup = this.fb.group({
       isExclusive: ['', Validators.required],
@@ -73,14 +85,27 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
         "We're going to draw the names. You can watch the draw live.",
         Validators.required,
       ],
-      themes: [[
-        { name: 'Color' },
-        { name: 'Season' },
-        { name: 'Country' },
-        { name: 'Book' },
-        { name: 'ABC' },
-      ]],
+      themes: [
+        [
+          { name: 'Color' },
+          { name: 'Season' },
+          { name: 'Country' },
+          { name: 'Book' },
+          { name: 'ABC' },
+        ],
+      ],
     });
+    this.exclusiveFormGroup.get('isExclusive').valueChanges.subscribe((x) => {
+      if(x)
+      {
+        this.getExclusiveList();
+      }else{
+        this.removeExclusiveList();
+      }
+    });
+    this.firstFormGroup.valueChanges.subscribe(x =>{
+      this.memberList = [x.host.name,...x.memberArray.map(x=>x.name)]
+    })
   }
 
   ngAfterViewInit() {
@@ -93,18 +118,32 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     });
   }
   addItem(): void {
-    console.log(this.firstFormGroup.get('memberArray'));
     (this.firstFormGroup.get('memberArray') as FormArray).push(
       this.createItem()
     );
-    console.log(this.firstFormGroup.get('memberArray'));
   }
   removeItem(index: number): void {
     (this.firstFormGroup.get('memberArray') as FormArray).removeAt(index);
   }
 
+
+  getExclusiveList() {
+    const userData = [this.firstFormGroup.get('host').value ,
+       ...this.firstFormGroup.get('memberArray').value];
+    userData.forEach(ele => ele['exclusive']=[])
+    this.exclusiveFormGroup.addControl('exclusiveList',this.fb.array(userData.map(x => this.fb.group(x))));
+  }
+  removeExclusiveList()
+  {
+    this.exclusiveFormGroup.removeControl('exclusiveList');
+  }
+
   getControls() {
     return (this.firstFormGroup.get('memberArray') as FormArray).controls;
+  }
+
+  getExclusiveControls() {
+    return (this.exclusiveFormGroup.get('exclusiveList') as FormArray).controls;
   }
 
   showinfo() {
@@ -130,7 +169,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     };
 
     this.submitData = submitData;
-    console.log(submitData, submitData.members);
+    // console.log(submitData);
     this.FirestoreService.SetUserData(submitData);
   }
 

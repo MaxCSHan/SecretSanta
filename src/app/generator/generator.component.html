@@ -11,7 +11,7 @@
     </button>
   </div>
   <form [formGroup]="firstFormGroup">
-    <mat-vertical-stepper #stepper >
+    <mat-vertical-stepper #stepper linear>
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
           <ng-template matStepLabel>Fill out your name</ng-template>
@@ -95,7 +95,7 @@
                   />
                 </mat-form-field>
                 <button
-                  *ngIf="getControls().length > 1"
+                  *ngIf="getControls().length > 2"
                   (click)="removeItem(i)"
                   mat-icon-button
                   color="error"
@@ -133,6 +133,29 @@
               </mat-radio-button>
             </mat-radio-group>
           </div>
+          <ng-container *ngIf="exclusiveFormGroup.get('isExclusive').value">
+            <ng-container *ngFor="let member of getExclusiveControls()">
+              <form [formGroup]="member">
+              <div class="row">
+                {{member.value.name}}
+              </div>
+              <div class="row">
+                <mat-form-field appearance="fill">
+                  <mat-label>Choose the member</mat-label>
+                  <mat-select formControlName="exclusive" name="exclusive" multiple>
+                    <mat-option
+                      *ngFor="let option of memberList"
+                      [value]="option"
+                      [disabled]="option===member.value.name"
+                    >
+                      {{ option }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </form>
+            </ng-container>
+          </ng-container>
         </form>
         <button mat-raised-button matStepperNext>Next</button>
       </mat-step>
