@@ -1,3 +1,4 @@
+import { FirestoreService } from './../firestore.service';
 import { LoginService } from '../login.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -45,7 +46,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     { value: true, viewValue: 'Set exclusions' },
   ];
 
-  constructor(private fb: FormBuilder, public LoginService: LoginService) {}
+  constructor(private fb: FormBuilder, public LoginService: LoginService, private FirestoreService: FirestoreService) {}
 
   ngOnInit(): void {
     this.firstFormGroup = this.fb.group({
@@ -130,6 +131,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
 
     this.submitData = submitData;
     console.log(submitData, submitData.members);
+    this.FirestoreService.SetUserData(submitData);
   }
 
   getSymbol(code) {
