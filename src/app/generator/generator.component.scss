@@ -9,11 +9,23 @@
  display: flex;
  justify-content: space-between;
 }
+.block{
+  margin-top: 10px;
+}
 
 .rowitem{
   margin-right: 10px;
   display: flex;
   align-items: center;
+}
+
+::ng-deep .radioGp{
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+::ng-deep .radioBtn{
+  margin: 15px 0;
 }
 
 .stretch{

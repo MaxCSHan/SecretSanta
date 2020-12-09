@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "secret-santa-gen": {
+      "hosting": {
+        "SecretSanta": [
+          "secret-santa-gen"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "secret-santa-gen"
+  }
+}
