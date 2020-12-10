@@ -6,13 +6,16 @@
   </div>
 
   <div class="block">
-    <button *ngIf="!LoginService.isLoggedIn" (click)="loginWithG()" mat-raised-button color="primary">
+    <button
+      *ngIf="!LoginService.isLoggedIn"
+      (click)="loginWithG()"
+      mat-raised-button
+      color="primary"
+    >
       Sign in with your Google Account
     </button>
     <ng-container *ngIf="LoginService.isLoggedIn && LoginService.userData">
-      <h2>
-        Hello, {{LoginService.userData.displayName}}!
-      </h2>
+      <h2>Hello, {{ LoginService.userData.displayName }}!</h2>
       <div>
         <button (click)="logout()" mat-raised-button color="primary">
           Logout
@@ -22,7 +25,7 @@
   </div>
   <div class="mainform-container">
     <form class="mainform" [formGroup]="secretSantaFromGroup">
-      <mat-vertical-stepper #stepper >
+      <mat-vertical-stepper #stepper linear>
         <mat-step [stepControl]="secretSantaFromGroup.get('firstFormGroup')">
           <form [formGroup]="secretSantaFromGroup.get('firstFormGroup')">
             <ng-template matStepLabel>Fill out your name</ng-template>
@@ -33,11 +36,19 @@
                   <input
                     matInput
                     placeholder="Last name, First name"
-                    [formControl]="secretSantaFromGroup.get('firstFormGroup').get('host').get('name')"
+                    [formControl]="
+                      secretSantaFromGroup
+                        .get('firstFormGroup')
+                        .get('host')
+                        .get('name')
+                    "
                     required
                     matTooltip="A name is required"
                     [matTooltipDisabled]="
-                    secretSantaFromGroup.get('firstFormGroup').get('host').get('name').valid
+                      secretSantaFromGroup
+                        .get('firstFormGroup')
+                        .get('host')
+                        .get('name').valid
                     "
                     matTooltipPosition="above"
                     matTooltipClass="tooltip-error"
@@ -51,12 +62,20 @@
                   <input
                     matInput
                     placeholder="Your Email"
-                    [formControl]="secretSantaFromGroup.get('firstFormGroup').get('host').get('email')"
+                    [formControl]="
+                      secretSantaFromGroup
+                        .get('firstFormGroup')
+                        .get('host')
+                        .get('email')
+                    "
                     required
                     email
                     matTooltip="Not a valid Email format"
                     [matTooltipDisabled]="
-                    secretSantaFromGroup.get('firstFormGroup').get('host').get('email').valid
+                      secretSantaFromGroup
+                        .get('firstFormGroup')
+                        .get('host')
+                        .get('email').valid
                     "
                     matTooltipPosition="above"
                     matTooltipClass="tooltip-error"
@@ -125,7 +144,9 @@
           </form>
           <button mat-raised-button matStepperNext>Next</button>
         </mat-step>
-        <mat-step [stepControl]="secretSantaFromGroup.get('exclusiveFormGroup')">
+        <mat-step
+          [stepControl]="secretSantaFromGroup.get('exclusiveFormGroup')"
+        >
           <form [formGroup]="secretSantaFromGroup.get('exclusiveFormGroup')">
             <ng-template matStepLabel>Set your exclusions </ng-template>
             <div class="row">
@@ -134,7 +155,11 @@
             <div class="row">
               <mat-radio-group
                 required
-                [formControl]="secretSantaFromGroup.get('exclusiveFormGroup').get('isExclusive')"
+                [formControl]="
+                  secretSantaFromGroup
+                    .get('exclusiveFormGroup')
+                    .get('isExclusive')
+                "
                 name="isExclusive"
                 class="radioGp"
               >
@@ -148,7 +173,13 @@
                 </mat-radio-button>
               </mat-radio-group>
             </div>
-            <ng-container *ngIf="secretSantaFromGroup.get('exclusiveFormGroup').get('isExclusive').value">
+            <ng-container
+              *ngIf="
+                secretSantaFromGroup
+                  .get('exclusiveFormGroup')
+                  .get('isExclusive').value
+              "
+            >
               <ng-container *ngFor="let member of getExclusiveControls()">
                 <form [formGroup]="member">
                   <div class="row">
@@ -193,11 +224,12 @@
                   formControlName="groupName"
                   required
                   matTooltip="A group name is required"
-                    [matTooltipDisabled]="
-                    secretSantaFromGroup.get('detailFormGroup').get('groupName').valid
-                    "
-                    matTooltipPosition="above"
-                    matTooltipClass="tooltip-error"
+                  [matTooltipDisabled]="
+                    secretSantaFromGroup.get('detailFormGroup').get('groupName')
+                      .valid
+                  "
+                  matTooltipPosition="above"
+                  matTooltipClass="tooltip-error"
                 />
               </mat-form-field>
             </div>
@@ -215,11 +247,13 @@
                   formControlName="dateOfExchange"
                   required
                   matTooltip="Let's pick a date!"
-                    [matTooltipDisabled]="
-                    secretSantaFromGroup.get('detailFormGroup').get('dateOfExchange').valid
-                    "
-                    matTooltipPosition="above"
-                    matTooltipClass="tooltip-error"
+                  [matTooltipDisabled]="
+                    secretSantaFromGroup
+                      .get('detailFormGroup')
+                      .get('dateOfExchange').valid
+                  "
+                  matTooltipPosition="above"
+                  matTooltipClass="tooltip-error"
                 />
                 <mat-datepicker-toggle
                   [for]="datePicker"
@@ -244,7 +278,7 @@
                 </mat-form-field>
               </div>
               <div class="rowitem currency-input">
-                <mat-form-field >
+                <mat-form-field>
                   <mat-label>Budget</mat-label>
                   <input
                     matInput
@@ -254,13 +288,18 @@
                     pattern="[0-9]+"
                     matTooltip="Set a budget!"
                     [matTooltipDisabled]="
-                    secretSantaFromGroup.get('detailFormGroup').get('budget').valid
+                      secretSantaFromGroup.get('detailFormGroup').get('budget')
+                        .valid
                     "
                     matTooltipPosition="above"
                     matTooltipClass="tooltip-error"
                   />
                   <span matPrefix>{{
-                    getSymbol(secretSantaFromGroup.get('detailFormGroup').get("currency").value)
+                    getSymbol(
+                      secretSantaFromGroup
+                        .get("detailFormGroup")
+                        .get("currency").value
+                    )
                   }}</span>
                 </mat-form-field>
               </div>
@@ -271,7 +310,11 @@
                 <mat-label>Set up themes for gifts</mat-label>
                 <mat-chip-list #chipList formControlName="themes">
                   <mat-chip
-                    *ngFor="let theme of secretSantaFromGroup.get('detailFormGroup').get('themes').value"
+                    *ngFor="
+                      let theme of secretSantaFromGroup
+                        .get('detailFormGroup')
+                        .get('themes').value
+                    "
                     [selectable]="selectable"
                     [removable]="removable"
                     (removed)="remove(theme)"
@@ -299,11 +342,13 @@
                   formControlName="invitationMessage"
                   required
                   matTooltip="Leave a message!"
-                    [matTooltipDisabled]="
-                    secretSantaFromGroup.get('detailFormGroup').get('invitationMessage').valid
-                    "
-                    matTooltipPosition="above"
-                    matTooltipClass="tooltip-error"
+                  [matTooltipDisabled]="
+                    secretSantaFromGroup
+                      .get('detailFormGroup')
+                      .get('invitationMessage').valid
+                  "
+                  matTooltipPosition="above"
+                  matTooltipClass="tooltip-error"
                 ></textarea>
               </mat-form-field>
             </div>
@@ -312,7 +357,11 @@
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>Send out the invitations!</ng-template>
-          <button (click)="submit()" [ngClass]="{submit:true,submitted:submitted}" mat-raised-button>
+          <button
+            (click)="submit()"
+            [ngClass]="{ submit: true, submitted: submitted }"
+            mat-raised-button
+          >
             Submit
           </button>
         </mat-step>

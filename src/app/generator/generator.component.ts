@@ -1,4 +1,6 @@
 import { FirestoreService } from './../firestore.service';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
+
 import { LoginService } from '../login.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import {
@@ -23,10 +25,6 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   isLinear = true;
   memberList: string[];
   secretSantaFromGroup: FormGroup;
-  firstFormGroup: FormGroup;
-  exclusiveFormGroup: FormGroup;
-  detailFormGroup: FormGroup;
-  memberArray: FormArray;
   selectedCurrency: string;
   submitData = {};
   submitted = false;
@@ -60,8 +58,10 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     public LoginService: LoginService,
     private FirestoreService: FirestoreService,
-    private _snackBar: MatSnackBar
-  ) {}
+    private _snackBar: MatSnackBar,
+    private analytics: AngularFireAnalytics
+  ) {
+  }
 
   ngOnInit(): void {
     this.secretSantaFromGroup = this.fb.group({
@@ -95,42 +95,14 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
         ],
       })
     });
+    this.secretSantaFromGroup.valueChanges.subscribe((x) => {
+      if(this.submitted){
+        this.submitted = false;
+        this.openSnackBar('It seems like you made some changes, don\'t forget to update it!','close');
 
-    // this.firstFormGroup = this.fb.group({
-    //   host: this.fb.group({
-    //     name: ['', Validators.required],
-    //     email: ['', [Validators.required, Validators.email]],
-    //   }),
-    //   memberArray: this.fb.array([this.createItem(), this.createItem()]),
-    // });
-    // this.exclusiveFormGroup = this.fb.group({
-    //   isExclusive: [false, Validators.required],
-    // });
-    // this.memberArray = this.fb.array([this.createItem()]);
-    // console.log(
-    //   this.memberArray.controls[0],
-    //   this.memberArray.get([0]).get('name')
-    // );
+      }
+    });
 
-    // this.detailFormGroup = this.fb.group({
-    //   groupName: ['My Secret Santa', Validators.required],
-    //   dateOfExchange: ['', Validators.required],
-    //   currency: [''],
-    //   budget: ['', Validators.required],
-    //   invitationMessage: [
-    //     "We're going to draw the names. You can watch the draw live.",
-    //     Validators.required,
-    //   ],
-    //   themes: [
-    //     [
-    //       { name: 'Color' },
-    //       { name: 'Season' },
-    //       { name: 'Country' },
-    //       { name: 'Book' },
-    //       { name: 'ABC' },
-    //     ],
-    //   ],
-    // });
     this.secretSantaFromGroup.get('exclusiveFormGroup')
     .get('isExclusive').valueChanges.subscribe((x) => {
       if (x) {
@@ -185,9 +157,6 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     return (this.secretSantaFromGroup.get('exclusiveFormGroup').get('exclusiveList') as FormArray).controls;
   }
 
-  showinfo() {
-    console.log(this.memberArray);
-  }
 
   loginWithG() {
     this.LoginService.GoogleAuth().finally(() => {
@@ -219,6 +188,8 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       }
       this.submitted = true;
       this.openSnackBar('SUCCESS', 'close');
+      this.analytics.logEvent('submit_event', {submitData:submitData.details});
+
       // console.log(this.submitted)
     });
   }

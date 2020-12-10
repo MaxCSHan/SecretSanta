@@ -25,6 +25,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+
 import { environment } from '../environments/environment';
 import { GeneratorComponent } from './generator/generator.component';
 
@@ -54,6 +56,7 @@ import { GeneratorComponent } from './generator/generator.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireAnalyticsModule,
 
   ],
   providers: [],
