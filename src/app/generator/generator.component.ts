@@ -22,6 +22,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   title = 'Secret Santa Generator';
   isLinear = true;
   memberList: string[];
+  secretSantaFromGroup: FormGroup;
   firstFormGroup: FormGroup;
   exclusiveFormGroup: FormGroup;
   detailFormGroup: FormGroup;
@@ -63,54 +64,88 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.firstFormGroup = this.fb.group({
-      host: this.fb.group({
-        name: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
+    this.secretSantaFromGroup = this.fb.group({
+      firstFormGroup:this.fb.group({
+        host: this.fb.group({
+          name: ['', Validators.required],
+          email: ['', [Validators.required, Validators.email]],
+        }),
+        memberArray: this.fb.array([this.createItem(), this.createItem()]),
       }),
-      memberArray: this.fb.array([this.createItem(), this.createItem()]),
+      exclusiveFormGroup:this.fb.group({
+        isExclusive: [false, Validators.required],
+      }),
+      detailFormGroup:this.fb.group({
+        groupName: ['My Secret Santa', Validators.required],
+        dateOfExchange: ['', Validators.required],
+        currency: [''],
+        budget: ['', Validators.required],
+        invitationMessage: [
+          "We're going to draw the names. You can watch the draw live.",
+          Validators.required,
+        ],
+        themes: [
+          [
+            { name: 'Color' },
+            { name: 'Season' },
+            { name: 'Country' },
+            { name: 'Book' },
+            { name: 'ABC' },
+          ],
+        ],
+      })
     });
-    this.exclusiveFormGroup = this.fb.group({
-      isExclusive: [false, Validators.required],
-    });
+
+    // this.firstFormGroup = this.fb.group({
+    //   host: this.fb.group({
+    //     name: ['', Validators.required],
+    //     email: ['', [Validators.required, Validators.email]],
+    //   }),
+    //   memberArray: this.fb.array([this.createItem(), this.createItem()]),
+    // });
+    // this.exclusiveFormGroup = this.fb.group({
+    //   isExclusive: [false, Validators.required],
+    // });
     // this.memberArray = this.fb.array([this.createItem()]);
     // console.log(
     //   this.memberArray.controls[0],
     //   this.memberArray.get([0]).get('name')
     // );
-    this.detailFormGroup = this.fb.group({
-      groupName: ['My Secret Santa', Validators.required],
-      dateOfExchange: ['', Validators.required],
-      currency: [''],
-      budget: ['', Validators.required],
-      invitationMessage: [
-        "We're going to draw the names. You can watch the draw live.",
-        Validators.required,
-      ],
-      themes: [
-        [
-          { name: 'Color' },
-          { name: 'Season' },
-          { name: 'Country' },
-          { name: 'Book' },
-          { name: 'ABC' },
-        ],
-      ],
-    });
-    this.exclusiveFormGroup.get('isExclusive').valueChanges.subscribe((x) => {
+
+    // this.detailFormGroup = this.fb.group({
+    //   groupName: ['My Secret Santa', Validators.required],
+    //   dateOfExchange: ['', Validators.required],
+    //   currency: [''],
+    //   budget: ['', Validators.required],
+    //   invitationMessage: [
+    //     "We're going to draw the names. You can watch the draw live.",
+    //     Validators.required,
+    //   ],
+    //   themes: [
+    //     [
+    //       { name: 'Color' },
+    //       { name: 'Season' },
+    //       { name: 'Country' },
+    //       { name: 'Book' },
+    //       { name: 'ABC' },
+    //     ],
+    //   ],
+    // });
+    this.secretSantaFromGroup.get('exclusiveFormGroup')
+    .get('isExclusive').valueChanges.subscribe((x) => {
       if (x) {
         this.getExclusiveList();
       } else {
         this.removeExclusiveList();
       }
     });
-    this.firstFormGroup.valueChanges.subscribe((x) => {
+    this.secretSantaFromGroup.get('firstFormGroup').valueChanges.subscribe((x) => {
       this.memberList = [x.host.name, ...x.memberArray.map((x) => x.name)];
     });
   }
 
   ngAfterViewInit() {
-    this.firstFormGroup.updateValueAndValidity();
+    this.secretSantaFromGroup.get('firstFormGroup').updateValueAndValidity();
   }
   createItem(): FormGroup {
     return this.fb.group({
@@ -119,35 +154,35 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     });
   }
   addItem(): void {
-    (this.firstFormGroup.get('memberArray') as FormArray).push(
+    (this.secretSantaFromGroup.get('firstFormGroup').get('memberArray') as FormArray).push(
       this.createItem()
     );
   }
   removeItem(index: number): void {
-    (this.firstFormGroup.get('memberArray') as FormArray).removeAt(index);
+    (this.secretSantaFromGroup.get('firstFormGroup').get('memberArray') as FormArray).removeAt(index);
   }
 
   getExclusiveList() {
     const userData = [
-      this.firstFormGroup.get('host').value,
-      ...this.firstFormGroup.get('memberArray').value,
+      this.secretSantaFromGroup.get('firstFormGroup').get('host').value,
+      ...this.secretSantaFromGroup.get('firstFormGroup').get('memberArray').value,
     ];
     userData.forEach((ele) => (ele['exclusive'] = []));
-    this.exclusiveFormGroup.addControl(
+    (this.secretSantaFromGroup.get('exclusiveFormGroup') as FormGroup).addControl(
       'exclusiveList',
       this.fb.array(userData.map((x) => this.fb.group(x)))
     );
   }
   removeExclusiveList() {
-    this.exclusiveFormGroup.removeControl('exclusiveList');
+    (this.secretSantaFromGroup.get('exclusiveFormGroup') as FormGroup).removeControl('exclusiveList');
   }
 
   getControls() {
-    return (this.firstFormGroup.get('memberArray') as FormArray).controls;
+    return (this.secretSantaFromGroup.get('firstFormGroup').get('memberArray') as FormArray).controls;
   }
 
   getExclusiveControls() {
-    return (this.exclusiveFormGroup.get('exclusiveList') as FormArray).controls;
+    return (this.secretSantaFromGroup.get('exclusiveFormGroup').get('exclusiveList') as FormArray).controls;
   }
 
   showinfo() {
@@ -157,23 +192,23 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   loginWithG() {
     this.LoginService.GoogleAuth().finally(() => {
       const userData = this.LoginService.userData;
-      this.firstFormGroup
+      this.secretSantaFromGroup.get('firstFormGroup')
         .get('host')
         .get('name')
         .setValue(userData.displayName);
-      this.firstFormGroup.get('host').get('email').setValue(userData.email);
+      this.secretSantaFromGroup.get('firstFormGroup').get('host').get('email').setValue(userData.email);
     });
   }
 
   submit() {
     const submitData = {
-      host: this.firstFormGroup.get('host').value,
+      host: this.secretSantaFromGroup.get('firstFormGroup').get('host').value,
       members: [
-        this.firstFormGroup.get('host').value,
-        ...this.firstFormGroup.get('memberArray').value,
+        this.secretSantaFromGroup.get('firstFormGroup').get('host').value,
+        ...this.secretSantaFromGroup.get('firstFormGroup').get('memberArray').value,
       ],
-      exclusionList: this.exclusiveFormGroup.value,
-      details: this.detailFormGroup.value,
+      exclusionList: this.secretSantaFromGroup.get('exclusiveFormGroup').value,
+      details: this.secretSantaFromGroup.get('detailFormGroup').value,
     };
     this.submitData = submitData;
     // console.log(submitData);
@@ -198,8 +233,8 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
 
     // Add our fruit
     if ((value || '').trim()) {
-      this.detailFormGroup.get('themes').value.push({ name: value.trim() });
-      this.detailFormGroup.get('themes').updateValueAndValidity();
+      this.secretSantaFromGroup.get('detailFormGroup').get('themes').value.push({ name: value.trim() });
+      this.secretSantaFromGroup.get('detailFormGroup').get('themes').updateValueAndValidity();
     }
 
     // Reset the input value
@@ -209,9 +244,9 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   }
 
   remove(fruit): void {
-    const index = this.detailFormGroup.get('themes').value.indexOf(fruit);
+    const index = this.secretSantaFromGroup.get('detailFormGroup').get('themes').value.indexOf(fruit);
     if (index >= 0) {
-      this.detailFormGroup.get('themes').value.splice(index, 1);
+      this.secretSantaFromGroup.get('detailFormGroup').get('themes').value.splice(index, 1);
     }
   }
 
