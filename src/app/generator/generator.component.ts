@@ -11,6 +11,7 @@ import {
 import { getCurrencySymbol } from '@angular/common';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { from } from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-generator',
@@ -57,7 +58,8 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   constructor(
     private fb: FormBuilder,
     public LoginService: LoginService,
-    private FirestoreService: FirestoreService
+    private FirestoreService: FirestoreService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -176,8 +178,12 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     this.submitData = submitData;
     // console.log(submitData);
     this.FirestoreService.SetUserData(submitData).then((x) => {
-      this.FirestoreService.updateUserInfo(this.LoginService.userData.uid);
+      if(this.LoginService.isLoggedIn)
+      {
+        this.FirestoreService.updateUserInfo(this.LoginService.userData.uid);
+      }
       this.submitted = true;
+      this.openSnackBar('SUCCESS', 'close');
       // console.log(this.submitted)
     });
   }
@@ -211,5 +217,10 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
 
   logout(): void {
     this.LoginService.logout();
+  }
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }
