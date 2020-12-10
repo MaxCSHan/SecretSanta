@@ -6,269 +6,317 @@
   </div>
 
   <div class="block">
-    <button (click)="loginWithG()" mat-raised-button color="primary">
+    <button *ngIf="!LoginService.isLoggedIn" (click)="loginWithG()" mat-raised-button color="primary">
       Sign in with your Google Account
     </button>
+    <ng-container *ngIf="LoginService.isLoggedIn && LoginService.userData">
+      <h2>
+        Hello, {{LoginService.userData.displayName}}!
+      </h2>
+      <div>
+        <button (click)="logout()" mat-raised-button color="primary">
+          Logout
+        </button>
+      </div>
+    </ng-container>
   </div>
-  <form [formGroup]="firstFormGroup">
-    <mat-vertical-stepper #stepper linear>
-      <mat-step [stepControl]="firstFormGroup">
-        <form [formGroup]="firstFormGroup">
-          <ng-template matStepLabel>Fill out your name</ng-template>
-          <div class="row">
-            <div class="rowitem">
-              <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input
-                  matInput
-                  placeholder="Last name, First name"
-                  [formControl]="firstFormGroup.get('host').get('name')"
-                  required
-                  matTooltip="A name is required"
-                  [matTooltipDisabled]="
-                    firstFormGroup.get('host').get('name').valid
-                  "
-                  matTooltipPosition="above"
-                  matTooltipClass="tooltip-error"
-                />
-              </mat-form-field>
+  <div class="mainform-container">
+    <form class="mainform" [formGroup]="firstFormGroup">
+      <mat-vertical-stepper #stepper >
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Fill out your name</ng-template>
+            <div class="row">
+              <div class="rowitem">
+                <mat-form-field>
+                  <mat-label>Name</mat-label>
+                  <input
+                    matInput
+                    placeholder="Last name, First name"
+                    [formControl]="firstFormGroup.get('host').get('name')"
+                    required
+                    matTooltip="A name is required"
+                    [matTooltipDisabled]="
+                      firstFormGroup.get('host').get('name').valid
+                    "
+                    matTooltipPosition="above"
+                    matTooltipClass="tooltip-error"
+                  />
+                </mat-form-field>
+              </div>
+
+              <div class="rowitem">
+                <mat-form-field>
+                  <mat-label>Email</mat-label>
+                  <input
+                    matInput
+                    placeholder="Your Email"
+                    [formControl]="firstFormGroup.get('host').get('email')"
+                    required
+                    email
+                    matTooltip="Not a valid Email format"
+                    [matTooltipDisabled]="
+                      firstFormGroup.get('host').get('email').valid
+                    "
+                    matTooltipPosition="above"
+                    matTooltipClass="tooltip-error"
+                  />
+                </mat-form-field>
+              </div>
             </div>
 
-            <div class="rowitem">
-              <mat-form-field>
-                <mat-label>Email</mat-label>
-                <input
-                  matInput
-                  placeholder="Your Email"
-                  [formControl]="firstFormGroup.get('host').get('email')"
-                  required
-                  email
-                  matTooltip="Not a valid Email format"
-                  [matTooltipDisabled]="
-                    firstFormGroup.get('host').get('email').valid
-                  "
-                  matTooltipPosition="above"
-                  matTooltipClass="tooltip-error"
-                />
-              </mat-form-field>
-            </div>
-          </div>
-
-          <mat-label>Draw names with</mat-label>
-          <!-- <div *ngIf="firstFormGroup.get('host').get('name').value.length>0" class="row">
+            <mat-label>Draw names with</mat-label>
+            <!-- <div *ngIf="firstFormGroup.get('host').get('name').value.length>0" class="row">
             <input
               [(value)]="firstFormGroup.get('host').get('name').value"
               disabled
             />
           </div> -->
-          <ng-container *ngFor="let item of getControls(); let i = index">
-            <div class="row" [formGroup]="item">
-              <div class="rowitem">
-                <mat-form-field>
-                  <mat-label>Enter Member {{ i + 2 }}</mat-label>
-                  <input
-                    matInput
-                    placeholder="Last name, First name"
-                    formControlName="name"
-                    required
-                    matTooltip="A name is required"
-                    [matTooltipDisabled]="item.get('name').valid"
-                    matTooltipPosition="above"
-                    matTooltipClass="tooltip-error"
-                  />
-                </mat-form-field>
-              </div>
+            <ng-container *ngFor="let item of getControls(); let i = index">
+              <div class="row" [formGroup]="item">
+                <div class="rowitem userInput">
+                  <mat-form-field>
+                    <mat-label>Enter Member {{ i + 2 }}</mat-label>
+                    <input
+                      matInput
+                      placeholder="Last name, First name"
+                      formControlName="name"
+                      required
+                      matTooltip="A name is required"
+                      [matTooltipDisabled]="item.get('name').valid"
+                      matTooltipPosition="above"
+                      matTooltipClass="tooltip-error"
+                    />
+                  </mat-form-field>
+                </div>
 
-              <div class="rowitem">
-                <mat-form-field>
-                  <mat-label>Enter Member {{ i + 2 }}'s Email</mat-label>
-                  <input
-                    matInput
-                    placeholder="Email"
-                    formControlName="email"
-                    required
-                    email
-                    matTooltip="Not a valid Email format"
-                    [matTooltipDisabled]="item.get('email').valid"
+                <div class="rowitem userInput">
+                  <mat-form-field>
+                    <mat-label>Enter Member {{ i + 2 }}'s Email</mat-label>
+                    <input
+                      matInput
+                      placeholder="Email"
+                      formControlName="email"
+                      required
+                      email
+                      matTooltip="Not a valid Email format"
+                      [matTooltipDisabled]="item.get('email').valid"
+                      matTooltipPosition="above"
+                      matTooltipClass="tooltip-error"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div class="rowitem">
+                  <button
+                    *ngIf="getControls().length > 2"
+                    (click)="removeItem(i)"
+                    mat-icon-button
+                    color="error"
+                  >
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+            <button (click)="addItem()" mat-icon-button color="primary">
+              <mat-icon>add</mat-icon>
+            </button>
+          </form>
+          <button mat-raised-button matStepperNext>Next</button>
+        </mat-step>
+        <mat-step [stepControl]="exclusiveFormGroup">
+          <form [formGroup]="exclusiveFormGroup">
+            <ng-template matStepLabel>Set your exclusions </ng-template>
+            <div class="row">
+              <mat-label>Any exlcusion?</mat-label>
+            </div>
+            <div class="row">
+              <mat-radio-group
+                required
+                [formControl]="exclusiveFormGroup.get('isExclusive')"
+                name="isExclusive"
+                class="radioGp"
+              >
+                <mat-radio-button
+                  class="radioBtn"
+                  *ngFor="let isExclusive of isExclusives"
+                  [value]="isExclusive.value"
+                  [checked]="!isExclusive.value"
+                >
+                  {{ isExclusive.viewValue }}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <ng-container *ngIf="exclusiveFormGroup.get('isExclusive').value">
+              <ng-container *ngFor="let member of getExclusiveControls()">
+                <form [formGroup]="member">
+                  <div class="row">
+                    {{ member.value.name }}
+                  </div>
+                  <div class="row">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Choose the member</mat-label>
+                      <mat-select
+                        formControlName="exclusive"
+                        name="exclusive"
+                        multiple
+                      >
+                        <mat-option
+                          *ngFor="let option of memberList"
+                          [value]="option"
+                          [disabled]="option === member.value.name"
+                        >
+                          {{ option }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </form>
+              </ng-container>
+            </ng-container>
+          </form>
+          <button mat-raised-button matStepperNext>Next</button>
+        </mat-step>
+
+        <mat-step [stepControl]="detailFormGroup">
+          <form [formGroup]="detailFormGroup">
+            <ng-template matStepLabel>Set up gift exchange details</ng-template>
+            <ng-template matStepLabel>Group Name</ng-template>
+
+            <div class="row">
+              <mat-form-field>
+                <mat-label>Group Name</mat-label>
+                <input
+                  matInput
+                  placeholder="My Secret Santa"
+                  formControlName="groupName"
+                  required
+                  matTooltip="A group name is required"
+                    [matTooltipDisabled]="
+                      detailFormGroup.get('groupName').valid
+                    "
                     matTooltipPosition="above"
                     matTooltipClass="tooltip-error"
-                  />
-                </mat-form-field>
-                <button
-                  *ngIf="getControls().length > 2"
-                  (click)="removeItem(i)"
-                  mat-icon-button
-                  color="error"
-                >
-                  <mat-icon>remove_circle_outline</mat-icon>
-                </button>
-              </div>
+                />
+              </mat-form-field>
             </div>
-          </ng-container>
-          <button (click)="addItem()" mat-icon-button color="primary">
-            <mat-icon>add</mat-icon>
-          </button>
-        </form>
-        <button mat-raised-button matStepperNext>Next</button>
-      </mat-step>
-      <mat-step [stepControl]="exclusiveFormGroup">
-        <form [formGroup]="exclusiveFormGroup">
-          <ng-template matStepLabel>Set your exclusions </ng-template>
-          <div class="row">
-            <mat-label>Any exlcusion?</mat-label>
-          </div>
-          <div class="row">
-            <mat-radio-group
-              required
-              [formControl]="exclusiveFormGroup.get('isExclusive')"
-              name="isExclusive"
-              class="radioGp"
-            >
-              <mat-radio-button
-                class="radioBtn"
-                *ngFor="let isExclusive of isExclusives"
-                [value]="isExclusive.value"
-              >
-              {{isExclusive.viewValue}}
-              </mat-radio-button>
-            </mat-radio-group>
-          </div>
-          <ng-container *ngIf="exclusiveFormGroup.get('isExclusive').value">
-            <ng-container *ngFor="let member of getExclusiveControls()">
-              <form [formGroup]="member">
-              <div class="row">
-                {{member.value.name}}
-              </div>
-              <div class="row">
+
+            <div class="row">
+              <mat-form-field>
+                <mat-label>Date Of Exchange</mat-label>
+
+                <input
+                  type="text"
+                  name="dateforSC"
+                  matInput
+                  placeholder="Date Of Exchange"
+                  [matDatepicker]="datePicker"
+                  formControlName="dateOfExchange"
+                  required
+                  matTooltip="Let's pick a date!"
+                    [matTooltipDisabled]="
+                      detailFormGroup.get('dateOfExchange').valid
+                    "
+                    matTooltipPosition="above"
+                    matTooltipClass="tooltip-error"
+                />
+                <mat-datepicker-toggle
+                  [for]="datePicker"
+                  matSuffix
+                ></mat-datepicker-toggle>
+                <mat-datepicker #datePicker></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="row">
+              <div class="rowitem currency-select">
                 <mat-form-field appearance="fill">
-                  <mat-label>Choose the member</mat-label>
-                  <mat-select formControlName="exclusive" name="exclusive" multiple>
+                  <mat-label>Choose the currency</mat-label>
+                  <mat-select formControlName="currency" name="currency">
                     <mat-option
-                      *ngFor="let option of memberList"
-                      [value]="option"
-                      [disabled]="option===member.value.name"
+                      *ngFor="let currency of currencys"
+                      [value]="currency.value"
                     >
-                      {{ option }}
+                      {{ currency.viewValue }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
-            </form>
-            </ng-container>
-          </ng-container>
-        </form>
-        <button mat-raised-button matStepperNext>Next</button>
-      </mat-step>
+              <div class="rowitem currency-input">
+                <mat-form-field >
+                  <mat-label>Budget</mat-label>
+                  <input
+                    matInput
+                    placeholder="Budget"
+                    formControlName="budget"
+                    required
+                    pattern="[0-9]+"
+                    matTooltip="Set a budget!"
+                    [matTooltipDisabled]="
+                      detailFormGroup.get('budget').valid
+                    "
+                    matTooltipPosition="above"
+                    matTooltipClass="tooltip-error"
+                  />
+                  <span matPrefix>{{
+                    getSymbol(detailFormGroup.get("currency").value)
+                  }}</span>
+                </mat-form-field>
+              </div>
+            </div>
 
-      <mat-step [stepControl]="detailFormGroup">
-        <form [formGroup]="detailFormGroup">
-          <ng-template matStepLabel>Set up gift exchange details</ng-template>
-          <ng-template matStepLabel>Group Name</ng-template>
-
-          <div class="row">
-            <mat-form-field>
-              <mat-label>Group Name</mat-label>
-              <input
-                matInput
-                placeholder="Last name, First name"
-                formControlName="groupName"
-                required
-              />
-            </mat-form-field>
-          </div>
-
-          <div class="row">
-            <mat-form-field>
-              <mat-label>Date Of Exchange</mat-label>
-
-              <input
-                type="text"
-                name="dateforSC"
-                matInput
-                placeholder="Date Of Exchange"
-                [matDatepicker]="datePicker"
-                formControlName="dateOfExchange"
-                required
-              />
-              <mat-datepicker-toggle
-                [for]="datePicker"
-                matSuffix
-              ></mat-datepicker-toggle>
-              <mat-datepicker #datePicker></mat-datepicker>
-            </mat-form-field>
-          </div>
-
-          <div class="row">
-            <div class="rowitem">
-              <mat-form-field appearance="fill">
-                <mat-label>Choose the currency</mat-label>
-                <mat-select formControlName="currency" name="currency">
-                  <mat-option
-                    *ngFor="let currency of currencys"
-                    [value]="currency.value"
+            <div class="row">
+              <mat-form-field class="stretch">
+                <mat-label>Set up themes for gifts</mat-label>
+                <mat-chip-list #chipList formControlName="themes">
+                  <mat-chip
+                    *ngFor="let theme of detailFormGroup.get('themes').value"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(theme)"
                   >
-                    {{ currency.viewValue }}
-                  </mat-option>
-                </mat-select>
+                    {{ theme.name }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="New idea..."
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)"
+                  />
+                </mat-chip-list>
               </mat-form-field>
             </div>
-            <div class="rowitem">
-              <mat-form-field>
-                <mat-label>Budget</mat-label>
-                <input
+
+            <div class="row">
+              <mat-form-field class="stretch">
+                <mat-label>Invitation Message</mat-label>
+                <textarea
                   matInput
-                  placeholder="Budget"
-                  formControlName="budget"
+                  placeholder="Invitation Message"
+                  formControlName="invitationMessage"
                   required
-                  pattern="[0-9]+"
-                />
-                <span matPrefix>{{
-                  getSymbol(detailFormGroup.get("currency").value)
-                }}</span>
+                  matTooltip="Leave a message!"
+                    [matTooltipDisabled]="
+                      detailFormGroup.get('invitationMessage').valid
+                    "
+                    matTooltipPosition="above"
+                    matTooltipClass="tooltip-error"
+                ></textarea>
               </mat-form-field>
             </div>
-          </div>
-
-          <div class="row">
-
-          <mat-form-field class="stretch">
-            <mat-label>Set up themes for gifts</mat-label>
-            <mat-chip-list #chipList  formControlName="themes">
-              <mat-chip *ngFor="let theme of detailFormGroup.get('themes').value" [selectable]="selectable"
-                       [removable]="removable" (removed)="remove(theme)">
-                {{theme.name}}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-              </mat-chip>
-              <input placeholder="New idea..."
-
-                     [matChipInputFor]="chipList"
-                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                     [matChipInputAddOnBlur]="addOnBlur"
-                     (matChipInputTokenEnd)="add($event)">
-            </mat-chip-list>
-          </mat-form-field>
-        </div>
-
-          <div class="row">
-            <mat-form-field class="stretch">
-              <mat-label>Invitation Messge</mat-label>
-              <textarea
-                matInput
-                placeholder="Invitation Messge"
-                formControlName="invitationMessge"
-                required
-              ></textarea>
-            </mat-form-field>
-          </div>
-        </form>
-        <button mat-raised-button matStepperNext>Next</button>
-      </mat-step>
-      <mat-step>
-        <ng-template matStepLabel>Send out the invitations!</ng-template>
-        <button (click)="submit()" class="submit" mat-raised-button>
-          Submit
-        </button>
-      </mat-step>
-    </mat-vertical-stepper>
-  </form>
+          </form>
+          <button mat-raised-button matStepperNext>Next</button>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Send out the invitations!</ng-template>
+          <button (click)="submit()" [ngClass]="{submit:true,submitted:submitted}" mat-raised-button>
+            Submit
+          </button>
+        </mat-step>
+      </mat-vertical-stepper>
+    </form>
+  </div>
 </div>

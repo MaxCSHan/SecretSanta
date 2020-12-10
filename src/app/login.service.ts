@@ -1,6 +1,6 @@
+import { from } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { User } from '../app/shared/services/user';
-
 import firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {
@@ -21,9 +21,9 @@ export class LoginService {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.user = user;
-        sessionStorage.setItem('user', JSON.stringify(this.user));
-        if (this.isLoggedIn) {
-          this.log();
+        if(!this.isLoggedIn)
+        {
+          sessionStorage.setItem('user', JSON.stringify(this.user));
         }
       } else {
         sessionStorage.setItem('user', null);
@@ -36,33 +36,46 @@ export class LoginService {
   }
   // Auth logic to run auth providers
   AuthLogin(provider) {
-    return firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then((result) => {
+    return this.afAuth
+    .signInWithPopup(provider)
+    .then(
+      (result) => {
         this.SetUserData(result.user);
-      })
-      .catch((error) => {
-        window.alert(error);
-      });
+        const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+          `users/${result.user.uid}`
+        );
+        userRef.valueChanges().subscribe(x => {
+          if(x)
+          {
+            console.log('account created')
+            this.user = x ;
+          }else{
+            this.SetUserData(result.user);
+          }
+        });
+      }
+    ).catch((error) => {
+      window.alert(error);
+    });
+
   }
 
-  async loginWithGoogle() {
-    const res = await this.afAuth.signInWithPopup(
-      new firebase.auth.GoogleAuthProvider()
-    );
-    if (res) {
-      const userUID = res.user['uid'];
-      const userPic = res.user['photoURL'];
-      console.log('login success ', res.user, userUID, userPic);
-      const userInfo = res.additionalUserInfo.profile['name'];
-      this.loginData = res;
-      return { userInfo, userUID, userPic };
-    } else {
-      console.log('fail');
-    }
-    // this.router.navigate(['']);
-  }
+  // async loginWithGoogle() {
+  //   const res = await this.afAuth.signInWithPopup(
+  //     new firebase.auth.GoogleAuthProvider()
+  //   );
+  //   if (res) {
+  //     const userUID = res.user['uid'];
+  //     const userPic = res.user['photoURL'];
+  //     console.log('login success ', res.user, userUID, userPic);
+  //     const userInfo = res.additionalUserInfo.profile['name'];
+  //     this.loginData = res;
+  //     return { userInfo, userUID, userPic };
+  //   } else {
+  //     console.log('fail');
+  //   }
+  //   // this.router.navigate(['']);
+  // }
   get isLoggedIn(): boolean {
     const user = JSON.parse(sessionStorage.getItem('user'));
     return user !== null;
@@ -71,7 +84,8 @@ export class LoginService {
   /* Setting up user data when sign in with username/password,
   sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(user) {
+  SetUserData(user): Promise<void> {
+
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
@@ -81,24 +95,44 @@ export class LoginService {
       displayName: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
+      managerList: [],
+      groupList: []
+
     };
+    this.user = userData;
+
     return userRef.set(userData, {
       merge: true,
     });
   }
 
   get userData(): User{
-    const userData: User = {
-      uid: this.user.uid,
-      email: this.user.email,
-      displayName: this.user.displayName,
-      photoURL: this.user.photoURL,
-      emailVerified: this.user.emailVerified,
-    };
-    return userData;
+    const user = this.user;
+    if(user){
+      const userData: User = {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        emailVerified: user.emailVerified,
+        managerList: user.managerList || [],
+        groupList: user.managerList || []
+      };
+      return userData;
+    }
+    return ;
   }
 
-  log() {}
+  // userSubmitForm(newForm){
+  //   const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+  //     `users/${this.user.uid}/mangerList`
+  //   );
+  //   const mangerList: string[] = this.user.managerList.push(newForm);
+  //   return userRef.set(mangerList, {
+  //     merge: true,
+  //   });
+  // }
+
   async logout() {
     await this.afAuth.signOut();
     sessionStorage.removeItem('user');

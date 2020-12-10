@@ -1,34 +1,3 @@
-.container{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.row{
- display: flex;
- justify-content: space-between;
-}
-
-.rowitem{
-  margin-right: 10px;
-  display: flex;
-  align-items: center;
-}
-
-.stretch{
-width: 100%;
-}
-::ng-deep .tooltip-error {
-  background: #b71c1c;
-}
-
-::ng-deep .submit{
-  margin-top: 10px !important;
-  border: solid 1px #0080007a !important;
-  box-shadow: 0 0 10px #008000 !important;
-}
-
 
 :host {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -53,10 +22,4 @@ p {
 }
 
 
-.mat-stepper-vertical {
-  margin-top: 8px;
-}
 
-.mat-form-field {
-  margin-top: 16px;
-}

@@ -1,14 +1,24 @@
+@import '../../styles.scss';
+
 .container{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  flex: 1;
+  width: 100%;
+}
+.mainform-container{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .row{
  display: flex;
  justify-content: space-between;
+ flex-wrap:wrap
 }
+
 .block{
   margin-top: 10px;
 }
@@ -17,7 +27,14 @@
   margin-right: 10px;
   display: flex;
   align-items: center;
+  flex: 1;
+
 }
+
+.userInput{
+  flex-shrink: 1;
+}
+
 
 ::ng-deep .radioGp{
   display: flex;
@@ -28,8 +45,14 @@
   margin: 15px 0;
 }
 
+.currency-select{
+  flex-shrink:1;
+}
+.currency-input{
+  flex-shrink:2;
+}
 .stretch{
-width: 100%;
+width: 80%;
 }
 ::ng-deep .tooltip-error {
   background: #b71c1c;
@@ -37,9 +60,18 @@ width: 100%;
 
 ::ng-deep .submit{
   margin-top: 10px !important;
+  border: solid 1px #42a5f5 !important;
+  box-shadow: 0 0 10px #42a5f5 !important;
+}
+::ng-deep .submit.submitted{
   border: solid 1px #0080007a !important;
   box-shadow: 0 0 10px #008000 !important;
 }
+
+
+
+// border: solid 1px #0080007a !important;
+// box-shadow: 0 0 10px #008000 !important;
 
 
 :host {

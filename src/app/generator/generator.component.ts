@@ -1,10 +1,16 @@
 import { FirestoreService } from './../firestore.service';
 import { LoginService } from '../login.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { TooltipPosition } from '@angular/material/tooltip';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { getCurrencySymbol } from '@angular/common';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-generator',
@@ -21,6 +27,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   memberArray: FormArray;
   selectedCurrency: string;
   submitData = {};
+  submitted = false;
 
   selectable = true;
   removable = true;
@@ -56,20 +63,13 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.firstFormGroup = this.fb.group({
       host: this.fb.group({
-        name: ['陳司翰 Max Chen', Validators.required],
-        email: [
-          'max.chen@tpisoftware.com',
-          [Validators.required, Validators.email],
-        ],
+        name: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
       }),
-      memberArray: this.fb.array([
-        this.fb.group({ name: 'David', email: 'david@gmail.com' }),
-        this.fb.group({ name: 'Tom', email: 'tom@gmail.com' }),
-        this.createItem(),
-      ]),
+      memberArray: this.fb.array([this.createItem(), this.createItem()]),
     });
     this.exclusiveFormGroup = this.fb.group({
-      isExclusive: ['', Validators.required],
+      isExclusive: [false, Validators.required],
     });
     // this.memberArray = this.fb.array([this.createItem()]);
     // console.log(
@@ -81,7 +81,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       dateOfExchange: ['', Validators.required],
       currency: [''],
       budget: ['', Validators.required],
-      invitationMessge: [
+      invitationMessage: [
         "We're going to draw the names. You can watch the draw live.",
         Validators.required,
       ],
@@ -96,16 +96,15 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       ],
     });
     this.exclusiveFormGroup.get('isExclusive').valueChanges.subscribe((x) => {
-      if(x)
-      {
+      if (x) {
         this.getExclusiveList();
-      }else{
+      } else {
         this.removeExclusiveList();
       }
     });
-    this.firstFormGroup.valueChanges.subscribe(x =>{
-      this.memberList = [x.host.name,...x.memberArray.map(x=>x.name)]
-    })
+    this.firstFormGroup.valueChanges.subscribe((x) => {
+      this.memberList = [x.host.name, ...x.memberArray.map((x) => x.name)];
+    });
   }
 
   ngAfterViewInit() {
@@ -126,15 +125,18 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     (this.firstFormGroup.get('memberArray') as FormArray).removeAt(index);
   }
 
-
   getExclusiveList() {
-    const userData = [this.firstFormGroup.get('host').value ,
-       ...this.firstFormGroup.get('memberArray').value];
-    userData.forEach(ele => ele['exclusive']=[])
-    this.exclusiveFormGroup.addControl('exclusiveList',this.fb.array(userData.map(x => this.fb.group(x))));
+    const userData = [
+      this.firstFormGroup.get('host').value,
+      ...this.firstFormGroup.get('memberArray').value,
+    ];
+    userData.forEach((ele) => (ele['exclusive'] = []));
+    this.exclusiveFormGroup.addControl(
+      'exclusiveList',
+      this.fb.array(userData.map((x) => this.fb.group(x)))
+    );
   }
-  removeExclusiveList()
-  {
+  removeExclusiveList() {
     this.exclusiveFormGroup.removeControl('exclusiveList');
   }
 
@@ -150,11 +152,15 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     console.log(this.memberArray);
   }
 
-  async loginWithG() {
-    const res = await this.LoginService.GoogleAuth();
-    const userData = this.LoginService.userData;
-    this.firstFormGroup.get('host').get('name').setValue(userData.displayName);
-    this.firstFormGroup.get('host').get('email').setValue(userData.email);
+  loginWithG() {
+    this.LoginService.GoogleAuth().finally(() => {
+      const userData = this.LoginService.userData;
+      this.firstFormGroup
+        .get('host')
+        .get('name')
+        .setValue(userData.displayName);
+      this.firstFormGroup.get('host').get('email').setValue(userData.email);
+    });
   }
 
   submit() {
@@ -167,10 +173,13 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       exclusionList: this.exclusiveFormGroup.value,
       details: this.detailFormGroup.value,
     };
-
     this.submitData = submitData;
     // console.log(submitData);
-    this.FirestoreService.SetUserData(submitData);
+    this.FirestoreService.SetUserData(submitData).then((x) => {
+      this.FirestoreService.updateUserInfo(this.LoginService.userData.uid);
+      this.submitted = true;
+      // console.log(this.submitted)
+    });
   }
 
   getSymbol(code) {
@@ -198,5 +207,9 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     if (index >= 0) {
       this.detailFormGroup.get('themes').value.splice(index, 1);
     }
+  }
+
+  logout(): void {
+    this.LoginService.logout();
   }
 }
