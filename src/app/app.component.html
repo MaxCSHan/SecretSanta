@@ -1,8 +1,36 @@
 <mat-toolbar color="primary">
-  <button [matMenuTriggerFor]="menu" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+  <button
+    [matMenuTriggerFor]="menu"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
+    <div mat-menu-item>
+      <button
+        *ngIf="!loginService.isLoggedIn"
+        (click)="loginWithG()"
+        mat-raised-button
+        color="primary"
+        i18n
+      >
+        Sign in with your Google Account
+      </button>
+      <ng-container *ngIf="loginService.isLoggedIn && loginService.userData">
+        <h2 i18n>Hello, {{ loginService.userData.displayName }}!</h2>
+      </ng-container>
+
+    </div>
+    <ng-container  *ngIf="loginService.isLoggedIn && loginService.userData">
+      <div mat-menu-item>
+        <button class="logoutbtn"  i18n (click)="logout()" mat-raised-button color="primary">
+          Logout
+        </button>
+      </div>
+    </ng-container>
+
     <button [routerLink]="['']" mat-menu-item>
       <mat-icon>star_border</mat-icon>
       <span i18n>Secret Santa Generator</span>
@@ -16,9 +44,14 @@
       <span i18n>My groups</span>
     </button>
   </mat-menu>
-  <span  i18n>Secret Santa Generator</span>
+  <span i18n>Secret Santa Generator</span>
   <span class="example-spacer"></span>
-  <button [cdkCopyToClipboard]="url" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+  <button
+    [cdkCopyToClipboard]="url"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+  >
     <mat-icon>share</mat-icon>
   </button>
 </mat-toolbar>

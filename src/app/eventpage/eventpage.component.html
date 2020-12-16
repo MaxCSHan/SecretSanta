@@ -7,18 +7,18 @@
         *ngIf="user"
       >
         <div><mat-icon>person_pin</mat-icon></div>
-        <div>{{ user.displayName }}</div>
+        <div>{{ user.name }}</div>
       </div>
       <div>
-        <button mat-raised-button color="primary">My drawn name</button>
+        <button (click)="openSnackBar(user.target,'Done')" mat-raised-button color="primary">My drawn name</button>
       </div>
     </div>
     <div class="row">
       <h3>Member List</h3>
       <ng-container *ngIf="data">
-        <!-- <div *ngFor="let member of data.members">
+        <div *ngFor="let member of data.members">
           <div>{{ member.name }}</div>
-        </div> -->
+        </div>
       </ng-container>
     </div>
     <mat-divider></mat-divider>

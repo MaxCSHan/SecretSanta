@@ -4,9 +4,9 @@ admin.initializeApp();
 // const db = admin.firestore();
 import * as sgMail from '@sendgrid/mail';
 const API_KEY =
-  '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';
+  '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';
 // functions.config().sendgrid.key;
-const TEMPLATE_ID = 'd-bfa159c80a744f8cbd067da765fada17';
+const TEMPLATE_ID = 'd-e2e58bc8a7a64e56bba71eb7304df130';
 sgMail.setApiKey(API_KEY);
 
 // export const welcomeEmail = functions.auth.user().onCreate((user) => {
@@ -47,11 +47,12 @@ sgMail.setApiKey(API_KEY);
 export const justMail = functions.https.onCall(async (data) => {
   const msg = {
     to: data.email,
-    from: 'tsukasakasa1231@gmail.com',
+    from: 'maxchen.sihhan@gmail.com',
     subject: 'Secret Santa Generator ' + data.details.groupName + ' Result',
     text: 'some text and yeah',
     templateId: TEMPLATE_ID,
     dynamic_template_data: {
+      url:data.url,
       subject: data.subject,
       target: data.target,
       groupName: data.details.groupName,
@@ -62,11 +63,12 @@ export const justMail = functions.https.onCall(async (data) => {
     },
   };
 
-  try {
-    await sgMail.send(msg);
-  } catch (error) {
-    console.error(error.errors);
-    return error.errors;
-  }
+  // try {
+  // } catch (error) {
+  //   console.error(error.errors);
+  //   return error.errors;
+  // }
+  await sgMail.send(msg);
+
   return { success: true };
 });

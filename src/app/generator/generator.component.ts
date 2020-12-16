@@ -209,15 +209,15 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     ];
     const submitData: IGroupInfo = {
       host: this.secretSantaFromGroup.get('firstFormGroup').get('host').value,
-      members: memberList,
+      members: memberList.map(ele => JSON.parse(JSON.stringify(ele))),
       // memberList.map(ele => JSON.parse(JSON.stringify(ele))),
       exclusionList: this.secretSantaFromGroup.get('exclusiveFormGroup').value,
       details: this.secretSantaFromGroup.get('detailFormGroup').value,
     };
-    // submitData.members.forEach(
-    //   (ele) => (ele['uid'] = this.FirestoreService.createRandomId)
-    // );
-    this.hostData = submitData.host;
+    submitData.members.forEach((ele) => {
+      ele['uid'] = this.FirestoreService.createRandomId;
+    });
+    this.hostData = submitData.members[0];
     this.submitData = submitData;
     // console.log(submitData);
     this.FirestoreService.SetUserData(submitData).then((x) => {
@@ -308,11 +308,12 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
 
   justSendEmail() {
     const collable = this.fun.httpsCallable('justMail');
-    // console.log(this.distributor);
+    console.log(this.distributor);
     this.distributor.forEach((user) => {
       collable({
         subject: user.name,
         email: user.email,
+        url: `https://secret-santa-gen.web.app/overview/${this.FirestoreService.groupId}/${user.uid}`,
         details: this.secretSantaFromGroup.get('detailFormGroup').value,
       }).subscribe({
         next(x): void {
