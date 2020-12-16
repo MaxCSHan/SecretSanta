@@ -1,1 +1,26 @@
+<mat-toolbar color="primary">
+  <button [matMenuTriggerFor]="menu" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button [routerLink]="['']" mat-menu-item>
+      <mat-icon>star_border</mat-icon>
+      <span i18n>Secret Santa Generator</span>
+    </button>
+    <button [routerLink]="['account']" mat-menu-item>
+      <mat-icon>face</mat-icon>
+      <span i18n>My Account</span>
+    </button>
+    <button [routerLink]="['/groups']" mat-menu-item>
+      <mat-icon>dashboard</mat-icon>
+      <span i18n>My groups</span>
+    </button>
+  </mat-menu>
+  <span  i18n>Secret Santa Generator</span>
+  <span class="example-spacer"></span>
+  <button [cdkCopyToClipboard]="url" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+
 <router-outlet></router-outlet>

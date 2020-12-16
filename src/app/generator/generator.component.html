@@ -1,8 +1,8 @@
 <div class="container">
   <div class="title">
-    <h1>Secret Santa</h1>
-    <h1>Generator</h1>
-    <p>Organize your Secret Santa using Email or Text Message.</p>
+    <h1 i18n="site header">Secret Santa</h1>
+    <h1 i18n="site header">Generator</h1>
+    <p i18n>Organize your Secret Santa using Email or Text Message.</p>
   </div>
 
   <div class="block">
@@ -11,13 +11,14 @@
       (click)="loginWithG()"
       mat-raised-button
       color="primary"
+      i18n
     >
       Sign in with your Google Account
     </button>
     <ng-container *ngIf="LoginService.isLoggedIn && LoginService.userData">
-      <h2>Hello, {{ LoginService.userData.displayName }}!</h2>
+      <h2 i18n>Hello, {{ LoginService.userData.displayName }}!</h2>
       <div>
-        <button (click)="logout()" mat-raised-button color="primary">
+        <button i18n (click)="logout()" mat-raised-button color="primary">
           Logout
         </button>
       </div>
@@ -25,14 +26,14 @@
   </div>
   <div class="mainform-container">
     <form class="mainform" [formGroup]="secretSantaFromGroup">
-      <mat-vertical-stepper #stepper linear>
+      <mat-vertical-stepper #stepper>
         <mat-step [stepControl]="secretSantaFromGroup.get('firstFormGroup')">
           <form [formGroup]="secretSantaFromGroup.get('firstFormGroup')">
-            <ng-template matStepLabel>Fill out your name</ng-template>
+            <ng-template matStepLabel i18n>Fill out your name</ng-template>
             <div class="row">
               <div class="rowitem">
                 <mat-form-field>
-                  <mat-label>Name</mat-label>
+                  <mat-label i18n>Name</mat-label>
                   <input
                     matInput
                     placeholder="Last name, First name"
@@ -43,6 +44,7 @@
                         .get('name')
                     "
                     required
+                    i18n-matTooltip
                     matTooltip="A name is required"
                     [matTooltipDisabled]="
                       secretSantaFromGroup
@@ -58,7 +60,7 @@
 
               <div class="rowitem">
                 <mat-form-field>
-                  <mat-label>Email</mat-label>
+                  <mat-label i18n>Email</mat-label>
                   <input
                     matInput
                     placeholder="Your Email"
@@ -70,6 +72,7 @@
                     "
                     required
                     email
+                    i18n-matTooltip
                     matTooltip="Not a valid Email format"
                     [matTooltipDisabled]="
                       secretSantaFromGroup
@@ -84,7 +87,7 @@
               </div>
             </div>
 
-            <mat-label>Draw names with</mat-label>
+            <h3 i18n>Draw names with</h3>
             <!-- <div *ngIf="firstFormGroup.get('host').get('name').value.length>0" class="row">
             <input
               [(value)]="firstFormGroup.get('host').get('name').value"
@@ -95,12 +98,13 @@
               <div class="row" [formGroup]="item">
                 <div class="rowitem userInput">
                   <mat-form-field>
-                    <mat-label>Enter Member {{ i + 2 }}</mat-label>
+                    <mat-label i18n>Enter Member {{ i + 2 }}</mat-label>
                     <input
                       matInput
                       placeholder="Last name, First name"
                       formControlName="name"
                       required
+                      i18n-matTooltip
                       matTooltip="A name is required"
                       [matTooltipDisabled]="item.get('name').valid"
                       matTooltipPosition="above"
@@ -111,13 +115,14 @@
 
                 <div class="rowitem userInput">
                   <mat-form-field>
-                    <mat-label>Enter Member {{ i + 2 }}'s Email</mat-label>
+                    <mat-label i18n>Enter Member {{ i + 2 }}'s Email</mat-label>
                     <input
                       matInput
                       placeholder="Email"
                       formControlName="email"
                       required
                       email
+                      i18n-matTooltip
                       matTooltip="Not a valid Email format"
                       [matTooltipDisabled]="item.get('email').valid"
                       matTooltipPosition="above"
@@ -142,15 +147,16 @@
               <mat-icon>add</mat-icon>
             </button>
           </form>
-          <button mat-raised-button matStepperNext>Next</button>
+          <button mat-raised-button matStepperNext i18n>Next</button>
         </mat-step>
         <mat-step
           [stepControl]="secretSantaFromGroup.get('exclusiveFormGroup')"
         >
           <form [formGroup]="secretSantaFromGroup.get('exclusiveFormGroup')">
-            <ng-template matStepLabel>Set your exclusions </ng-template>
+            <ng-template matStepLabel i18n>Set your exclusions </ng-template>
+            <ng-container *ngIf="getControls().length > 3;else elsetmpl">
             <div class="row">
-              <mat-label>Any exlcusion?</mat-label>
+              <h3 i18n>Any exlcusion?</h3>
             </div>
             <div class="row">
               <mat-radio-group
@@ -187,7 +193,7 @@
                   </div>
                   <div class="row">
                     <mat-form-field appearance="fill">
-                      <mat-label>Choose the member</mat-label>
+                      <mat-label i18n>Choose the member</mat-label>
                       <mat-select
                         formControlName="exclusive"
                         name="exclusive"
@@ -206,23 +212,28 @@
                 </form>
               </ng-container>
             </ng-container>
+          </ng-container>
+          <ng-template #elsetmpl>
+            <div class="row">
+              <h3 i18n>There are too few people for exclusions.</h3>
+            </div>
+          </ng-template>
           </form>
-          <button mat-raised-button matStepperNext>Next</button>
+          <button mat-raised-button matStepperNext i18n>Next</button>
         </mat-step>
 
         <mat-step [stepControl]="secretSantaFromGroup.get('detailFormGroup')">
           <form [formGroup]="secretSantaFromGroup.get('detailFormGroup')">
-            <ng-template matStepLabel>Set up gift exchange details</ng-template>
-            <ng-template matStepLabel>Group Name</ng-template>
-
+            <ng-template i18n matStepLabel>Set up gift exchange details</ng-template>
             <div class="row">
               <mat-form-field>
-                <mat-label>Group Name</mat-label>
+                <mat-label i18n>Group Name</mat-label>
                 <input
                   matInput
                   placeholder="My Secret Santa"
                   formControlName="groupName"
                   required
+                  i18n-matTooltip
                   matTooltip="A group name is required"
                   [matTooltipDisabled]="
                     secretSantaFromGroup.get('detailFormGroup').get('groupName')
@@ -236,7 +247,7 @@
 
             <div class="row">
               <mat-form-field>
-                <mat-label>Date Of Exchange</mat-label>
+                <mat-label i18n>Date Of Exchange</mat-label>
 
                 <input
                   type="text"
@@ -246,6 +257,7 @@
                   [matDatepicker]="datePicker"
                   formControlName="dateOfExchange"
                   required
+                  i18n-matTooltip
                   matTooltip="Let's pick a date!"
                   [matTooltipDisabled]="
                     secretSantaFromGroup
@@ -266,7 +278,7 @@
             <div class="row">
               <div class="rowitem currency-select">
                 <mat-form-field appearance="fill">
-                  <mat-label>Choose the currency</mat-label>
+                  <mat-label i18n>Choose the currency</mat-label>
                   <mat-select formControlName="currency" name="currency">
                     <mat-option
                       *ngFor="let currency of currencys"
@@ -279,13 +291,14 @@
               </div>
               <div class="rowitem currency-input">
                 <mat-form-field>
-                  <mat-label>Budget</mat-label>
+                  <mat-label i18n>Budget</mat-label>
                   <input
                     matInput
                     placeholder="Budget"
                     formControlName="budget"
                     required
                     pattern="[0-9]+"
+                    i18n-matTooltip
                     matTooltip="Set a budget!"
                     [matTooltipDisabled]="
                       secretSantaFromGroup.get('detailFormGroup').get('budget')
@@ -307,7 +320,7 @@
 
             <div class="row">
               <mat-form-field class="stretch">
-                <mat-label>Set up themes for gifts</mat-label>
+                <mat-label i18n>Set up themes for gifts</mat-label>
                 <mat-chip-list #chipList formControlName="themes">
                   <mat-chip
                     *ngFor="
@@ -335,12 +348,13 @@
 
             <div class="row">
               <mat-form-field class="stretch">
-                <mat-label>Invitation Message</mat-label>
+                <mat-label i18n>Invitation Message</mat-label>
                 <textarea
                   matInput
                   placeholder="Invitation Message"
                   formControlName="invitationMessage"
                   required
+                  i18n-matTooltip
                   matTooltip="Leave a message!"
                   [matTooltipDisabled]="
                     secretSantaFromGroup
@@ -353,17 +367,27 @@
               </mat-form-field>
             </div>
           </form>
-          <button mat-raised-button matStepperNext>Next</button>
+          <button mat-raised-button matStepperNext i18n>Next</button>
         </mat-step>
         <mat-step>
-          <ng-template matStepLabel>Send out the invitations!</ng-template>
-          <button
+          <ng-template matStepLabel i18n>Send out the invitations!</ng-template>
+            <button
+            i18n
             (click)="submit()"
-            [ngClass]="{ submit: true, submitted: submitted }"
+            [ngClass]="{ submit: secretSantaFromGroup.valid, submitted: submitted }"
             mat-raised-button
           >
             Submit
           </button>
+          <button
+          i18n
+          *ngIf="submitted"
+          [routerLink]="[pagePath]"
+          mat-raised-button
+        >
+          Go to Page
+        </button>
+
         </mat-step>
       </mat-vertical-stepper>
     </form>

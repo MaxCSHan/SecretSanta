@@ -1,0 +1,32 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  text-align: left;
+  align-items: center;
+
+}
+.grid{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+.row{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap:wrap;
+  margin-top:1rem;
+  margin-bottom:1rem;
+
+ }
+
+ .memberTitle{
+   display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+ }

@@ -59,6 +59,13 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "zh": {
+              "aot": true,
+              "outputPath": "dist/under-construction-zh/",
+              "i18nFile": "src/locale/messages.zh.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "zh"
             }
           }
         },
@@ -70,6 +77,9 @@
           "configurations": {
             "production": {
               "browserTarget": "SecretSanta:build:production"
+            },
+            "zh": {
+              "browserTarget": "SecretSanta:build:zh"
             }
           }
         },

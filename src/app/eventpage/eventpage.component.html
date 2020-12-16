@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="grid">
+    <div class="row" *ngIf="data">
+      <h1>{{ data.details.groupName }}</h1>
+      <div
+        class="memberTitle"
+        *ngIf="user"
+      >
+        <div><mat-icon>person_pin</mat-icon></div>
+        <div>{{ user.displayName }}</div>
+      </div>
+      <div>
+        <button mat-raised-button color="primary">My drawn name</button>
+      </div>
+    </div>
+    <div class="row">
+      <h3>Member List</h3>
+      <ng-container *ngIf="data">
+        <!-- <div *ngFor="let member of data.members">
+          <div>{{ member.name }}</div>
+        </div> -->
+      </ng-container>
+    </div>
+    <mat-divider></mat-divider>
+    <ng-container *ngIf="data">
+      <div class="row">
+        <h3>Date of the gift exchange</h3>
+        <div>
+          {{ data.details.dateOfExchange.toDate() | date }}
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="row">
+        <h3>Ideas for the gift exchange</h3>
+        <mat-chip-list #chipList>
+          <mat-chip
+            *ngFor="let theme of data.details.themes"
+            color="primary"
+            selected
+          >
+            {{ theme.name }}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+      <mat-divider></mat-divider>
+
+      <div class="row">
+        <h3>Budget</h3>
+        <div>
+          {{ data.details.budget | currency: data.details.currency }}
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+
+      <div class="row">
+        <h3>Send a message to the group</h3>
+        <div>
+          {{ data.details.invitationMessage }}
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
