@@ -126,7 +126,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
         .get('memberArray') as FormArray)
         .controls
         .forEach( ele => {
-          ele.get('name').setValidators(nameDuplicateValid(this.userList));
+          ele.get('name').setValidators([required,nameDuplicateValid(this.userList)]);
         })
       this.secretSantaFromGroup
     .get('firstFormGroup')
