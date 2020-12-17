@@ -40,7 +40,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA];
   hostData: IEventUser;
-
+  memberSet = [];
   nameRequiredMessage = 'A name is required';
 
   themes = [
@@ -77,7 +77,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     this.secretSantaFromGroup = this.fb.group({
       firstFormGroup: this.fb.group({
         host: this.fb.group({
-          name: ['陳司翰 Max Chen', Validators.required],
+          name: ['陳司翰 Max Chen', required],
           email: [
             'max.chen@tpisoftware.com',
             [Validators.required, Validators.email],
@@ -89,7 +89,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
         isExclusive: [false, Validators.required],
       }),
       detailFormGroup: this.fb.group({
-        groupName: ['My Secret Santa', Validators.required],
+        groupName: ['My Secret Santa', required],
         dateOfExchange: ['', Validators.required],
         currency: [''],
         budget: ['', Validators.required],
@@ -119,6 +119,20 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     });
 
     this.secretSantaFromGroup
+    .get('firstFormGroup')
+    .get('memberArray').valueChanges.subscribe((x) => {
+      (this.secretSantaFromGroup
+        .get('firstFormGroup')
+        .get('memberArray') as FormArray)
+        .controls
+        .forEach( ele => {
+          ele.get('name').setValidators(nameDuplicateValid(this.userList));
+        })
+      this.secretSantaFromGroup
+    .get('firstFormGroup')
+    .get('memberArray').updateValueAndValidity({emitEvent:false});
+    });
+    this.secretSantaFromGroup
       .get('exclusiveFormGroup')
       .get('isExclusive')
       .valueChanges.subscribe((x) => {
@@ -135,14 +149,19 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       });
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.secretSantaFromGroup.get('firstFormGroup').updateValueAndValidity();
+    this.secretSantaFromGroup.get('firstFormGroup')
+        .get('memberArray').updateValueAndValidity();
+
   }
   createItem(): FormGroup {
-    return this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-    });
+    return this.fb.group(
+      {
+        name: ['', [required,nameDuplicateValid(this.userList)]],
+        email: ['', [required, Validators.email]],
+      }
+    );
   }
   addItem(): void {
     (this.secretSantaFromGroup
@@ -212,7 +231,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     ];
     const submitData: IGroupInfo = {
       host: this.secretSantaFromGroup.get('firstFormGroup').get('host').value,
-      members: memberList.map(ele => JSON.parse(JSON.stringify(ele))),
+      members: memberList.map((ele) => JSON.parse(JSON.stringify(ele))),
       // memberList.map(ele => JSON.parse(JSON.stringify(ele))),
       exclusionList: this.secretSantaFromGroup.get('exclusiveFormGroup').value,
       details: this.secretSantaFromGroup.get('detailFormGroup').value,
@@ -292,12 +311,12 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     collable({ data, context }).subscribe();
   }
 
-  get userList() {
-    return [
+  get userList(): IEventUser[] {
+    return this.secretSantaFromGroup ? [
       this.secretSantaFromGroup.get('firstFormGroup').get('host').value,
       ...this.secretSantaFromGroup.get('firstFormGroup').get('memberArray')
         .value,
-    ];
+    ] : [];
   }
   get distributor() {
     const list = this.userList;
@@ -330,21 +349,48 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     return `overview/${this.FirestoreService.groupId}/${this.hostData.uid}`;
   }
 }
-export function vValidator(val: string[], errorKey: string): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const errorV = val.filter((ele) => !isBlank(control.get(ele).value));
-    const rule = val
-      .map((ele) => control.get(ele).value)
-      .every((ele) => isBlank(ele));
+export function nameDuplicateValid(val: IEventUser[] ): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} | null => {
+    const errorKey = {};
+    const nameArray: string[] = val.map((ele) => ele.name);
+    nameArray.push(control.value);
+    const rule = nameArray.filter((x) => x === control.value).length <= 1;
+    console.log( nameArray,control.value, nameArray.filter((x) => x === control.value.name),rule)
     if (rule) {
       return null;
     } else {
-      return { [errorKey]: errorV };
+      errorKey['duplicated'] = 'This name is duplicated' ;
+      console.log(errorKey);
+      return errorKey;
     }
   };
 }
 
-export function isBlank(val: string): boolean {
+export function arrayDuplicateValid(): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} | null => {
+    const errorKey = {};
+    const nameArray: string[] = control.value.map((ele) => ele.name);
+    const isDu = nameArray.filter((x,index) => nameArray.indexOf(x) !== index);
+    console.log(isDu,'jhi')
+    if (isDu.length === 0) {
+      return null;
+    } else {
+      errorKey['duplicated'] = isDu ;
+      console.log(errorKey);
+      return errorKey;
+    }
+  };
+}
+
+export function required(control: AbstractControl): {[key: string]: any} | null  {
+
+  if ( !isNotBlank(control.value)){
+    return {['required']: 'A name is required'};
+  }
+  return null;
+};
+
+export function isNotBlank(val: string): boolean {
   const regEx = /.*\S.*/;
   return regEx.test(val) && val !== null;
 }

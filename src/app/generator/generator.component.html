@@ -103,9 +103,8 @@
                       matInput
                       placeholder="Last name, First name"
                       formControlName="name"
-                      required
                       i18n-matTooltip
-                      matTooltip="A name is required"
+                      [matTooltip]=" item.get('name').getError('required') || item.get('name').getError('duplicated') "
                       [matTooltipDisabled]="item.get('name').valid"
                       matTooltipPosition="above"
                       matTooltipClass="tooltip-error"
