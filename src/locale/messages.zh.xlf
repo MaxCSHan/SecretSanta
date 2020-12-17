@@ -304,6 +304,54 @@
           <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="c483007a5d2930bf15f807fd4262e9d97f6b6e5c" datatype="html">
+        <source> Go to Page </source>
+        <target>前往群組頁面</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/generator/generator.component.html</context>
+          <context context-type="linenumber">388,389</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="536c8bcf5596ff7a116e2d753537660c19692c43" datatype="html">
+        <source>Member List</source>
+        <target>成員名單</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ca9cb94a6b49e7a4156ae08f8fd76ea4088cdfa3" datatype="html">
+        <source> My drawn name </source>
+        <target>我抽到的名字</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e47c2b210cdd456ed0d8608a7e5fde0831603dd6" datatype="html">
+        <source>Date of the gift exchange</source>
+        <target>交換禮物日期</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b2c74f2951bd196ac8db2cb62009db48422633a6" datatype="html">
+        <source>Ideas for the gift exchange</source>
+        <target>交換禮物主題</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8747a9f3ba3f9f54d4831c5a38ebde36f79ea347" datatype="html">
+        <source>Send a message to the group</source>
+        <target>群組通知</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>

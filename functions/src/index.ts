@@ -48,7 +48,7 @@ export const justMail = functions.https.onCall(async (data) => {
   const msg = {
     to: data.email,
     from: 'maxchen.sihhan@gmail.com',
-    subject: 'Secret Santa Generator ' + data.details.groupName + ' Result',
+    subject: data.subject,
     text: 'some text and yeah',
     templateId: TEMPLATE_ID,
     dynamic_template_data: {

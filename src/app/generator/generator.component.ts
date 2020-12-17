@@ -4,10 +4,13 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { LoginService } from '../login.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { getCurrencySymbol } from '@angular/common';
@@ -308,7 +311,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
 
   justSendEmail() {
     const collable = this.fun.httpsCallable('justMail');
-    console.log(this.distributor);
+    // console.log(this.distributor);
     this.distributor.forEach((user) => {
       collable({
         subject: user.name,
@@ -317,7 +320,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
         details: this.secretSantaFromGroup.get('detailFormGroup').value,
       }).subscribe({
         next(x): void {
-          console.log(x, 'done');
+          // console.log(x, 'done');
         },
       });
     });
@@ -326,4 +329,22 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   get pagePath(): string {
     return `overview/${this.FirestoreService.groupId}/${this.hostData.uid}`;
   }
+}
+export function vValidator(val: string[], errorKey: string): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const errorV = val.filter((ele) => !isBlank(control.get(ele).value));
+    const rule = val
+      .map((ele) => control.get(ele).value)
+      .every((ele) => isBlank(ele));
+    if (rule) {
+      return null;
+    } else {
+      return { [errorKey]: errorV };
+    }
+  };
+}
+
+export function isBlank(val: string): boolean {
+  const regEx = /.*\S.*/;
+  return regEx.test(val) && val !== null;
 }

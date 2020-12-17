@@ -2,19 +2,28 @@
   <div class="grid">
     <div class="row" *ngIf="data">
       <h1>{{ data.details.groupName }}</h1>
-      <div
-        class="memberTitle"
-        *ngIf="user"
-      >
-        <div><mat-icon>person_pin</mat-icon></div>
+      <div class="memberTitle" *ngIf="user">
+        <div>
+          <div class="iconholder"><mat-icon>person_pin</mat-icon></div>
+        </div>
         <div>{{ user.name }}</div>
       </div>
       <div>
-        <button (click)="openSnackBar(user.target,'Done')" mat-raised-button color="primary">My drawn name</button>
+        <button
+          (click)="openSnackBar(user.target, 'Done')"
+          mat-raised-button
+          color="primary"
+          i18n
+        >
+          My drawn name
+        </button>
       </div>
     </div>
     <div class="row">
-      <h3>Member List</h3>
+      <div class="subtitle_container">
+        <div class="iconholder"><mat-icon>groups</mat-icon></div>
+        <h3 i18n>Member List</h3>
+      </div>
       <ng-container *ngIf="data">
         <div *ngFor="let member of data.members">
           <div>{{ member.name }}</div>
@@ -24,14 +33,21 @@
     <mat-divider></mat-divider>
     <ng-container *ngIf="data">
       <div class="row">
-        <h3>Date of the gift exchange</h3>
+        <div class="subtitle_container">
+          <div class="iconholder"><mat-icon>today</mat-icon></div>
+          <h3 i18n>Date of the gift exchange</h3>
+        </div>
         <div>
           {{ data.details.dateOfExchange.toDate() | date }}
         </div>
       </div>
       <mat-divider></mat-divider>
       <div class="row">
-        <h3>Ideas for the gift exchange</h3>
+        <div class="subtitle_container">
+          <div class="iconholder"><mat-icon>emoji_objects</mat-icon></div>
+
+          <h3 i18n>Ideas for the gift exchange</h3>
+        </div>
         <mat-chip-list #chipList>
           <mat-chip
             *ngFor="let theme of data.details.themes"
@@ -45,7 +61,10 @@
       <mat-divider></mat-divider>
 
       <div class="row">
-        <h3>Budget</h3>
+        <div class="subtitle_container">
+          <div class="iconholder"><mat-icon>attach_money</mat-icon></div>
+          <h3 i18n>Budget</h3>
+        </div>
         <div>
           {{ data.details.budget | currency: data.details.currency }}
         </div>
@@ -53,9 +72,22 @@
       <mat-divider></mat-divider>
 
       <div class="row">
-        <h3>Send a message to the group</h3>
+        <div class="subtitle_container">
+          <div class="iconholder"><mat-icon>message</mat-icon></div>
+
+          <h3 i18n>Send a message to the group</h3>
+        </div>
         <div>
-          {{ data.details.invitationMessage }}
+          <mat-card>
+            <mat-card-content>
+              {{ data.details.invitationMessage }}
+            </mat-card-content>
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>{{data.host.name}}{{data.host.uid}}</mat-card-title>
+              <mat-card-subtitle>From the host</mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
         </div>
       </div>
     </ng-container>
