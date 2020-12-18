@@ -1,3 +1,5 @@
+import { ShowresultComponent } from './showresult/showresult.component';
+import { RegisterComponent } from './register/register.component';
 import { EventpageComponent } from './eventpage/eventpage.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
 import { MygroupComponent } from './mygroup/mygroup.component';
@@ -9,7 +11,18 @@ const routes: Routes = [
   { path: '', component: GeneratorComponent },
   { path: 'account', component: MyprofileComponent },
   { path: 'groups', component: MygroupComponent },
-  { path: 'overview', children: [{ path: ':gid/:uid', component: EventpageComponent }] },
+  {
+    path: 'overview',
+    children: [{ path: ':gid/:uid', component: EventpageComponent }],
+  },
+  {
+    path: 'register',
+    children: [{ path: ':gid', component: RegisterComponent }],
+  },
+  {
+    path:'show-result',
+    component:ShowresultComponent
+  }
 ];
 
 @NgModule({

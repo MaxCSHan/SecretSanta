@@ -4,10 +4,14 @@
       <h1>{{ data.details.groupName }}</h1>
       <div class="memberTitle" *ngIf="user">
         <div>
-          <div class="iconholder"><mat-icon>person_pin</mat-icon></div>
+          <div class="iconholder person"><mat-icon class="person">person_pin</mat-icon></div>
         </div>
-        <div>{{ user.name }}</div>
+        <div>
+          <div>{{ user.name }}</div>
+          <div *ngIf="user && user.host">Organizer<mat-icon color="primary" >stars</mat-icon></div>
+        </div>
       </div>
+
       <div>
         <button
           (click)="openSnackBar(user.target, 'Done')"
@@ -89,6 +93,25 @@
             </mat-card-header>
           </mat-card>
         </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="user && user.host">
+      <mat-divider></mat-divider>
+      <div class="row">
+        <div class="subtitle_container">
+          <div class="iconholder"><mat-icon color="error">whatshot</mat-icon></div>
+
+          <h3 i18n>It's time to show the results!</h3>
+          <div class="iconholder"><mat-icon color="error">whatshot</mat-icon></div>
+
+        </div>
+        <div>
+          It's {{ data.details.dateOfExchange.toDate() | date }}
+          <button mat-button
+          [routerLink]="[goToResult]"
+          >Party Time🎉</button>
+        </div>
+
       </div>
     </ng-container>
   </div>

@@ -68,4 +68,8 @@ export class EventpageComponent implements OnInit {
       duration: 5000,
     });
   }
+
+  get goToResult(){
+    return `/show-result`;
+  }
 }

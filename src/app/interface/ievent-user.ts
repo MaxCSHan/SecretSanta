@@ -3,4 +3,6 @@ export interface IEventUser {
   email: string;
   target?: string;
   uid?: string;
+  drawn: boolean;
+  host?: boolean;
 }

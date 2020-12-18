@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="grid">
+    <div class="row" *ngIf="data">
+      <h1>Welcome to {{ data.details.groupName }}</h1>
+      <h2>Send drawn name email again</h2>
+      <div>Who would you like to re-send the drawn name notification email to?</div>
+      <div class="memberTitle" *ngIf="user">
+        <div>
+          <div class="iconholder"><mat-icon>person_pin</mat-icon></div>
+        </div>
+        <div>{{ user.name }}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="subtitle_container">
+        <div class="iconholder"><mat-icon>groups</mat-icon></div>
+        <h3 i18n>Name</h3>
+      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a member</mat-label>
+        <mat-select [formControl]="registerForm.get('name')">
+          <ng-container *ngIf="data">
+            <div *ngFor="let member of data.members">
+              <mat-option [value]="member.name">{{ member.name }}</mat-option>
+            </div>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="registerForm.get('name').valid" class="row">
+        <div class="subtitle_container">
+          <div class="iconholder"><mat-icon>groups</mat-icon></div>
+          <h3 i18n>Email</h3>
+        </div>
+        <mat-form-field>
+          <input required type="email" matInput
+          [formControl]="registerForm.get('email')"
+          placeholder="Ex. pat@example.com"
+          >
+        </mat-form-field>
+      </div>
+
+
+      <div class="row">
+        <button  (click)="temp()" mat-raised-button [disabled]="!registerForm.valid" color="primary" class="rounded">Send</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>

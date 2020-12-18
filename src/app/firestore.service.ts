@@ -33,18 +33,22 @@ export class FirestoreService {
       details: data.details,
       exclusionList: data.exclusionList,
       members: data.members.map((ele) => {
-        return { name: ele.name, email: ele.email };
+        return { name: ele.name, email: ele.email, drawn: false };
       }),
       timecode: firebase.firestore.FieldValue.serverTimestamp(),
     };
 
     data.members.forEach((ele) => {
-      userRef.collection('members').doc(ele.uid).set(ele, { merge: true });
+      //重複新增bug
+      userRef.collection('members').doc(ele.uid).set(ele);
     });
 
     return userRef.set(valueData, {
       merge: true,
     });
+    // return userRef.set(valueData, {
+    //   merge: true,
+    // });
   }
   updateUserInfo(userId) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(

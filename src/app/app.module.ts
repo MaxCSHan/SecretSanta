@@ -42,6 +42,8 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
 import { DashComponent } from './dash/dash.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { EventpageComponent } from './eventpage/eventpage.component';
+import { RegisterComponent } from './register/register.component';
+import { ShowresultComponent } from './showresult/showresult.component';
 
 
 @NgModule({
@@ -51,7 +53,9 @@ import { EventpageComponent } from './eventpage/eventpage.component';
     MygroupComponent,
     MyprofileComponent,
     DashComponent,
-    EventpageComponent
+    EventpageComponent,
+    RegisterComponent,
+    ShowresultComponent
   ],
   imports: [
     BrowserModule,
