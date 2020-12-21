@@ -162,7 +162,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   createItem(): FormGroup {
     return this.fb.group({
       name: ['', [required, nameDuplicateValid(this.userList)]],
-      email: ['', [required, Validators.email]],
+      email: ['', [Validators.email]],
     });
   }
   addItem(): void {
@@ -320,7 +320,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   get userList(): IEventUser[] {
     return this.secretSantaFromGroup
       ? [
-          this.secretSantaFromGroup.get('firstFormGroup').get('host').value,
+          {...this.secretSantaFromGroup.get('firstFormGroup').get('host').value,host:true},
           ...this.secretSantaFromGroup.get('firstFormGroup').get('memberArray')
             .value,
         ]
