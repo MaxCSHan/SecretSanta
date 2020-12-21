@@ -72,7 +72,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     private _snackBar: MatSnackBar,
     private analytics: AngularFireAnalytics,
     private fun: AngularFireFunctions
-    ) {}
+  ) {}
 
   ngOnInit(): void {
     this.secretSantaFromGroup = this.fb.group({
@@ -227,13 +227,16 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
 
   submit() {
     const memberList = [
-      {...this.secretSantaFromGroup.get('firstFormGroup').get('host').value,host:true},
+      {
+        ...this.secretSantaFromGroup.get('firstFormGroup').get('host').value,
+        host: true,
+      },
       ...this.secretSantaFromGroup.get('firstFormGroup').get('memberArray')
         .value,
     ];
     const submitData: IGroupInfo = {
-      host: this.secretSantaFromGroup.get('firstFormGroup').get('host').value,
-      members: memberList.map((ele) => JSON.parse(JSON.stringify(ele))),
+      host: JSON.parse(JSON.stringify(this.secretSantaFromGroup.get('firstFormGroup').get('host').value)),
+      members: this.distributor.map((ele) => JSON.parse(JSON.stringify(ele))),
       // memberList.map(ele => JSON.parse(JSON.stringify(ele))),
       exclusionList: this.secretSantaFromGroup.get('exclusiveFormGroup').value,
       details: this.secretSantaFromGroup.get('detailFormGroup').value,
@@ -325,12 +328,37 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   }
   get distributor() {
     const list = this.userList;
-    let counter = 0;
-    list.forEach((ele) => {
-      ele['target'] = 'AAA' + counter;
-      counter++;
-    });
+    const randomizedArr = this.shuffle(this.userList);
+    let pos = randomizedArr.indexOf(list[0]) + 1;
+    for (let i = 0; i < list.length; i++) {
+      if (pos === list.length) {
+        pos = pos - list.length;
+      }
+      list[i]['target'] = randomizedArr[pos].name;
+      pos++;
+    }
+    // list.forEach((ele, index) => {
+    //   ele['target'] = randomizedArr[index].name;
+    // });
     return list;
+  }
+  shuffle(array): any[] {
+    let m = array.length;
+    let t: any;
+    let i: number;
+
+    // While there remain elements to shuffle…
+    while (m) {
+      // Pick a remaining element…
+      i = Math.floor(Math.random() * m--);
+
+      // And swap it with the current element.
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
+    }
+
+    return array;
   }
 
   justSendEmail() {
@@ -354,7 +382,6 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     return `register/${this.FirestoreService.groupId}`;
     // return `overview/${this.FirestoreService.groupId}/${this.hostData.uid}`;
   }
-
 }
 export function nameDuplicateValid(val: IEventUser[]): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
