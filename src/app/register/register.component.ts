@@ -64,9 +64,9 @@ export class RegisterComponent implements OnInit {
     );
     // subscribe to changes
     this.queryObservable.subscribe((queriedItems) => {
-      console.log(queriedItems[0]);
+      // console.log(queriedItems[0]);
       this.uid = queriedItems[0].uid;
-      console.log('uid =>', this.uid);
+      // console.log('uid =>', this.uid);
       this.router.navigate([`overview/${this.gid}/${this.uid}`]);
 
     });
@@ -84,10 +84,13 @@ export class RegisterComponent implements OnInit {
         .collection('members', ref => ref.where('name', '==', ele))
         .valueChanges()
         .subscribe(x => {
-          if(x){
+          if(x[0].email){
             this.hasEmail = true;
             this.registerForm.get('email').setValue(x[0].email);
             this.registerForm.get('email').disable();
+          }else{
+            this.registerForm.get('email').setValue('');
+            this.registerForm.get('email').enable();
           }
         });
     });
