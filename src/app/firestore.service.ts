@@ -95,4 +95,24 @@ export class FirestoreService {
   get createRandomId(): string {
     return this.afs.createId();
   }
+
+  nameDrawn(groupId, userData) {
+    const groupRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `groups/${groupId}`
+    );
+    const valueData = {
+      members: userData,
+    };
+    return groupRef.set(valueData, {
+      merge: true,
+    });
+  }
+
+  updateEmail(groupId, userId, userEmail) {
+    const userData = this.afs
+      .doc(`groups/${groupId}`)
+      .collection('members')
+      .doc(userId);
+    return userData.set({ email: userEmail }, { merge: true });
+  }
 }

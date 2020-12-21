@@ -19,7 +19,13 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+.rowitem{
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  flex: 1;
 
+}
 .memberTitle {
   display: flex;
   justify-content: flex-start;

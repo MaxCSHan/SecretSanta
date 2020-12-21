@@ -226,14 +226,6 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   }
 
   submit() {
-    const memberList = [
-      {
-        ...this.secretSantaFromGroup.get('firstFormGroup').get('host').value,
-        host: true,
-      },
-      ...this.secretSantaFromGroup.get('firstFormGroup').get('memberArray')
-        .value,
-    ];
     const submitData: IGroupInfo = {
       host: JSON.parse(JSON.stringify(this.secretSantaFromGroup.get('firstFormGroup').get('host').value)),
       members: this.distributor.map((ele) => JSON.parse(JSON.stringify(ele))),
@@ -329,14 +321,16 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   get distributor() {
     const list = this.userList;
     const randomizedArr = this.shuffle(this.userList);
-    let pos = randomizedArr.indexOf(list[0]) + 1;
+    console.log(randomizedArr);
     for (let i = 0; i < list.length; i++) {
+      let pos = randomizedArr.indexOf(list[i]) + 1;
       if (pos === list.length) {
         pos = pos - list.length;
       }
       list[i]['target'] = randomizedArr[pos].name;
-      pos++;
     }
+    console.log(list);
+
     // list.forEach((ele, index) => {
     //   ele['target'] = randomizedArr[index].name;
     // });

@@ -41,7 +41,11 @@
 
 
       <div class="row">
-        <button  (click)="temp()" mat-raised-button [disabled]="!registerForm.valid" color="primary" class="rounded">Send</button>
+        <div class="rowitem">
+          <button (click)="changeEmail()" *ngIf="registerForm.get('email').value" mat-raised-button color="primary" class="rounded" >Change my email</button>
+          <button  (click)="temp()" mat-raised-button [disabled]="!registerForm.valid" color="primary" class="rounded">Send</button>
+        </div>
+
       </div>
 
     </div>

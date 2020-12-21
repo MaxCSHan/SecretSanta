@@ -18,6 +18,7 @@ import { IEventUser } from '../interface/ievent-user';
 export class EventpageComponent implements OnInit {
   data: IGroupInfo;
   user: any;
+  gid: string;
   constructor(
     private firestoreService: FirestoreService,
     private angularFirestore: AngularFirestore,
@@ -29,6 +30,7 @@ export class EventpageComponent implements OnInit {
     this.route.params.subscribe((params) => {
       // console.log('params :',params);
       if(params.gid){
+        this.gid = params.gid;
         this.firestoreService.getEventData(params.gid).then((x) => {
           x.subscribe((ele) => {
             const holder: IGroupInfo = ele;
@@ -71,5 +73,16 @@ export class EventpageComponent implements OnInit {
 
   get goToResult(){
     return `/show-result`;
+  }
+
+  checkDrawnName(){
+    this.openSnackBar(this.user.target, 'Done');
+    let newdata = this.data.members.filter(x => x.name!==this.user.name);
+    newdata.push({ name: this.user.name, email: this.user.email, drawn: true })
+    this.firestoreService.nameDrawn(this.gid,newdata);
+  }
+
+  get memberList(): any[]{
+    return this.data.members.sort((a: any,b: any) => a.name - b.name)
   }
 }

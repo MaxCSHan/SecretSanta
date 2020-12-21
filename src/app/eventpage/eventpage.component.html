@@ -4,17 +4,21 @@
       <h1>{{ data.details.groupName }}</h1>
       <div class="memberTitle" *ngIf="user">
         <div>
-          <div class="iconholder person"><mat-icon class="person">person_pin</mat-icon></div>
+          <div class="iconholder person">
+            <mat-icon class="person">person_pin</mat-icon>
+          </div>
         </div>
         <div>
           <div>{{ user.name }}</div>
-          <div *ngIf="user && user.host">Organizer<mat-icon color="primary" >stars</mat-icon></div>
+          <div *ngIf="user && user.host">
+            Organizer<mat-icon color="primary">stars</mat-icon>
+          </div>
         </div>
       </div>
 
       <div>
         <button
-          (click)="openSnackBar(user.target, 'Done')"
+          (click)="checkDrawnName()"
           mat-raised-button
           color="primary"
           i18n
@@ -23,13 +27,26 @@
         </button>
       </div>
     </div>
+    <ng-container *ngIf="data">
+      <mat-card>
+        <mat-card-content>
+          <h4>People haven't viewed their drawn names yet</h4>
+          <span *ngFor="let member of memberList">
+            <span *ngIf="!member.drawn">{{ member.name }}, </span>
+          </span>
+          hasn't check the drawn name yet!
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
     <div class="row">
       <div class="subtitle_container">
         <div class="iconholder"><mat-icon>groups</mat-icon></div>
         <h3 i18n>Member List</h3>
       </div>
       <ng-container *ngIf="data">
-        <div *ngFor="let member of data.members">
+        <div
+          *ngFor="let member of memberList"
+        >
           <div>{{ member.name }}</div>
         </div>
       </ng-container>
@@ -88,7 +105,9 @@
             </mat-card-content>
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>{{data.host.name}}{{data.host.uid}}</mat-card-title>
+              <mat-card-title
+                >{{ data.host.name }}{{ data.host.uid }}</mat-card-title
+              >
               <mat-card-subtitle>From the host</mat-card-subtitle>
             </mat-card-header>
           </mat-card>
@@ -99,19 +118,19 @@
       <mat-divider></mat-divider>
       <div class="row">
         <div class="subtitle_container">
-          <div class="iconholder"><mat-icon color="error">whatshot</mat-icon></div>
+          <div class="iconholder">
+            <mat-icon color="error">whatshot</mat-icon>
+          </div>
 
           <h3 i18n>It's time to show the results!</h3>
-          <div class="iconholder"><mat-icon color="error">whatshot</mat-icon></div>
-
+          <div class="iconholder">
+            <mat-icon color="error">whatshot</mat-icon>
+          </div>
         </div>
         <div>
           It's {{ data.details.dateOfExchange.toDate() | date }}
-          <button mat-button
-          [routerLink]="[goToResult]"
-          >Party Time🎉</button>
+          <button mat-button [routerLink]="[goToResult]">Party Time🎉</button>
         </div>
-
       </div>
     </ng-container>
   </div>
