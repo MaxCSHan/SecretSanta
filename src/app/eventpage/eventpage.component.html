@@ -10,7 +10,7 @@
         </div>
         <div>
           <div>{{ user.name }}</div>
-          <div *ngIf="user && user.host">
+          <div *ngIf="user && user.host" i18n>
             Organizer<mat-icon color="primary">stars</mat-icon>
           </div>
         </div>
@@ -30,11 +30,11 @@
     <ng-container *ngIf="data">
       <mat-card>
         <mat-card-content>
-          <h4>People haven't viewed their drawn names yet</h4>
+          <h4 i18n>People haven't viewed their drawn names yet</h4>
           <span *ngFor="let member of memberList">
             <span *ngIf="!member.drawn">{{ member.name }}, </span>
           </span>
-          hasn't check the drawn name yet!
+          <div i18n>hasn't check the drawn name yet!</div>
         </mat-card-content>
       </mat-card>
     </ng-container>
@@ -108,7 +108,7 @@
               <mat-card-title
                 >{{ data.host.name }}{{ data.host.uid }}</mat-card-title
               >
-              <mat-card-subtitle>From the host</mat-card-subtitle>
+              <mat-card-subtitle i18n>From the host</mat-card-subtitle>
             </mat-card-header>
           </mat-card>
         </div>
@@ -129,7 +129,7 @@
         </div>
         <div>
           It's {{ data.details.dateOfExchange.toDate() | date }}
-          <button mat-button [routerLink]="[goToResult]">Party Time🎉</button>
+          <button mat-button [routerLink]="[goToResult]" i18n>Party Time🎉</button>
         </div>
       </div>
     </ng-container>

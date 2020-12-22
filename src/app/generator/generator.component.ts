@@ -78,10 +78,10 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     this.secretSantaFromGroup = this.fb.group({
       firstFormGroup: this.fb.group({
         host: this.fb.group({
-          name: ['陳司翰 Max Chen', required],
+          name: ['', required],
           email: [
-            'max.chen@tpisoftware.com',
-            [Validators.required, Validators.email],
+            '',
+            [required, Validators.email],
           ],
         }),
         memberArray: this.fb.array([this.createItem(), this.createItem()]),
@@ -319,22 +319,21 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       : [];
   }
   get distributor() {
-    const list = this.userList;
     const randomizedArr = this.shuffle(this.userList);
-    console.log(randomizedArr);
-    for (let i = 0; i < list.length; i++) {
-      let pos = randomizedArr.indexOf(list[i]) + 1;
-      if (pos === list.length) {
-        pos = pos - list.length;
+    // console.log(randomizedArr);
+    for (let i = 0; i < randomizedArr.length; i++) {
+      let pos = i+1;
+      if (pos > randomizedArr.length - 1) {
+        pos = 0
       }
-      list[i]['target'] = randomizedArr[pos].name;
+      // console.log(randomizedArr[pos].name)
+      randomizedArr[i]['target'] = randomizedArr[pos]['name'];
     }
-    console.log(list);
-
+    // console.log(randomizedArr);
     // list.forEach((ele, index) => {
     //   ele['target'] = randomizedArr[index].name;
     // });
-    return list;
+    return randomizedArr;
   }
   shuffle(array): any[] {
     let m = array.length;

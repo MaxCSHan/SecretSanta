@@ -77,9 +77,12 @@ export class EventpageComponent implements OnInit {
 
   checkDrawnName(){
     this.openSnackBar(this.user.target, 'Done');
-    let newdata = this.data.members.filter(x => x.name!==this.user.name);
-    newdata.push({ name: this.user.name, email: this.user.email, drawn: true })
-    this.firestoreService.nameDrawn(this.gid,newdata);
+    if(!this.user.drawn)
+    {
+      let newdata = this.data.members.filter(x => x.name!==this.user.name);
+      newdata.push({ name: this.user.name, email: this.user.email, drawn: true })
+      this.firestoreService.nameDrawn(this.gid,newdata);
+    }
   }
 
   get memberList(): any[]{

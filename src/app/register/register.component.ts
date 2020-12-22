@@ -95,6 +95,7 @@ export class RegisterComponent implements OnInit,OnDestroy {
             this.registerForm.get('email').setValue(x[0].email);
             this.registerForm.get('email').disable();
           } else {
+            this.hasEmail = false;
             this.registerForm.get('email').setValue('');
             this.registerForm.get('email').enable();
           }

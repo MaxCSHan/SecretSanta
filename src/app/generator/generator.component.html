@@ -26,7 +26,7 @@
   </div>
   <div class="mainform-container">
     <form class="mainform" [formGroup]="secretSantaFromGroup">
-      <mat-vertical-stepper #stepper>
+      <mat-vertical-stepper #stepper linear>
         <mat-step [stepControl]="secretSantaFromGroup.get('firstFormGroup')" >
           <form [formGroup]="secretSantaFromGroup.get('firstFormGroup')">
             <ng-template matStepLabel i18n>Fill out your name</ng-template>
@@ -386,7 +386,7 @@
           Go to Page
         </button>
         <button           *ngIf="submitted"
-         [cdkCopyToClipboard]="pagePath" mat-raised-button color="primary">
+         [cdkCopyToClipboard]="'secret-santa-gen.firebaseapp.com/'+pagePath" mat-raised-button color="primary">
           <mat-icon>content_copy</mat-icon>
         </button>
 

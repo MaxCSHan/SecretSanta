@@ -352,6 +352,54 @@
           <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
+       <trans-unit id="473d7fb0fa1f703691a8ee5ca17b5df4a050bff6" datatype="html">
+        <source>People haven&apos;t viewed their drawn names yet</source>
+        <target>還有成員尚未查看抽籤結果，提醒他們吧！</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ed7f01680b5ca35dacf435c4b6cb696d0c2218f3" datatype="html">
+        <source>hasn&apos;t check the drawn name yet!</source>
+        <target>尚未查看抽籤結果。</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d50c15211a38c619a9874598f893697d53dccf8b" datatype="html">
+        <source>It&apos;s time to show the results!</source>
+        <target>時間到了，來公佈結果吧！</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">125</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e84d567dcd481efa24568308f8e4008017ab550f" datatype="html">
+        <source>Party Time🎉</source>
+        <target>派對時間🎉</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">132</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="87486550eafff32ae3b961565970ff2fc904573c" datatype="html">
+        <source>From the host</source>
+        <target>來自主辦人的訊息</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">111</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3fb3055595257db15d223448a3b90fb56f71deb6" datatype="html">
+        <source> Organizer<x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon color=&quot;primary&quot;&gt;"/>stars<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <target>主辦人<x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon color=&quot;primary&quot;&gt;"/>stars<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>

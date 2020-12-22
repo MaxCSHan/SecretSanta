@@ -1,9 +1,11 @@
 <div class="container">
   <div class="grid">
     <div class="row" *ngIf="data">
-      <h1>Welcome to {{ data.details.groupName }}</h1>
-      <h2>Send drawn name email again</h2>
-      <div>Who would you like to re-send the drawn name notification email to?</div>
+      <h1 i18n>Welcome to {{ data.details.groupName }}</h1>
+      <h2 i18n>Send drawn name email again</h2>
+      <div i18n>
+        Who would you like to re-send the drawn name notification email to?
+      </div>
       <div class="memberTitle" *ngIf="user">
         <div>
           <div class="iconholder"><mat-icon>person_pin</mat-icon></div>
@@ -17,7 +19,7 @@
         <h3 i18n>Name</h3>
       </div>
       <mat-form-field appearance="fill">
-        <mat-label>Choose a member</mat-label>
+        <mat-label i18n>Choose a member</mat-label>
         <mat-select [formControl]="registerForm.get('name')">
           <ng-container *ngIf="data">
             <div *ngFor="let member of data.members">
@@ -28,27 +30,49 @@
       </mat-form-field>
       <div *ngIf="registerForm.get('name').valid" class="row">
         <div class="subtitle_container">
-          <div class="iconholder"><mat-icon>groups</mat-icon></div>
+          <div class="iconholder"><mat-icon>email</mat-icon></div>
           <h3 i18n>Email</h3>
         </div>
         <mat-form-field>
-          <input required type="email" matInput
-          [formControl]="registerForm.get('email')"
-          placeholder="Ex. secretsanta@example.com"
-          >
+          <input
+            required
+            type="email"
+            matInput
+            [formControl]="registerForm.get('email')"
+            placeholder="Ex. secretsanta@example.com"
+            i18n-matTooltip
+            matTooltip="Not a valid Email format"
+            [matTooltipDisabled]="registerForm.get('email').valid"
+            matTooltipPosition="above"
+            matTooltipClass="tooltip-error"
+          />
         </mat-form-field>
       </div>
 
-
       <div class="row">
         <div class="rowitem">
-          <button (click)="changeEmail()" *ngIf="registerForm.get('email').value" mat-raised-button color="primary" class="rounded" >Change my email</button>
-          <button  (click)="temp()" mat-raised-button [disabled]="!registerForm.valid" color="primary" class="rounded">Send</button>
+          <button
+            (click)="changeEmail()"
+            *ngIf="hasEmail"
+            mat-raised-button
+            color="primary"
+            class="rounded"
+            i18n
+          >
+            Change my email
+          </button>
+          <button
+            (click)="temp()"
+            mat-raised-button
+            [disabled]="!registerForm.valid"
+            color="primary"
+            class="rounded"
+            i18n
+          >
+            Send
+          </button>
         </div>
-
       </div>
-
     </div>
-
   </div>
 </div>
