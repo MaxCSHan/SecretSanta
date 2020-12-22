@@ -21,8 +21,7 @@ export class LoginService {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.user = user;
-        if(!this.isLoggedIn)
-        {
+        if (!this.isLoggedIn) {
           sessionStorage.setItem('user', JSON.stringify(this.user));
         }
       } else {
@@ -31,33 +30,30 @@ export class LoginService {
     });
   }
   // Sign in with Google
-  GoogleAuth(): Promise<void>{
+  GoogleAuth(): Promise<void> {
     return this.AuthLogin(new firebase.auth.GoogleAuthProvider());
   }
   // Auth logic to run auth providers
   AuthLogin(provider) {
     return this.afAuth
-    .signInWithPopup(provider)
-    .then(
-      (result) => {
+      .signInWithPopup(provider)
+      .then((result) => {
         this.SetUserData(result.user);
         const userRef: AngularFirestoreDocument<any> = this.afs.doc(
           `users/${result.user.uid}`
         );
-        userRef.valueChanges().subscribe(x => {
-          if(x)
-          {
-            console.log('account created')
-            this.user = x ;
-          }else{
+        userRef.valueChanges().subscribe((x) => {
+          if (x) {
+            console.log('account created');
+            this.user = x;
+          } else {
             this.SetUserData(result.user);
           }
         });
-      }
-    ).catch((error) => {
-      window.alert(error);
-    });
-
+      })
+      .catch((error) => {
+        window.alert(error);
+      });
   }
 
   // async loginWithGoogle() {
@@ -85,7 +81,6 @@ export class LoginService {
   sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   SetUserData(user): Promise<void> {
-
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
@@ -95,9 +90,8 @@ export class LoginService {
       displayName: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
-      managerList: [],
-      groupList: []
-
+      managerList: firebase.firestore.FieldValue.arrayUnion('created'),
+      groupList: firebase.firestore.FieldValue.arrayUnion('created'),
     };
     this.user = userData;
 
@@ -106,9 +100,9 @@ export class LoginService {
     });
   }
 
-  get userData(): User{
+  get userData(): User {
     const user = this.user;
-    if(user){
+    if (user) {
       const userData: User = {
         uid: user.uid,
         email: user.email,
@@ -116,11 +110,25 @@ export class LoginService {
         photoURL: user.photoURL,
         emailVerified: user.emailVerified,
         managerList: user.managerList || [],
-        groupList: user.managerList || []
+        groupList: user.managerList || [],
       };
       return userData;
     }
-    return ;
+    return;
+  }
+  get userUid() {
+    return this.user.uid;
+  }
+
+  userCaseUpadated(caseId) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${this.user.uid}`
+    );
+
+    return userRef.update({
+      managerList: firebase.firestore.FieldValue.arrayUnion(caseId),
+      groupList: firebase.firestore.FieldValue.arrayUnion(caseId),
+    });
   }
 
   // userSubmitForm(newForm){

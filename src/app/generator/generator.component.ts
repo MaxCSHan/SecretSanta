@@ -241,7 +241,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     // console.log(submitData);
     this.FirestoreService.SetUserData(submitData).then((x) => {
       if (this.LoginService.isLoggedIn) {
-        this.FirestoreService.updateUserInfo(this.LoginService.userData.uid);
+        this.FirestoreService.updateUserInfo(this.LoginService.userData.uid,this.secretSantaFromGroup.get('firstFormGroup').get('host').value.name);
       }
       // this.justSendEmail();
       this.submitted = true;

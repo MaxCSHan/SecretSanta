@@ -4,6 +4,6 @@ export interface User {
   displayName: string;
   photoURL: string;
   emailVerified: boolean;
-  managerList?: string[];
-  groupList?: string[];
+  managerList?: any;
+  groupList?: any;
 }

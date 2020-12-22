@@ -7,6 +7,7 @@ import {
 } from '@angular/fire/firestore';
 import { IGroupInfo } from './interface/igroup-info';
 import { IEventUser } from './interface/ievent-user';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -43,29 +44,37 @@ export class FirestoreService {
       userRef.collection('members').doc(ele.uid).set(ele);
     });
 
-    return userRef.set(valueData, {
+    userRef.set(valueData, {
       merge: true,
     });
+
+    return this.ls.userCaseUpadated(this.Id);
+
     // return userRef.set(valueData, {
     //   merge: true,
     // });
   }
-  updateUserInfo(userId) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${userId}`
+  updateUserInfo(userId, memberName) {
+    const managerRef = this.afs
+      .doc(`users/${userId}`)
+      .collection('managerList')
+      .doc(this.Id);
+    managerRef.set(
+      { groupId: this.Id, nameAsMember: memberName },
+      {
+        merge: true,
+      }
     );
-    const preManArr: string[] = this.ls.userData.managerList;
-    const preGrouArr: string[] = this.ls.userData.groupList;
-
-    // console.log(preManArr);
-    preManArr.push(this.Id);
-    preGrouArr.push(this.Id);
-
-    const valueData = {
-      groupList: preGrouArr,
-      managerList: preManArr,
-    };
-    return userRef.update(valueData);
+    const grouprRef = this.afs
+      .doc(`users/${userId}`)
+      .collection('groupList')
+      .doc(this.Id);
+    return grouprRef.set(
+      { groupId: this.Id, nameAsMember: memberName },
+      {
+        merge: true,
+      }
+    );
   }
   async getUserData(userId) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(

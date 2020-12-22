@@ -27,7 +27,7 @@
         </button>
       </div>
     </div>
-    <ng-container *ngIf="data">
+    <ng-container *ngIf="data && !allDrawn">
       <mat-card>
         <mat-card-content>
           <h4 i18n>People haven't viewed their drawn names yet</h4>
@@ -44,9 +44,7 @@
         <h3 i18n>Member List</h3>
       </div>
       <ng-container *ngIf="data">
-        <div
-          *ngFor="let member of memberList"
-        >
+        <div *ngFor="let member of memberList">
           <div>{{ member.name }}</div>
         </div>
       </ng-container>
@@ -127,10 +125,25 @@
             <mat-icon color="error">whatshot</mat-icon>
           </div>
         </div>
-        <div>
-          It's {{ data.details.dateOfExchange.toDate() | date }}
-          <button mat-button [routerLink]="[goToResult]" i18n>Party Time🎉</button>
+        <div class=rowitem
+        i18n-matTooltip
+              matTooltip="Not all drawn names are viewed yet!"
+              [matTooltipDisabled]="allDrawn"
+              matTooltipPosition="above"
+              matTooltipClass="tooltip-error">
+          <div>
+            It's {{ data.details.dateOfExchange.toDate() | date }}
+          </div>
+          <button
+              mat-button
+              [routerLink]="[goToResult]"
+              [disabled]="!allDrawn"
+              i18n
+            >
+              Party Time🎉
+            </button>
         </div>
+
       </div>
     </ng-container>
   </div>

@@ -24,12 +24,11 @@ export class EventpageComponent implements OnInit {
     private angularFirestore: AngularFirestore,
     private route: ActivatedRoute,
     public loginService: LoginService,
-    private _snackBar: MatSnackBar,
-
+    private _snackBar: MatSnackBar
   ) {
     this.route.params.subscribe((params) => {
       // console.log('params :',params);
-      if(params.gid){
+      if (params.gid) {
         this.gid = params.gid;
         this.firestoreService.getEventData(params.gid).then((x) => {
           x.subscribe((ele) => {
@@ -37,18 +36,17 @@ export class EventpageComponent implements OnInit {
             // console.log(holder);
             this.data = holder;
             // console.log(this.data);
-
           });
         });
       }
       this.firestoreService.getEventUser(params.gid, params.uid).then((x) => {
-          x.subscribe((ele) => {
-            const holder = ele;
-            // console.log('user', ele);
-            this.user = holder;
-            // console.log(this.user);
-          });
+        x.subscribe((ele) => {
+          const holder = ele;
+          // console.log('user', ele);
+          this.user = holder;
+          // console.log(this.user);
         });
+      });
       // this.firestoreService.getUserData(params.uid).then((x) => {
       //   x.subscribe((ele) => {
       //     const holder = ele;
@@ -57,13 +55,10 @@ export class EventpageComponent implements OnInit {
       //     // console.log(this.user);
       //   });
       // });
-
     });
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
@@ -71,21 +66,29 @@ export class EventpageComponent implements OnInit {
     });
   }
 
-  get goToResult(){
+  get goToResult() {
     return `/show-result`;
   }
 
-  checkDrawnName(){
+  checkDrawnName() {
     this.openSnackBar(this.user.target, 'Done');
-    if(!this.user.drawn)
-    {
-      let newdata = this.data.members.filter(x => x.name!==this.user.name);
-      newdata.push({ name: this.user.name, email: this.user.email, drawn: true })
-      this.firestoreService.nameDrawn(this.gid,newdata);
+    if (!this.user.drawn) {
+      let newdata = this.data.members.filter((x) => x.name !== this.user.name);
+      newdata.push({
+        name: this.user.name,
+        email: this.user.email,
+        drawn: true,
+      });
+      this.firestoreService.nameDrawn(this.gid, newdata);
     }
   }
 
-  get memberList(): any[]{
-    return this.data.members.sort((a: any,b: any) => a.name - b.name)
+  get memberList(): any[] {
+    return this.data.members.sort((a: any, b: any) =>
+      a.name >= b.name ? 0 : -1
+    );
+  }
+  get allDrawn(): boolean {
+    return this.data.members.every((ele) => ele.drawn === true);
   }
 }

@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc",
+    "startzh":"ng serve --configuration=zh --port 5050"
   },
   "private": true,
   "dependencies": {
