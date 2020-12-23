@@ -79,10 +79,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       firstFormGroup: this.fb.group({
         host: this.fb.group({
           name: ['', required],
-          email: [
-            '',
-            [required, Validators.email],
-          ],
+          email: ['', [required, Validators.email]],
         }),
         memberArray: this.fb.array([this.createItem(), this.createItem()]),
       }),
@@ -227,7 +224,11 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
 
   submit() {
     const submitData: IGroupInfo = {
-      host: JSON.parse(JSON.stringify(this.secretSantaFromGroup.get('firstFormGroup').get('host').value)),
+      host: JSON.parse(
+        JSON.stringify(
+          this.secretSantaFromGroup.get('firstFormGroup').get('host').value
+        )
+      ),
       members: this.distributor.map((ele) => JSON.parse(JSON.stringify(ele))),
       // memberList.map(ele => JSON.parse(JSON.stringify(ele))),
       exclusionList: this.secretSantaFromGroup.get('exclusiveFormGroup').value,
@@ -241,7 +242,11 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     // console.log(submitData);
     this.FirestoreService.SetUserData(submitData).then((x) => {
       if (this.LoginService.isLoggedIn) {
-        this.FirestoreService.updateUserInfo(this.LoginService.userData.uid,this.secretSantaFromGroup.get('firstFormGroup').get('host').value.name);
+        this.FirestoreService.updateUserInfo(
+          this.LoginService.userData.uid,
+          this.secretSantaFromGroup.get('detailFormGroup').get('groupName').value,
+          this.secretSantaFromGroup.get('firstFormGroup').get('host').value.name
+        );
       }
       // this.justSendEmail();
       this.submitted = true;
@@ -312,7 +317,11 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   get userList(): IEventUser[] {
     return this.secretSantaFromGroup
       ? [
-          {...this.secretSantaFromGroup.get('firstFormGroup').get('host').value,host:true},
+          {
+            ...this.secretSantaFromGroup.get('firstFormGroup').get('host')
+              .value,
+            host: true,
+          },
           ...this.secretSantaFromGroup.get('firstFormGroup').get('memberArray')
             .value,
         ]
@@ -322,9 +331,9 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     const randomizedArr = this.shuffle(this.userList);
     // console.log(randomizedArr);
     for (let i = 0; i < randomizedArr.length; i++) {
-      let pos = i+1;
+      let pos = i + 1;
       if (pos > randomizedArr.length - 1) {
-        pos = 0
+        pos = 0;
       }
       // console.log(randomizedArr[pos].name)
       randomizedArr[i]['target'] = randomizedArr[pos]['name'];

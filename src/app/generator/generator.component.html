@@ -26,7 +26,7 @@
   </div>
   <div class="mainform-container">
     <form class="mainform" [formGroup]="secretSantaFromGroup">
-      <mat-vertical-stepper #stepper linear>
+      <mat-vertical-stepper #stepper >
         <mat-step [stepControl]="secretSantaFromGroup.get('firstFormGroup')" >
           <form [formGroup]="secretSantaFromGroup.get('firstFormGroup')">
             <ng-template matStepLabel i18n>Fill out your name</ng-template>

@@ -9,6 +9,8 @@ import {
 } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { IEventUser } from '../interface/ievent-user';
+import firebase from 'firebase/app';
+import { FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-eventpage',
@@ -19,12 +21,14 @@ export class EventpageComponent implements OnInit {
   data: IGroupInfo;
   user: any;
   gid: string;
+  messages: FormControl;
   constructor(
     private firestoreService: FirestoreService,
     private angularFirestore: AngularFirestore,
     private route: ActivatedRoute,
     public loginService: LoginService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private fb: FormBuilder
   ) {
     this.route.params.subscribe((params) => {
       // console.log('params :',params);
@@ -58,7 +62,9 @@ export class EventpageComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.messages = this.fb.control(['']);
+  }
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
@@ -90,5 +96,11 @@ export class EventpageComponent implements OnInit {
   }
   get allDrawn(): boolean {
     return this.data.members.every((ele) => ele.drawn === true);
+  }
+
+  leaveMessage(){
+    const groupRef = this.angularFirestore.collection('groups').doc(this.gid);
+    groupRef.update({invitationMessage: firebase.firestore.FieldValue.arrayUnion(this.messages.value)});
+    this.messages.setValue('');
   }
 }

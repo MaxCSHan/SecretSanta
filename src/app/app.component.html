@@ -21,11 +21,16 @@
       <ng-container *ngIf="loginService.isLoggedIn && loginService.userData">
         <h2 i18n>Hello, {{ loginService.userData.displayName }}!</h2>
       </ng-container>
-
     </div>
-    <ng-container  *ngIf="loginService.isLoggedIn && loginService.userData">
+    <ng-container *ngIf="loginService.isLoggedIn && loginService.userData">
       <div mat-menu-item>
-        <button class="logoutbtn"  i18n (click)="logout()" mat-raised-button color="primary">
+        <button
+          class="logoutbtn"
+          i18n
+          (click)="logout()"
+          mat-raised-button
+          color="primary"
+        >
           Logout
         </button>
       </div>
@@ -54,6 +59,12 @@
   >
     <mat-icon>share</mat-icon>
   </button>
+  <ng-container *ngFor="let language of languageList">
+    <a href="/{{ language.code }}/">
+      <button mat-raised-button class="button">{{ language.label }}</button>
+    </a></ng-container
+  >
 </mat-toolbar>
 
 <router-outlet></router-outlet>
+

@@ -97,7 +97,16 @@
           <h3 i18n>Send a message to the group</h3>
         </div>
         <div>
-          <mat-card>
+          <div class="rowitem">
+            <mat-form-field class="textarea-container">
+              <textarea [formControl]="messages" matInput placeholder="Ex. Event updates...."></textarea>
+              </mat-form-field>
+              <button (click)="leaveMessage()" mat-icon-button color="primary"><mat-icon>send</mat-icon></button>
+          </div>
+
+
+
+          <mat-card class="card">
             <mat-card-content>
               {{ data.details.invitationMessage }}
             </mat-card-content>
@@ -125,25 +134,24 @@
             <mat-icon color="error">whatshot</mat-icon>
           </div>
         </div>
-        <div class=rowitem
-        i18n-matTooltip
-              matTooltip="Not all drawn names are viewed yet!"
-              [matTooltipDisabled]="allDrawn"
-              matTooltipPosition="above"
-              matTooltipClass="tooltip-error">
-          <div>
-            It's {{ data.details.dateOfExchange.toDate() | date }}
-          </div>
+        <div
+          class="rowitem"
+          i18n-matTooltip
+          matTooltip="Not all drawn names are viewed yet!"
+          [matTooltipDisabled]="allDrawn"
+          matTooltipPosition="above"
+          matTooltipClass="tooltip-error"
+        >
+          <div>It's {{ data.details.dateOfExchange.toDate() | date }}</div>
           <button
-              mat-button
-              [routerLink]="[goToResult]"
-              [disabled]="!allDrawn"
-              i18n
-            >
-              Party Time🎉
-            </button>
+            mat-button
+            [routerLink]="[goToResult]"
+            [disabled]="!allDrawn"
+            i18n
+          >
+            Party Time🎉
+          </button>
         </div>
-
       </div>
     </ng-container>
   </div>

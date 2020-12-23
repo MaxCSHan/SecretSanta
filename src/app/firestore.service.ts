@@ -54,13 +54,13 @@ export class FirestoreService {
     //   merge: true,
     // });
   }
-  updateUserInfo(userId, memberName) {
+  updateUserInfo(userId,groupName, memberName) {
     const managerRef = this.afs
       .doc(`users/${userId}`)
       .collection('managerList')
       .doc(this.Id);
     managerRef.set(
-      { groupId: this.Id, nameAsMember: memberName },
+      { groupId: this.Id, groupName,nameAsMember: memberName },
       {
         merge: true,
       }
@@ -70,7 +70,7 @@ export class FirestoreService {
       .collection('groupList')
       .doc(this.Id);
     return grouprRef.set(
-      { groupId: this.Id, nameAsMember: memberName },
+      { groupId: this.Id,groupName, nameAsMember: memberName },
       {
         merge: true,
       }
