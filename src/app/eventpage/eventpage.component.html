@@ -105,19 +105,23 @@
           </div>
 
 
+<div class="carholder">
+  <mat-card class="card" *ngFor="let mes of data.messages">
+    <mat-card-content class="card-content">
+       {{ mes.message }}
+    </mat-card-content>
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title
+        >{{ mes.name }}</mat-card-title
+      >
+      <mat-card-subtitle *ngIf="mes.name === data.host.name" i18n>From the host</mat-card-subtitle>
+      <mat-card-subtitle>{{ mes.timecode.toDate() | date}}</mat-card-subtitle>
 
-          <mat-card class="card">
-            <mat-card-content>
-              {{ data.details.invitationMessage }}
-            </mat-card-content>
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title
-                >{{ data.host.name }}{{ data.host.uid }}</mat-card-title
-              >
-              <mat-card-subtitle i18n>From the host</mat-card-subtitle>
-            </mat-card-header>
-          </mat-card>
+    </mat-card-header>
+  </mat-card>
+</div>
+
         </div>
       </div>
     </ng-container>

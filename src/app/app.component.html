@@ -50,20 +50,20 @@
     </button> -->
   </mat-menu>
   <span i18n>Secret Santa Generator</span>
-  <span class="example-spacer"></span>
+  <span class="spacer"></span>
+  <ng-container class="langOpt" *ngFor="let language of languageList">
+    <a class="langlink" href="/{{ langSwitch(language.code) }}">
+      <button mat-button class="button">{{ language.label }}</button>
+    </a></ng-container
+  >
   <button
-    [cdkCopyToClipboard]="url"
+    [cdkCopyToClipboard]="siteurl"
     mat-icon-button
-    class="example-icon"
+    class="icon"
     aria-label="Example icon-button with share icon"
   >
     <mat-icon>share</mat-icon>
   </button>
-  <ng-container *ngFor="let language of languageList">
-    <a href="/{{ language.code }}/">
-      <button mat-raised-button class="button">{{ language.label }}</button>
-    </a></ng-container
-  >
 </mat-toolbar>
 
 <router-outlet></router-outlet>

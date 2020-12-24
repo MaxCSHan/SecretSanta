@@ -6,11 +6,11 @@
         <source>Secret Santa Generator</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">41</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="764d43e65c7dcb69d777d864b177d7d8d1670788" datatype="html">
@@ -31,7 +31,7 @@
         <source> Logout </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">29,30</context>
+          <context context-type="linenumber">34,35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
@@ -69,7 +69,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c9fa2baa422fa2d0dab3d2c302b297479a91e612" datatype="html">
@@ -87,7 +87,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2f45624ade7cfa2e6c0e99eb2cbce603d50c0bf7" datatype="html">
@@ -99,6 +99,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">124</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="25daf2091d213f567a896b8029efc9f87879fc0a" datatype="html">
@@ -166,7 +170,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">85</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9f5e73e133116c8d62ccec8523748db4b8b43211" datatype="html">
@@ -327,42 +331,91 @@
         <source>Date of the gift exchange</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b2c74f2951bd196ac8db2cb62009db48422633a6" datatype="html">
         <source>Ideas for the gift exchange</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8747a9f3ba3f9f54d4831c5a38ebde36f79ea347" datatype="html">
         <source>Send a message to the group</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
-          <context context-type="linenumber">99</context>
+          <context context-type="linenumber">97</context>
         </context-group>
       </trans-unit>
       <trans-unit id="87486550eafff32ae3b961565970ff2fc904573c" datatype="html">
         <source>From the host</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">118</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d50c15211a38c619a9874598f893697d53dccf8b" datatype="html">
         <source>It&apos;s time to show the results!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="e84d567dcd481efa24568308f8e4008017ab550f" datatype="html">
-        <source>Party Time🎉</source>
+      <trans-unit id="c0c44fb6a83bab0e90dd4e294818834364d49aa1" datatype="html">
+        <source>Not all drawn names are viewed yet!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">140</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0ca989664f5920b37b961aa41a7c596a6e30c96e" datatype="html">
+        <source> Party Time🎉 </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">152,153</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0b8cad85fe91bb8a9434856bed1e9dda45868f85" datatype="html">
+        <source>Choose a member</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="35d6fad327a46446c18602f80912499d3a9a9024" datatype="html">
+        <source> Send </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">72,73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ae6112d7e2db28f8ce9159a9dad7aba52d69fb1b" datatype="html">
+        <source>Welcome to <x id="INTERPOLATION" equiv-text="{{ data.details.groupName }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ddedecfb6d16237f1b3547c396a5d2e776c82eb1" datatype="html">
+        <source>Go check the results!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9ec57c4e6c0cac96c7b9105e19598ec42481467e" datatype="html">
+        <source> Who would you like to re-send the drawn name notification email to? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2d4f477f91abd9224fbf886c78f667547f83ac26" datatype="html">
+        <source> Change my email </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">62,63</context>
         </context-group>
       </trans-unit>
     </body>

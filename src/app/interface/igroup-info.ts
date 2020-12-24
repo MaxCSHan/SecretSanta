@@ -7,4 +7,5 @@ export interface IGroupInfo {
   members: IEventUser[];
   exclusionList: IExclusionList;
   details: IGroupDetail;
+  messages?: any[];
 }

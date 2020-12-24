@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/SecretSanta",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -8,7 +8,15 @@
     ],
     "rewrites": [
       {
-        "source": "**",
+        "source": "en/**",
+        "destination": "/en/index.html"
+      },
+      {
+        "source": "zh/**",
+        "destination": "/zh/index.html"
+      },
+      {
+        "source": "en/**",
         "destination": "/index.html"
       }
     ]

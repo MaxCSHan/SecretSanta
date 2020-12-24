@@ -32,6 +32,11 @@ export class FirestoreService {
       Id: this.Id,
       host: data.host,
       details: data.details,
+      messages: firebase.firestore.FieldValue.arrayUnion({
+        name: data.host.name,
+        message: data.details.invitationMessage,
+        timecode: new Date(),
+      }),
       exclusionList: data.exclusionList,
       members: data.members.map((ele) => {
         return { name: ele.name, email: ele.email, drawn: false };
@@ -54,13 +59,13 @@ export class FirestoreService {
     //   merge: true,
     // });
   }
-  updateUserInfo(userId,groupName, memberName) {
+  updateUserInfo(userId, groupName, memberName) {
     const managerRef = this.afs
       .doc(`users/${userId}`)
       .collection('managerList')
       .doc(this.Id);
     managerRef.set(
-      { groupId: this.Id, groupName,nameAsMember: memberName },
+      { groupId: this.Id, groupName, nameAsMember: memberName },
       {
         merge: true,
       }
@@ -70,7 +75,7 @@ export class FirestoreService {
       .collection('groupList')
       .doc(this.Id);
     return grouprRef.set(
-      { groupId: this.Id,groupName, nameAsMember: memberName },
+      { groupId: this.Id, groupName, nameAsMember: memberName },
       {
         merge: true,
       }

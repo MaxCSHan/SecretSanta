@@ -98,9 +98,15 @@ export class EventpageComponent implements OnInit {
     return this.data.members.every((ele) => ele.drawn === true);
   }
 
-  leaveMessage(){
+  leaveMessage() {
     const groupRef = this.angularFirestore.collection('groups').doc(this.gid);
-    groupRef.update({invitationMessage: firebase.firestore.FieldValue.arrayUnion(this.messages.value)});
+    groupRef.update({
+      messages: firebase.firestore.FieldValue.arrayUnion({
+        name: this.user.name,
+        message: this.messages.value,
+        timecode: new Date(),
+      }),
+    });
     this.messages.setValue('');
   }
 }

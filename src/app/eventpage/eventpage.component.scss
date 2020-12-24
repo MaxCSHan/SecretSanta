@@ -66,8 +66,17 @@
 .textarea-container{
   width:100%;
 }
-
+.carholder{
+  display: flex;
+  flex-direction: column-reverse;
+}
 .card{
   border-radius: 2rem;
   padding: 2rem 2rem 1rem 2rem;
+  margin-bottom: 1rem;
+}
+
+.card-content{
+  font-size: 1rem;
+  word-wrap: break-word;
 }

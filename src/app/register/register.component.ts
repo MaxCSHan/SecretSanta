@@ -1,7 +1,7 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from './../login.service';
 import { FirestoreService } from './../firestore.service';
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IGroupInfo } from '../interface/igroup-info';
 import {
   AngularFirestore,
@@ -11,23 +11,22 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
+import { AngularFireFunctions } from '@angular/fire/functions';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit,OnDestroy {
+export class RegisterComponent implements OnInit, OnDestroy {
   data: IGroupInfo;
   user: any;
   registerForm: FormGroup;
   gid: string;
-  uid: string;
   hasEmail: boolean;
   name$ = new Subject<string>();
   queryObservable: Observable<any[]>;
   subscription = new Subscription();
-
 
   constructor(
     private firestoreService: FirestoreService,
@@ -36,7 +35,8 @@ export class RegisterComponent implements OnInit,OnDestroy {
     private router: Router,
     public loginService: LoginService,
     private _snackBar: MatSnackBar,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private fun: AngularFireFunctions
   ) {
     this.route.params.subscribe((params) => {
       // console.log('params :',params);
@@ -63,19 +63,24 @@ export class RegisterComponent implements OnInit,OnDestroy {
       )
     );
     // subscribe to changes
-    this.subscription = this.queryObservable.pipe().subscribe((queriedItems) => {
-      // console.log(queriedItems[0]);
-      this.uid = queriedItems[0].uid;
-      if (this.registerForm.get('email').dirty) {
-        this.firestoreService.updateEmail(
-          this.gid,
-          this.uid,
-          this.registerForm.get('email').value
-        );
-      }
-      // console.log('uid =>', this.uid);
-      this.router.navigate([`overview/${this.gid}/${this.uid}`]);
-    });
+    this.subscription = this.queryObservable
+      .pipe()
+      .subscribe((queriedItems) => {
+        // console.log(queriedItems[0]);
+        const uid = queriedItems[0].uid;
+        if (this.registerForm.get('email').dirty) {
+          this.firestoreService.updateEmail(
+            this.gid,
+            uid,
+            this.registerForm.get('email').value
+          );
+        }
+        // console.log('uid =>', this.uid);
+        const userInfo = queriedItems[0];
+        userInfo.email = this.registerForm.get('email').value;
+        this.sendMail(this.data, userInfo);
+        this.router.navigate([`overview/${this.gid}/${uid}`]);
+      });
   }
 
   ngOnInit() {
@@ -112,7 +117,7 @@ export class RegisterComponent implements OnInit,OnDestroy {
     //   }
     // });
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
@@ -126,7 +131,21 @@ export class RegisterComponent implements OnInit,OnDestroy {
     const { name } = this.registerForm.value;
     this.name$.next(name);
   }
-  changeEmail(){
+  changeEmail() {
     this.registerForm.get('email').enable();
+  }
+  async sendMail(groupinfo: IGroupInfo, user): Promise<any> {
+    const collable = this.fun.httpsCallable('personalMail');
+    const url = `overview/${this.gid}/${user.uid}`;
+    const date = groupinfo.details.dateOfExchange.toDate().toDateString();
+    const data = { groupinfo, date, user, url };
+    console.log(data);
+    try {
+      const res = await collable(data);
+      res.subscribe((x) => console.log(x));
+    } catch (error) {
+      console.error(error);
+    }
+    return { success: true };
   }
 }
