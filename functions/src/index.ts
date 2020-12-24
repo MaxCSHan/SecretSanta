@@ -105,14 +105,14 @@ function helper(val: any, user: any) {
     console.log('Message sent: ' + info.response);
   });
 }
-function helper1(val: IGroupInfo, date: string, user: any, userUrl: string) {
+// function helper1(val: IGroupInfo, date: string, user: any, userUrl: string) {
 
-}
+// }
 
 exports.personalMail = functions.https.onCall((data, context) => {
   console.log('checkhere ', data.date);
   const groupinfo: IGroupInfo = data.groupinfo;
-  helper1(groupinfo, data.date, data.user, data.url);
+  // helper1(groupinfo, data.date, data.user, data.url);
 
   const url = `https://secret-santa-gen.firebaseapp.com/en/${data.userUrl}`;
   const themes = groupinfo.details.themes.map((ele: any) => ele.name);
@@ -207,7 +207,7 @@ exports.personalMail = functions.https.onCall((data, context) => {
 exports.invitation = functions.https.onCall((data, context) => {
   console.log('checkhere ', data.date);
   const groupinfo: IGroupInfo = data.groupinfo;
-  helper1(groupinfo, data.date, data.user, data.url);
+  // helper1(groupinfo, data.date, data.user, data.url);
 
   const url = `https://secret-santa-gen.firebaseapp.com/en/${data.userUrl}`;
   const themes = groupinfo.details.themes.map((ele: any) => ele.name);
@@ -326,38 +326,3 @@ exports.invitation = functions.https.onCall((data, context) => {
 
 //   return { success: true };
 // });
-
-// export const welcomeEmail = functions.auth.user().onCreate((user) => {
-//   const msg = {
-//     to: user.email,
-//     from: 'maxchen.sihhan@gmail.com',
-//     templateId: TEMPLATE_ID,
-//     dynamic_template_dtat: {},
-//   };
-
-//   return sgMail.send(msg);
-// });
-
-// export const genericEmail = functions.https.onCall(
-//   async (data, context: any) => {
-//     if (!context.auth && !context.auth.token.email) {
-//       throw new functions.https.HttpsError(
-//         'failed-precondition',
-//         'Must be logged with'
-//       );
-//     }
-//     const msg = {
-//       to: context.auth.toke.email,
-//       from: 'maxchen.sihhan@gmail.com',
-//       templateId: TEMPLATE_ID,
-//       dynamic_template_dtat: {
-//         subject: data.subject,
-//         name: data.text,
-//       },
-//     };
-
-//     await sgMail.send(msg);
-
-//     return { success: true };
-//   }
-// );
