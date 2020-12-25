@@ -2,7 +2,13 @@ import { FirestoreService } from './../firestore.service';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { LoginService } from '../login.service';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  LOCALE_ID,
+  Inject,
+} from '@angular/core';
 import {
   AbstractControl,
   FormArray,
@@ -67,19 +73,20 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
 
   constructor(
     private fb: FormBuilder,
-    public LoginService: LoginService,
-    private FirestoreService: FirestoreService,
+    public loginService: LoginService,
+    private firestoreService: FirestoreService,
     private _snackBar: MatSnackBar,
     private analytics: AngularFireAnalytics,
-    private fun: AngularFireFunctions
+    private fun: AngularFireFunctions,
+    @Inject(LOCALE_ID) public localeId: string
   ) {}
 
   ngOnInit(): void {
     this.secretSantaFromGroup = this.fb.group({
       firstFormGroup: this.fb.group({
         host: this.fb.group({
-          name: ['', required],
-          email: ['', [required, Validators.email]],
+          name: ['', required(this.localeId)],
+          email: ['', [required(this.localeId), Validators.email]],
         }),
         memberArray: this.fb.array([this.createItem(), this.createItem()]),
       }),
@@ -92,7 +99,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
         currency: [''],
         budget: ['', Validators.required],
         invitationMessage: [
-          "We're going to draw the names. You can watch the draw live.",
+          'We\'re going to draw the names. You can watch the draw live.',
           Validators.required,
         ],
         themes: [
@@ -110,7 +117,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       if (this.submitted) {
         this.submitted = false;
         this.openSnackBar(
-          "It seems like you made some changes, don't forget to update it!",
+          'It seems like you made some changes, don\'t forget to update it!',
           'close'
         );
       }
@@ -125,7 +132,10 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
           .get('memberArray') as FormArray).controls.forEach((ele) => {
           ele
             .get('name')
-            .setValidators([required, nameDuplicateValid(this.userList)]);
+            .setValidators([
+              required(this.localeId),
+              nameDuplicateValid(this.userList, this.localeId),
+            ]);
         });
         this.secretSantaFromGroup
           .get('firstFormGroup')
@@ -145,7 +155,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     this.secretSantaFromGroup
       .get('firstFormGroup')
       .valueChanges.subscribe((x) => {
-        this.memberList = [x.host.name, ...x.memberArray.map((x) => x.name)];
+        this.memberList = [x.host.name, ...x.memberArray.map((ele: any) => ele.name)];
       });
   }
 
@@ -158,7 +168,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   }
   createItem(): FormGroup {
     return this.fb.group({
-      name: ['', [required, nameDuplicateValid(this.userList)]],
+      name: ['', [required(this.localeId), nameDuplicateValid(this.userList, this.localeId)]],
       email: ['', [Validators.email]],
     });
   }
@@ -188,7 +198,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       this.fb.array(userData.map((x) => this.fb.group(x)))
     );
   }
-  removeExclusiveList() {
+  removeExclusiveList(): void {
     (this.secretSantaFromGroup.get(
       'exclusiveFormGroup'
     ) as FormGroup).removeControl('exclusiveList');
@@ -206,9 +216,9 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       .get('exclusiveList') as FormArray).controls;
   }
 
-  loginWithG() {
-    this.LoginService.GoogleAuth().finally(() => {
-      const userData = this.LoginService.userData;
+  loginWithG(): void {
+    this.loginService.GoogleAuth().finally(() => {
+      const userData = this.loginService.userData;
       this.secretSantaFromGroup
         .get('firstFormGroup')
         .get('host')
@@ -222,7 +232,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     });
   }
 
-  submit() {
+  submit(): void {
     const submitData: IGroupInfo = {
       host: JSON.parse(
         JSON.stringify(
@@ -235,16 +245,17 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       details: this.secretSantaFromGroup.get('detailFormGroup').value,
     };
     submitData.members.forEach((ele) => {
-      ele['uid'] = this.FirestoreService.createRandomId;
+      ele['uid'] = this.firestoreService.createRandomId;
     });
     this.hostData = submitData.members[0];
     this.submitData = submitData;
     // console.log(submitData);
-    this.FirestoreService.SetUserData(submitData).then((x) => {
-      if (this.LoginService.isLoggedIn) {
-        this.FirestoreService.updateUserInfo(
-          this.LoginService.userData.uid,
-          this.secretSantaFromGroup.get('detailFormGroup').get('groupName').value,
+    this.firestoreService.SetUserData(submitData, this.localeId).then((x) => {
+      if (this.loginService.isLoggedIn) {
+        this.firestoreService.updateUserInfo(
+          this.loginService.userData.uid,
+          this.secretSantaFromGroup.get('detailFormGroup').get('groupName')
+            .value,
           this.secretSantaFromGroup.get('firstFormGroup').get('host').value.name
         );
       }
@@ -299,20 +310,15 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   }
 
   logout(): void {
-    this.LoginService.logout();
+    this.loginService.logout();
   }
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string): void {
     this._snackBar.open(message, action, {
       duration: 2000,
     });
   }
 
-  sendEmail() {
-    const collable = this.fun.httpsCallable('genericEmail');
-    const context = { auth: { toke: { email: 'maxchen.sihhan@gmail.com' } } };
-    const data = { text: 'Sending Email with Angular.', subject: 'email test' };
-    collable({ data, context }).subscribe();
-  }
+
 
   get userList(): IEventUser[] {
     return this.secretSantaFromGroup
@@ -327,7 +333,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
         ]
       : [];
   }
-  get distributor() {
+  get distributor(): any[] {
     const randomizedArr = this.shuffle(this.userList);
     // console.log(randomizedArr);
     for (let i = 0; i < randomizedArr.length; i++) {
@@ -363,29 +369,12 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     return array;
   }
 
-  justSendEmail() {
-    const collable = this.fun.httpsCallable('contactUs');
-    // console.log(this.distributor);
-    this.distributor.forEach((user) => {
-      collable({
-        subject: user.name,
-        email: user.email,
-        url: `https://secret-santa-gen.web.app/overview/${this.FirestoreService.groupId}/${user.uid}`,
-        details: this.secretSantaFromGroup.get('detailFormGroup').value,
-      }).subscribe({
-        next(x): void {
-          console.log(x, 'done');
-        },
-      });
-    });
-    this.submitted = true;
-  }
   get pagePath(): string {
-    return `register/${this.FirestoreService.groupId}`;
-    // return `overview/${this.FirestoreService.groupId}/${this.hostData.uid}`;
+    return `register/${this.firestoreService.groupId}`;
+    // return `overview/${this.firestoreService.groupId}/${this.hostData.uid}`;
   }
 }
-export function nameDuplicateValid(val: IEventUser[]): ValidatorFn {
+export function nameDuplicateValid(val: IEventUser[], lang: string): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     const errorKey = {};
     const nameArray: string[] = val.map((ele) => ele.name);
@@ -395,7 +384,21 @@ export function nameDuplicateValid(val: IEventUser[]): ValidatorFn {
     if (rule) {
       return null;
     } else {
-      errorKey['duplicated'] = 'This name is duplicated';
+      let errorMes = 'This name is duplicated';
+      switch (lang) {
+        case 'zh':
+          errorMes = '名稱已重複';
+          break;
+        case 'fr':
+          errorMes = 'Le nom est dupliqué';
+          break;
+        case 'ja':
+          errorMes = '名前が重複しています';
+          break;
+        default:
+          break;
+      }
+      errorKey['duplicated'] = errorMes;
       // console.log(errorKey);
       return errorKey;
     }
@@ -418,15 +421,29 @@ export function arrayDuplicateValid(): ValidatorFn {
   };
 }
 
-export function required(
-  control: AbstractControl
-): { [key: string]: any } | null {
-  if (!isNotBlank(control.value)) {
-    return { ['required']: 'A name is required' };
-  }
-  return null;
-}
+export function required(lang: string): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    if (!isNotBlank(control.value)) {
+      let errorMes = 'A name is required';
+      switch (lang) {
+        case 'zh':
+          errorMes = '請填入姓名';
+          break;
+        case 'fr':
+          errorMes = 'Un nom est obligatoire';
+          break;
+        case 'ja':
+          errorMes = 'お名前を入力してください';
+          break;
+        default:
+          break;
+      }
 
+      return { ['requiredName']: errorMes, ['required']: true };
+    }
+    return null;
+  };
+}
 export function isNotBlank(val: string): boolean {
   const regEx = /.*\S.*/;
   return regEx.test(val) && val !== null;

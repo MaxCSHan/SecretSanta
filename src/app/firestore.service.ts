@@ -1,5 +1,5 @@
 import { LoginService } from './login.service';
-import { Injectable } from '@angular/core';
+import { Injectable, LOCALE_ID } from '@angular/core';
 import firebase from 'firebase/app';
 import {
   AngularFirestore,
@@ -24,12 +24,13 @@ export class FirestoreService {
   /* Setting up user data when sign in with username/password,
   sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(data: IGroupInfo) {
+  SetUserData(data: IGroupInfo,lang: string) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `groups/${this.Id}`
     );
     const valueData = {
       Id: this.Id,
+      localeId: lang,
       host: data.host,
       details: data.details,
       messages: firebase.firestore.FieldValue.arrayUnion({

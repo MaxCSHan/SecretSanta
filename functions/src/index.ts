@@ -22,15 +22,71 @@ exports.groupCreatedEmail = functions.firestore
 
 //aux
 function helper(val: any, user: any) {
-  const url = `https://secret-santa-gen.firebaseapp.com/en/register/${val.Id}/`;
+  const url = val.localeId
+    ? `https://secret-santa-gen.firebaseapp.com/${val.localeId}/register/${val.Id}/`
+    : `https://secret-santa-gen.firebaseapp.com/en/register/${val.Id}/`;
   const date = val.details.dateOfExchange.toDate() || 'Not Designated';
   const themes = val.details.themes.map((ele: any) => ele.name);
-  const mailOptions = {
-    from: 'SecretSantaGenerator<secret.santa.gen.app@gmail.com>', // You can write any mail Adress you want this doesn't effect anything
-    to: user.email, // This mail adress should be filled with any mail you want to read it
-    titile: val.details.groupName,
-    subject: `Results for ${val.details.groupName}`, // Sample Subject for you template
-    html: `<html>
+  let html = `<html>
+  <head>
+    <title>Secret Santa Generator Result</title>
+    <link href="https://uiux.s3.amazonaws.com/style-guide/css/style-guide.css" rel="stylesheet">
+    <style>
+    .btn {
+      outline=0;
+      border:0;
+      border-radius:0.5rem;
+      background:#42a5f5
+      height:1rem
+    }
+    .link {
+      font-size:15px;
+      line-height:20px;
+      text-decoration: none;
+      color:#ffffff;
+      padding:1rem;
+    }
+    .module{
+        background-image: url('https://static-cdn.drawnames.com/Content/Assets/deco-sending.svg');
+        color:#444444;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size:12px;
+        line-height:20px;
+        padding:16px 16px 16px 16px;
+        text-align:Center;
+        height:100%
+    }
+    .mes{
+      word-break:break-all;
+    }
+  </style>
+  </head>
+  <body  style="height:100%;">
+
+  <div data-role="module-unsubscribe" class="module" style="background-image: url('https://static-cdn.drawnames.com/Content/Assets/deco-sending.svg');
+  color:#444444;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:12px;
+  line-height:20px;
+  padding:16px 16px 16px 16px;
+  text-align:Center;
+  height:100%" role="module" data-type="unsubscribe" data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5">
+      <h1>Hi ${user.name},</h1>
+      <h2>Your result for ${val.details.groupName}</h2>
+      <div>Date: ${date}</div>
+          <div>Theme: ${themes}</div>
+      <div>Budget: ${val.details.currency}${val.details.budget} </div>
+      <div class="mes">${val.details.invitationMessage}</div>
+
+      </div>
+     <button class="btn"><a class="link" href="${url}" >Go to website</a></button>
+    </div>
+
+  </body>
+</html>`;
+
+  if (val.localeId === 'zh') {
+    html = `<html>
     <head>
       <title>Secret Santa Generator Result</title>
       <link href="https://uiux.s3.amazonaws.com/style-guide/css/style-guide.css" rel="stylesheet">
@@ -65,38 +121,34 @@ function helper(val: any, user: any) {
     </style>
     </head>
     <body  style="height:100%;">
-      <div data-role="module-unsubscribe" class="module" style="background-image: url('https://static-cdn.drawnames.com/Content/Assets/deco-sending.svg');
-          color:#444444;
-          font-family: Arial, Helvetica, sans-serif;
-          font-size:12px;
-          line-height:20px;
-          padding:16px 16px 16px 16px;
-          text-align:Center;
-          height:100%" role="module" data-type="unsubscribe" data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5">
-        <div>
-        <h1>嗨 ${user.name}，</h1>
-        <h2>你是 ${val.details.groupName} 的活動主辦人，快跟你的朋友們分享抽籤結果！</h2>
-        <div>活動日期: ${date}</div>
-            <div>禮物主題: ${themes}</div>
-        <div>預算:  ${val.details.currency}${val.details.budget}</div>
-        <div class="mes">${val.details.invitationMessage}</div>
+        <div data-role="module-unsubscribe" class="module" style="background-image: url('https://static-cdn.drawnames.com/Content/Assets/deco-sending.svg');
+        color:#444444;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size:12px;
+        line-height:20px;
+        padding:16px 16px 16px 16px;
+        text-align:Center;
+        height:100%" role="module" data-type="unsubscribe" data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5">
+      <div>
+      <h1>嗨 ${user.name}，</h1>
+      <h2>你是 ${val.details.groupName} 的活動主辦人，快跟你的朋友們分享抽籤結果！</h2>
+      <div>活動日期: ${date}</div>
+          <div>禮物主題: ${themes}</div>
+      <div>預算:  ${val.details.currency}${val.details.budget}</div>
+      <div class="mes">${val.details.invitationMessage}</div>
+      <button class="btn"><a class="link" href="${url}" >Go to website</a></button>
 
-        </div>
-
-        <div>
-        <h1>Hi ${user.name},</h1>
-        <h2>Your result for ${val.details.groupName}</h2>
-        <div>Date: ${date}</div>
-            <div>Theme: ${themes}</div>
-        <div>Budget: ${val.details.currency}${val.details.budget} </div>
-        <div class="mes">${val.details.invitationMessage}</div>
-
-        </div>
-       <button class="btn"><a class="link" href="${url}" >Go to website</a></button>
       </div>
 
     </body>
-  </html>`, // email content in HTML. You can write any Html template in here
+  </html>`;
+  }
+  const mailOptions = {
+    from: 'SecretSantaGenerator<secret.santa.gen.app@gmail.com>', // You can write any mail Adress you want this doesn't effect anything
+    to: user.email, // This mail adress should be filled with any mail you want to read it
+    titile: val.details.groupName,
+    subject: `Results for ${val.details.groupName}`, // Sample Subject for you template
+    html, // email content in HTML. You can write any Html template in here
   };
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {

@@ -7,7 +7,7 @@
 
   <div class="block">
     <button
-      *ngIf="!LoginService.isLoggedIn"
+      *ngIf="!loginService.isLoggedIn"
       (click)="loginWithG()"
       mat-raised-button
       color="primary"
@@ -15,8 +15,8 @@
     >
       Sign in with your Google Account
     </button>
-    <ng-container *ngIf="LoginService.isLoggedIn && LoginService.userData">
-      <h2 i18n>Hello, {{ LoginService.userData.displayName }}!</h2>
+    <ng-container *ngIf="loginService.isLoggedIn && loginService.userData">
+      <h2 i18n>Hello, {{ loginService.userData.displayName }}!</h2>
       <div>
         <button i18n (click)="logout()" mat-raised-button color="primary">
           Logout
@@ -104,7 +104,8 @@
                       placeholder="Last name, First name"
                       formControlName="name"
                       i18n-matTooltip
-                      [matTooltip]=" item.get('name').getError('required') || item.get('name').getError('duplicated') "
+                      required
+                      [matTooltip]=" item.get('name').getError('requiredName') || item.get('name').getError('duplicated') "
                       [matTooltipDisabled]="item.get('name').valid"
                       matTooltipPosition="above"
                       matTooltipClass="tooltip-error"

@@ -10,8 +10,11 @@
     "e2e": "ng e2e",
     "postinstall": "ngcc",
     "startzh": "ng serve --configuration=zh --port 5050",
+    "startfr": "ng serve --configuration=fr --port 5050",
     "build-locale:en": "ng build --prod --i18n-locale en --i18n-format xlf --i18n-file src/locale/messages.xlf --output-path=dist/en --baseHref /en/",
     "build-locale:zh": "ng build --prod --i18n-locale zh --i18n-format xlf --i18n-file src/locale/messages.zh.xlf --output-path=dist/zh --baseHref /zh/",
+    "build-locale:ja": "ng build --prod --i18n-locale ja --i18n-format xlf --i18n-file src/locale/messages.ja.xlf --output-path=dist/ja --baseHref /ja/",
+    "build-locale:fr": "ng build --prod --i18n-locale fr --i18n-format xlf --i18n-file src/locale/messages.fr.xlf --output-path=dist/fr --baseHref /fr/",
     "build-locale": "npm run build-locale:en && npm run build-locale:zh"
   },
   "private": true,

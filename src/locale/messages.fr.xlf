@@ -4,7 +4,7 @@
     <body>
       <trans-unit id="1cafe7db85d2828709a2951917567f6867094a95" datatype="html">
         <source>Secret Santa</source>
-        <target> 秘密聖誕老人 </target>
+        <target>Générateur de</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">3</context>
@@ -13,7 +13,7 @@
       </trans-unit>
       <trans-unit id="ed088667ca975f5427bd3a4701da063b9edf68a0" datatype="html">
         <source>Generator</source>
-        <target>產生器</target>
+        <target>Secret Santa</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">4</context>
@@ -22,7 +22,7 @@
       </trans-unit>
       <trans-unit id="9d89e1206ff4fc2aa4e105e21529be2c615eae2e" datatype="html">
         <source>Organize your Secret Santa using Email or Text Message.</source>
-        <target>輕鬆用Email建立一個秘密交換禮物派對！</target>
+        <target>Faites rapidement un tirage au sort par email ou texto.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">5</context>
@@ -30,7 +30,7 @@
       </trans-unit>
       <trans-unit id="cff1428d10d59d14e45edec3c735a27b5482db59" datatype="html">
         <source>Name</source>
-        <target>姓名</target>
+        <target>Votre nom</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">36</context>
@@ -38,7 +38,7 @@
       </trans-unit>
       <trans-unit id="244aae9346da82b0922506c2d2581373a15641cc" datatype="html">
         <source>Email</source>
-        <target>電子郵件信箱</target>
+        <target>Email</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">62</context>
@@ -46,7 +46,7 @@
       </trans-unit>
       <trans-unit id="25daf2091d213f567a896b8029efc9f87879fc0a" datatype="html">
         <source>Draw names with</source>
-        <target>參加者</target>
+        <target>Tirer des noms avec</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">88</context>
@@ -54,7 +54,7 @@
       </trans-unit>
       <trans-unit id="f732c304c7433e5a83ffcd862c3dce709a0f4982" datatype="html">
         <source>Next</source>
-        <target>下一步</target>
+        <target>Étape Suivante</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">146</context>
@@ -70,7 +70,7 @@
       </trans-unit>
       <trans-unit id="de31685e1ee2f51b2d31b376653ad4a7e5406104" datatype="html">
         <source>Group Name</source>
-        <target>群組名稱</target>
+        <target>Nom du groupe</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">228</context>
@@ -78,7 +78,7 @@
       </trans-unit>
       <trans-unit id="d1dea8ba826abf8d1e6da32a6df38abff4db8f22" datatype="html">
         <source>Date Of Exchange</source>
-        <target>交換日期</target>
+        <target>Date de l'échange de cadeaux</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">247</context>
@@ -86,7 +86,7 @@
       </trans-unit>
       <trans-unit id="c276a20333cb40a52b3efa7fccae1a1f5c105666" datatype="html">
         <source>Choose the currency</source>
-        <target>選擇貨幣</target>
+        <target>Unités Monétaires</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">277</context>
@@ -94,7 +94,7 @@
       </trans-unit>
       <trans-unit id="95a7bc17e7b1cd608f95c1860e7ff2dec93e51ed" datatype="html">
         <source>Budget</source>
-        <target>禮物預算</target>
+        <target>Budget</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">290</context>
@@ -102,7 +102,7 @@
       </trans-unit>
       <trans-unit id="ae310956e6ffdafb2f281c1b42a6af090bf530ce" datatype="html">
         <source>Set up themes for gifts</source>
-        <target>選定送禮主題，讓派對更有趣！</target>
+        <target>Choisissez des thèmes pour les cadeaux</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">318</context>
@@ -110,7 +110,7 @@
       </trans-unit>
       <trans-unit id="c766f8f3b658b9f15454bd890f46635c935717ba" datatype="html">
         <source>Invitation Message</source>
-        <target>邀請訊息</target>
+        <target>Message</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">346</context>
@@ -118,7 +118,7 @@
       </trans-unit>
       <trans-unit id="425ff0c8b460391d1d47b96754e84ab6f2df54de" datatype="html">
         <source> Submit </source>
-        <target>送出</target>
+        <target>Confirmer</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">374,375</context>
@@ -126,7 +126,7 @@
       </trans-unit>
       <trans-unit id="7e1ab59b0bfa306ed6f69bc0dfe69ebef5d94fd4" datatype="html">
         <source> Sign in with your Google Account </source>
-        <target>使用Google帳號登入</target>
+        <target>Se connecter à un compte Google</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">16,17</context>
@@ -134,7 +134,7 @@
       </trans-unit>
       <trans-unit id="fe5b21402a107c98b4cf3f04cdfe03f589eae952" datatype="html">
         <source>Hello, <x id="INTERPOLATION" equiv-text="{{ LoginService.userData.displayName }}"/>!</source>
-        <target>嗨, <x id="INTERPOLATION" equiv-text="{{ LoginService.userData.displayName }}"/>！</target>
+        <target>Bonjour, <x id="INTERPOLATION" equiv-text="{{ LoginService.userData.displayName }}"/>！</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">19</context>
@@ -142,7 +142,7 @@
       </trans-unit>
       <trans-unit id="7d31bc3039a96d3a3c86a16e2fe4a3ae78b08b14" datatype="html">
         <source> Logout </source>
-        <target>登出</target>
+        <target>Se déconnecter</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">22,23</context>
@@ -150,7 +150,7 @@
       </trans-unit>
       <trans-unit id="74c11391b93a610d26658613367a4b0f6211e15a" datatype="html">
         <source>Fill out your name</source>
-        <target>填入你的姓名</target>
+        <target>Entrer des noms</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">32</context>
@@ -158,7 +158,7 @@
       </trans-unit>
       <trans-unit id="d24b243de01a99c5872c941a624a332e58bb00ef" datatype="html">
         <source>Enter Member <x id="INTERPOLATION" equiv-text="{{ i + 2 }}"/></source>
-        <target>輸入成員姓名 <x id="INTERPOLATION" equiv-text="{{ i + 2 }}"/></target>
+        <target>Entrez Participant <x id="INTERPOLATION" equiv-text="{{ i + 2 }}"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">99</context>
@@ -166,7 +166,7 @@
       </trans-unit>
       <trans-unit id="e74b400205b3a71c24e41fca94e264d986c8c1a2" datatype="html">
         <source>Enter Member <x id="INTERPOLATION" equiv-text="{{ i + 2 }}"/>&apos;s Email</source>
-        <target>輸入成員信箱 <x id="INTERPOLATION" equiv-text="{{ i + 2 }}"/></target>
+        <target>Entrez Email de Participant <x id="INTERPOLATION" equiv-text="{{ i + 2 }}"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">115</context>
@@ -174,7 +174,7 @@
       </trans-unit>
       <trans-unit id="059e40e72429b0159709cf7ad0a36161a585f595" datatype="html">
         <source>Set your exclusions </source>
-        <target>設定排除名單</target>
+        <target>Déterminez vos exclusions</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">152</context>
@@ -182,7 +182,7 @@
       </trans-unit>
       <trans-unit id="b0c017ebf3f9ec6276a117cc20184d6f5c9e6782" datatype="html">
         <source>Any exlcusion?</source>
-        <target>有誰跟誰不能互抽禮物嗎？</target>
+        <target>Une exclusion indique qui ne doit pas tirer qui.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">155</context>
@@ -190,7 +190,7 @@
       </trans-unit>
       <trans-unit id="da0c5e95c9af1616cdded84500dead7d973b076c" datatype="html">
         <source>Choose the member</source>
-        <target>選擇成員</target>
+        <target>Choisissez les membres</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">192</context>
@@ -198,7 +198,7 @@
       </trans-unit>
       <trans-unit id="c83543cb5ca2adfccb81dbbfd1e9a309fdc674e9" datatype="html">
         <source>There are too few people for exclusions.</source>
-        <target>成員人數不夠多，無法建立排除名單</target>
+        <target>Votre groupe est trop petit pour des exclusions.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">214</context>
@@ -206,7 +206,7 @@
       </trans-unit>
       <trans-unit id="9e0faa19d14408f2800c9c5ca0ab6d82d3b6f824" datatype="html">
         <source>Send out the invitations!</source>
-        <target>送出邀請函！</target>
+        <target>Envoyer vos invitations!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">367</context>
@@ -214,7 +214,7 @@
       </trans-unit>
       <trans-unit id="c9fa2baa422fa2d0dab3d2c302b297479a91e612" datatype="html">
         <source>A name is required</source>
-        <target>請填入姓名</target>
+        <target>Un nom est obligatoire</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">48</context>
@@ -226,7 +226,7 @@
       </trans-unit>
       <trans-unit id="2f45624ade7cfa2e6c0e99eb2cbce603d50c0bf7" datatype="html">
         <source>Not a valid Email format</source>
-        <target>信箱不符合格式</target>
+        <target>Le format de email n'est pas valide</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">76</context>
@@ -238,7 +238,7 @@
       </trans-unit>
       <trans-unit id="84c12064602c170bcfd90f4503061971cb57fdae" datatype="html">
         <source>Let&apos;s pick a date!</source>
-        <target>選個日子吧！</target>
+        <target>Choisissez un date!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">261</context>
@@ -246,7 +246,7 @@
       </trans-unit>
       <trans-unit id="9f5e73e133116c8d62ccec8523748db4b8b43211" datatype="html">
         <source>Set a budget!</source>
-        <target>設定個預算吧！</target>
+        <target>Seletionnez budget</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">302</context>
@@ -254,7 +254,7 @@
       </trans-unit>
       <trans-unit id="39c072fc520ac1181ec444043d77e5979f31f42f" datatype="html">
         <source>Leave a message!</source>
-        <target>留言給其他人吧！</target>
+        <target>Laisser un message!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">358</context>
@@ -262,7 +262,7 @@
       </trans-unit>
       <trans-unit id="5340f5d9d8936f710c2cb1a2c3f92e61d04a2754" datatype="html">
         <source>Set up gift exchange details</source>
-        <target>設定交換禮物細節</target>
+        <target>Détails pour l'échange de cadeaux</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">227</context>
@@ -270,7 +270,7 @@
       </trans-unit>
       <trans-unit id="321731a537d4ccdad94ba01163c848a401e68ce2" datatype="html">
         <source>A group name is required</source>
-        <target>請輸入群組名稱</target>
+        <target>Un nom du groupe est obligatoire </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">237</context>
@@ -278,7 +278,7 @@
       </trans-unit>
       <trans-unit id="93b614d20c6414a63dd702c2622499f5980c3188" datatype="html">
         <source>Secret Santa Generator</source>
-        <target>秘密聖誕老人產生器</target>
+        <target>Générateur de Secret Santa</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
           <context context-type="linenumber">8</context>
@@ -290,7 +290,7 @@
       </trans-unit>
       <trans-unit id="5ce2bda884ea801c34a1a6c23627d9a5e08f0a82" datatype="html">
         <source>My Account</source>
-        <target>我的帳號</target>
+        <target>Mon Compte</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
           <context context-type="linenumber">12</context>
@@ -298,7 +298,7 @@
       </trans-unit>
       <trans-unit id="b23a27ad3c9262b6d27dab068f498fa21abe4546" datatype="html">
         <source>My groups</source>
-        <target>我的群組</target>
+        <target>Mes groupes</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
           <context context-type="linenumber">16</context>
@@ -306,7 +306,7 @@
       </trans-unit>
       <trans-unit id="c483007a5d2930bf15f807fd4262e9d97f6b6e5c" datatype="html">
         <source> Go to Page </source>
-        <target>前往群組頁面</target>
+        <target>Aller à la page</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">388,389</context>
@@ -314,7 +314,7 @@
       </trans-unit>
       <trans-unit id="536c8bcf5596ff7a116e2d753537660c19692c43" datatype="html">
         <source>Member List</source>
-        <target>成員名單</target>
+        <target>Liste des membres</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">25</context>
@@ -322,7 +322,7 @@
       </trans-unit>
       <trans-unit id="ca9cb94a6b49e7a4156ae08f8fd76ea4088cdfa3" datatype="html">
         <source> My drawn name </source>
-        <target>我抽到的名字</target>
+        <target>Mon nom drawn</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">18,19</context>
@@ -330,7 +330,7 @@
       </trans-unit>
       <trans-unit id="e47c2b210cdd456ed0d8608a7e5fde0831603dd6" datatype="html">
         <source>Date of the gift exchange</source>
-        <target>交換禮物日期</target>
+        <target>Date de l'échange de cadeaux</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">38</context>
@@ -338,7 +338,7 @@
       </trans-unit>
       <trans-unit id="b2c74f2951bd196ac8db2cb62009db48422633a6" datatype="html">
         <source>Ideas for the gift exchange</source>
-        <target>交換禮物主題</target>
+        <target>Idéas pour le rapidement un tirage au sort</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">49</context>
@@ -346,7 +346,7 @@
       </trans-unit>
       <trans-unit id="8747a9f3ba3f9f54d4831c5a38ebde36f79ea347" datatype="html">
         <source>Send a message to the group</source>
-        <target>群組通知</target>
+        <target>Envoyer un message au groupe</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">78</context>
@@ -354,7 +354,7 @@
       </trans-unit>
        <trans-unit id="473d7fb0fa1f703691a8ee5ca17b5df4a050bff6" datatype="html">
         <source>People haven&apos;t viewed their drawn names yet</source>
-        <target>還有成員尚未查看抽籤結果，提醒他們吧！</target>
+        <target>Tous les lots n’ont pas été vus</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">33</context>
@@ -362,7 +362,7 @@
       </trans-unit>
       <trans-unit id="ed7f01680b5ca35dacf435c4b6cb696d0c2218f3" datatype="html">
         <source>hasn&apos;t check the drawn name yet!</source>
-        <target>尚未查看抽籤結果。</target>
+        <target>Le lot n’a pas encore été vu par ils. Demandez à voir le lot.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">37</context>
@@ -370,7 +370,7 @@
       </trans-unit>
       <trans-unit id="d50c15211a38c619a9874598f893697d53dccf8b" datatype="html">
         <source>It&apos;s time to show the results!</source>
-        <target>時間到了，來公佈結果吧！</target>
+        <target>Il est temps de montrer les résultats!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">125</context>
@@ -378,7 +378,7 @@
       </trans-unit>
       <trans-unit id="e84d567dcd481efa24568308f8e4008017ab550f" datatype="html">
         <source>Party Time🎉</source>
-        <target>派對時間🎉</target>
+        <target>Faisons la fête🎉</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">132</context>
@@ -386,7 +386,7 @@
       </trans-unit>
       <trans-unit id="87486550eafff32ae3b961565970ff2fc904573c" datatype="html">
         <source>From the host</source>
-        <target>來自主辦人的訊息</target>
+        <target>Message de l'organisateur/trice</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">111</context>
@@ -394,7 +394,7 @@
       </trans-unit>
       <trans-unit id="3fb3055595257db15d223448a3b90fb56f71deb6" datatype="html">
         <source> Organizer<x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon color=&quot;primary&quot;&gt;"/>stars<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
-        <target>主辦人<x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon color=&quot;primary&quot;&gt;"/>stars<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+        <target>L'organisateur/trice<x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon color=&quot;primary&quot;&gt;"/>stars<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">14</context>
@@ -402,7 +402,7 @@
       </trans-unit>
       <trans-unit id="ae6112d7e2db28f8ce9159a9dad7aba52d69fb1b" datatype="html">
         <source>Welcome to <x id="INTERPOLATION" equiv-text="{{ data.details.groupName }}"/></source>
-        <target>歡迎加入 <x id="INTERPOLATION" equiv-text="{{ data.details.groupName }}"/></target>
+        <target>Bienvenue en <x id="INTERPOLATION" equiv-text="{{ data.details.groupName }}"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register.component.html</context>
           <context context-type="linenumber">4</context>
@@ -410,7 +410,7 @@
       </trans-unit>
       <trans-unit id="ddedecfb6d16237f1b3547c396a5d2e776c82eb1" datatype="html">
         <source>Go check the results!</source>
-        <target>查看我的抽籤結果</target>
+        <target>Vérifier les résultats !</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register.component.html</context>
           <context context-type="linenumber">5</context>
@@ -418,7 +418,7 @@
       </trans-unit>
       <trans-unit id="9ec57c4e6c0cac96c7b9105e19598ec42481467e" datatype="html">
         <source> Who would you like to re-send the drawn name notification email to? </source>
-        <target>輸入或更改你的電子郵件信箱</target>
+        <target>Entrer ou Changer vos email</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register.component.html</context>
           <context context-type="linenumber">7,8</context>
@@ -426,7 +426,7 @@
       </trans-unit>
        <trans-unit id="35d6fad327a46446c18602f80912499d3a9a9024" datatype="html">
         <source> Send </source>
-        <target>送出</target>
+        <target>Confirmer</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register.component.html</context>
           <context context-type="linenumber">72,73</context>
@@ -434,7 +434,7 @@
       </trans-unit>
       <trans-unit id="2d4f477f91abd9224fbf886c78f667547f83ac26" datatype="html">
         <source> Change my email </source>
-        <target>變更我的電子郵件信箱</target>
+        <target> Changer mon email </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register.component.html</context>
           <context context-type="linenumber">62,63</context>
@@ -442,7 +442,7 @@
       </trans-unit>
       <trans-unit id="764d43e65c7dcb69d777d864b177d7d8d1670788" datatype="html">
         <source> Sign in with your Google Account </source>
-        <target>使用Google帳號登入</target>
+        <target>Se connecter à un compte Google</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
           <context context-type="linenumber">19,20</context>
@@ -450,7 +450,7 @@
       </trans-unit>
       <trans-unit id="ea377b40aa4098c97e53c2f1922124c149c1dc58" datatype="html">
         <source>Hello, <x id="INTERPOLATION" equiv-text="{{ loginService.userData.displayName }}"/>!</source>
-        <target>嗨, <x id="INTERPOLATION" equiv-text="{{ loginService.userData.displayName }}"/>!</target>
+        <target>Bonjour, <x id="INTERPOLATION" equiv-text="{{ loginService.userData.displayName }}"/>!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
           <context context-type="linenumber">22</context>

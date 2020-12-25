@@ -11,16 +11,19 @@ export class AppComponent implements OnInit {
   languageList = [
     { code: 'en', label: 'English' },
     { code: 'zh', label: '正體中文' },
+    { code: 'ja', label: '日本語' },
+    { code: 'fr', label: 'Français' },
+
   ];
   url = 'https://secret-santa-gen.web.app/';
-  lang = 'en';
   constructor(
     public loginService: LoginService,
     @Inject(LOCALE_ID) protected localeId: string,
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
   loginWithG() {
     this.loginService.GoogleAuth().finally(() => {});
   }
@@ -28,12 +31,12 @@ export class AppComponent implements OnInit {
     this.loginService.logout();
   }
   langSwitch(langCode){
-    this.lang = langCode;
     return `${langCode}${this.router.url}`;
   }
 
   get siteurl(): string{
-    console.log(`${this.url}${this.lang}/`)
-    return `${this.url}${this.lang}/`;
+    return `${this.url}${this.localeId}/`;
   }
 }
+
+
