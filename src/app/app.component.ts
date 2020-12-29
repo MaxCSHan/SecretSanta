@@ -13,8 +13,7 @@ export class AppComponent implements OnInit {
     { code: 'zh', label: '正體中文' },
     { code: 'ja', label: '日本語' },
     { code: 'fr', label: 'Français' },
-    // { code: 'th', label: 'ภาษาไทย' }
-
+    { code: 'th', label: 'ภาษาไทย' }
   ];
   url = 'https://secret-santa-gen.web.app/';
   constructor(

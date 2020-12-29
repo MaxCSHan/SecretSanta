@@ -66,14 +66,20 @@
               "i18nFile": "src/locale/messages.zh.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "zh"
-            }
-            ,
+            },
             "fr": {
               "aot": true,
               "outputPath": "dist/under-construction-fr/",
               "i18nFile": "src/locale/messages.fr.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "fr"
+            },
+            "th": {
+              "aot": true,
+              "outputPath": "dist/under-construction-th/",
+              "i18nFile": "src/locale/messages.th.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "th"
             }
           }
         },
@@ -88,10 +94,12 @@
             },
             "zh": {
               "browserTarget": "SecretSanta:build:zh"
-            }
-            ,
+            },
             "fr": {
               "browserTarget": "SecretSanta:build:fr"
+            },
+            "th": {
+              "browserTarget": "SecretSanta:build:th"
             }
           }
         },
