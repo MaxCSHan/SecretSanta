@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { LoginService } from './login.service';
 import { Injectable, LOCALE_ID } from '@angular/core';
 import firebase from 'firebase/app';
@@ -24,7 +25,7 @@ export class FirestoreService {
   /* Setting up user data when sign in with username/password,
   sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(data: IGroupInfo,lang: string) {
+  SetUserData(data: IGroupInfo, lang: string): Promise<void>{
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `groups/${this.Id}`
     );
@@ -46,7 +47,7 @@ export class FirestoreService {
     };
 
     data.members.forEach((ele) => {
-      //重複新增bug
+      // 重複新增bug
       userRef.collection('members').doc(ele.uid).set(ele);
     });
 
@@ -60,7 +61,7 @@ export class FirestoreService {
     //   merge: true,
     // });
   }
-  updateUserInfo(userId, groupName, memberName) {
+  updateUserInfo(userId, groupName, memberName): Promise<void> {
     const managerRef = this.afs
       .doc(`users/${userId}`)
       .collection('managerList')
@@ -82,7 +83,7 @@ export class FirestoreService {
       }
     );
   }
-  async getUserData(userId) {
+  async getUserData(userId): Promise<Observable<any>>{
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${userId}`
     );
@@ -90,14 +91,14 @@ export class FirestoreService {
     return userRef.valueChanges();
   }
 
-  async getEventUser(groupId, userId) {
+  async getEventUser(groupId, userId): Promise<Observable<any>> {
     const groupRef: AngularFirestoreDocument<any> = this.afs.doc(
       `groups/${groupId}`
     );
     return groupRef.collection('members').doc(userId).valueChanges();
   }
 
-  async getEventData(groupId) {
+  async getEventData(groupId): Promise<Observable<any>> {
     const groupRef: AngularFirestoreDocument<any> = this.afs.doc(
       `groups/${groupId}`
     );
@@ -111,7 +112,7 @@ export class FirestoreService {
     return this.afs.createId();
   }
 
-  nameDrawn(groupId, userData) {
+  nameDrawn(groupId, userData): Promise<void>{
     const groupRef: AngularFirestoreDocument<any> = this.afs.doc(
       `groups/${groupId}`
     );
@@ -123,7 +124,7 @@ export class FirestoreService {
     });
   }
 
-  updateEmail(groupId, userId, userEmail) {
+  updateEmail(groupId, userId, userEmail): Promise<void> {
     const userData = this.afs
       .doc(`groups/${groupId}`)
       .collection('members')

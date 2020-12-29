@@ -51,11 +51,26 @@
   </mat-menu>
   <span i18n>Secret Santa Generator</span>
   <span class="spacer"></span>
-  <ng-container class="langOpt" *ngFor="let language of languageList">
+
+  <button
+  [matMenuTriggerFor]="langMeu"
+  mat-button
+  class="example-icon"
+  aria-label="Example icon-button with menu icon"
+>        <mat-icon>language</mat-icon>
+</button>
+  <mat-menu #langMeu="matMenu">
+    <ng-container  class="langOpt" *ngFor="let language of languageList">
+      <a mat-menu-item  class="langlink" href="/{{ langSwitch(language.code) }}">
+        {{ language.label }}
+      </a></ng-container
+    >
+  </mat-menu>
+  <!-- <ng-container class="langOpt" *ngFor="let language of languageList">
     <a class="langlink" href="/{{ langSwitch(language.code) }}">
       <button mat-button class="button">{{ language.label }}</button>
     </a></ng-container
-  >
+  > -->
   <button
     [cdkCopyToClipboard]="siteurl"
     mat-icon-button
@@ -67,4 +82,12 @@
 </mat-toolbar>
 
 <router-outlet></router-outlet>
+<div class="footer">
+  <div class="footer-content">Created by Max Chen</div>
+  <div class="footericon">
+    <div><a class="iconlink" href="https://www.instagram.com/tsukasakasa1231/" target="_blank" ><i  class="fab fa-instagram"></i></a></div>
+    <div><a class="iconlink" href="https://github.com/MaxCSHan" target="_blank" ><i class="fab fa-github"></i></a></div>
+  </div>
 
+
+</div>

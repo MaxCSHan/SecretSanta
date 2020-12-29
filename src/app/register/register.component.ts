@@ -3,14 +3,11 @@ import { LoginService } from './../login.service';
 import { FirestoreService } from './../firestore.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IGroupInfo } from '../interface/igroup-info';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
-import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { AngularFireFunctions } from '@angular/fire/functions';
 
 @Component({
@@ -83,7 +80,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -117,21 +114,21 @@ export class RegisterComponent implements OnInit, OnDestroy {
     //   }
     // });
   }
-  ngOnDestroy() {
+  ngOnDestroy(): void{
     this.subscription.unsubscribe();
   }
 
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string): void {
     this._snackBar.open(message, action, {
       duration: 5000,
     });
   }
 
-  temp() {
+  temp(): void {
     const { name } = this.registerForm.value;
     this.name$.next(name);
   }
-  changeEmail() {
+  changeEmail(): void {
     this.registerForm.get('email').enable();
   }
   async sendMail(groupinfo: IGroupInfo, user): Promise<any> {

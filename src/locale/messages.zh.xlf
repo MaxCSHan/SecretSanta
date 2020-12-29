@@ -376,6 +376,14 @@
           <context context-type="linenumber">125</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="e02afe8266edbdb8545348a86c962b04954e9c9f" datatype="html">
+        <source>It&apos;s <x id="INTERPOLATION" equiv-text="{{ data.details.dateOfExchange.toDate() | date }}"/></source>
+        <target>現在是<x id="INTERPOLATION" equiv-text="{{ data.details.dateOfExchange.toDate() | date }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">163</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="e84d567dcd481efa24568308f8e4008017ab550f" datatype="html">
         <source>Party Time🎉</source>
         <target>派對時間🎉</target>
@@ -454,6 +462,29 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
           <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="98d4589360a9c06e6b6e1cc9c72122db2f8e24b8" datatype="html">
+        <source>Add to calendar</source>
+        <target>加入行事曆</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3030048329037e35b04512dfd50f6d2e68e9af22" datatype="html">
+        <source> Draw the names now </source>
+        <target>開始抽籤</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="346a72212df675478038aa0a555c2b61c86e14ee" datatype="html">
+        <source>請等候主辦人開始抽籤</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">40,41</context>
         </context-group>
       </trans-unit>
     </body>

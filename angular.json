@@ -67,6 +67,14 @@
               "i18nFormat": "xlf",
               "i18nLocale": "zh"
             }
+            ,
+            "fr": {
+              "aot": true,
+              "outputPath": "dist/under-construction-fr/",
+              "i18nFile": "src/locale/messages.fr.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "fr"
+            }
           }
         },
         "serve": {
@@ -80,6 +88,10 @@
             },
             "zh": {
               "browserTarget": "SecretSanta:build:zh"
+            }
+            ,
+            "fr": {
+              "browserTarget": "SecretSanta:build:fr"
             }
           }
         },

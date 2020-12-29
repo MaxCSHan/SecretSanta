@@ -15,8 +15,32 @@
           </div>
         </div>
       </div>
+      <!-- <div id='two'>
+        <div class='box'>
+          <ul>
+            <li  *ngFor="let member of memberList">
+              {{ member.name }}
 
-      <div>
+            </li>
+          </ul>
+
+        </div>
+      </div> -->
+      <div *ngIf="user && user.host && !data.host.drawn">
+        <button
+          (click)="drawTheName()"
+          mat-raised-button
+          color="primary"
+          i18n
+        >
+          Draw the names now
+        </button>
+      </div>
+      <div i18n class="attention" *ngIf="user && !user.host && !data.host.drawn">
+        Wait for the organizer to draw the names
+      </div>
+
+      <div *ngIf="data.host.drawn">
         <button
           (click)="checkDrawnName()"
           mat-raised-button
@@ -56,9 +80,12 @@
           <div class="iconholder"><mat-icon>today</mat-icon></div>
           <h3 i18n>Date of the gift exchange</h3>
         </div>
-        <div>
-          {{ data.details.dateOfExchange.toDate() | date }}
+        <div class="rowitem">
+         <div>{{ data.details.dateOfExchange.toDate() | date }}   </div>     <span class="spacer"></span>
+          <button i18n mat-raised-button color="primary" (click)="downloadIcs()">Add to calendar</button>
+
         </div>
+
       </div>
       <mat-divider></mat-divider>
       <div class="row">
@@ -146,7 +173,7 @@
           matTooltipPosition="above"
           matTooltipClass="tooltip-error"
         >
-          <div>It's {{ data.details.dateOfExchange.toDate() | date }}</div>
+          <div i18n>It's {{ data.details.dateOfExchange.toDate() | date }}</div>
           <button
             mat-button
             [routerLink]="[goToResult]"

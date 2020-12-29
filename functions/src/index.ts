@@ -20,8 +20,8 @@ exports.groupCreatedEmail = functions.firestore
     helper(val, val.host);
   });
 
-//aux
-function helper(val: any, user: any) {
+// aux
+function helper(val: any, user: any): void {
   const url = val.localeId
     ? `https://secret-santa-gen.firebaseapp.com/${val.localeId}/register/${val.Id}/`
     : `https://secret-santa-gen.firebaseapp.com/en/register/${val.Id}/`;
@@ -150,7 +150,7 @@ function helper(val: any, user: any) {
     subject: `Results for ${val.details.groupName}`, // Sample Subject for you template
     html, // email content in HTML. You can write any Html template in here
   };
-  transporter.sendMail(mailOptions, function (error, info) {
+  transporter.sendMail(mailOptions,  (error, info) => {
     if (error) {
       return console.log(error);
     }
@@ -246,7 +246,7 @@ exports.personalMail = functions.https.onCall((data, context) => {
     </body>
   </html>`, // email content in HTML. You can write any Html template in here
   };
-  transporter.sendMail(mailOptions, function (error, info) {
+  transporter.sendMail(mailOptions,  (error, info) => {
     if (error) {
       return console.log(error);
     }
@@ -341,7 +341,7 @@ exports.invitation = functions.https.onCall((data, context) => {
     </body>
   </html>`, // email content in HTML. You can write any Html template in here
   };
-  transporter.sendMail(mailOptions, function (error, info) {
+  transporter.sendMail(mailOptions, (error, info)  =>  {
     if (error) {
       return console.log(error);
     }

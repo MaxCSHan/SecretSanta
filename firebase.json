@@ -22,6 +22,10 @@
       {
         "source": "ja/**",
         "destination": "/ja/index.html"
+      },
+      {
+        "source": "SecretSanta/",
+        "destination": "/index.html"
       }
     ]
   },

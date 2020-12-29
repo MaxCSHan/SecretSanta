@@ -13,20 +13,15 @@ import {
   AbstractControl,
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
-  ValidationErrors,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { getCurrencySymbol } from '@angular/common';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { from } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as firebase from 'firebase';
 import { IGroupInfo } from '../interface/igroup-info';
 import { IEventUser } from '../interface/ievent-user';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-generator',
@@ -67,8 +62,8 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   ];
 
   isExclusives = [
-    { value: false, viewValue: 'Do not use exclusions' },
-    { value: true, viewValue: 'Set exclusions' },
+    { value: false, viewValue: this.noExclusiveMes },
+    { value: true, viewValue: this.setExclusiveMes },
   ];
 
   constructor(
@@ -155,7 +150,10 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     this.secretSantaFromGroup
       .get('firstFormGroup')
       .valueChanges.subscribe((x) => {
-        this.memberList = [x.host.name, ...x.memberArray.map((ele: any) => ele.name)];
+        this.memberList = [
+          x.host.name,
+          ...x.memberArray.map((ele: any) => ele.name),
+        ];
       });
   }
 
@@ -168,7 +166,13 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   }
   createItem(): FormGroup {
     return this.fb.group({
-      name: ['', [required(this.localeId), nameDuplicateValid(this.userList, this.localeId)]],
+      name: [
+        '',
+        [
+          required(this.localeId),
+          nameDuplicateValid(this.userList, this.localeId),
+        ],
+      ],
       email: ['', [Validators.email]],
     });
   }
@@ -183,7 +187,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       .get('memberArray') as FormArray).removeAt(index);
   }
 
-  getExclusiveList() {
+  getExclusiveList(): void {
     const originData = [
       this.secretSantaFromGroup.get('firstFormGroup').get('host').value,
       ...this.secretSantaFromGroup.get('firstFormGroup').get('memberArray')
@@ -270,7 +274,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getSymbol(code) {
+  getSymbol(code): string {
     return getCurrencySymbol(code, 'wide');
   }
 
@@ -317,8 +321,6 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       duration: 2000,
     });
   }
-
-
 
   get userList(): IEventUser[] {
     return this.secretSantaFromGroup
@@ -373,8 +375,36 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     return `register/${this.firestoreService.groupId}`;
     // return `overview/${this.firestoreService.groupId}/${this.hostData.uid}`;
   }
+
+  get setExclusiveMes(): string {
+    switch (this.localeId) {
+      case 'zh':
+        return '設定排除清單';
+      case 'ja':
+        return '排除リストを設定する';
+      case 'fr':
+        return 'Déterminez l\'exclusions';
+      default:
+        return 'Set exclusions';
+    }
+  }
+  get noExclusiveMes(): string {
+    switch (this.localeId) {
+      case 'zh':
+        return '不設定排除清單';
+      case 'ja':
+        return '排除リストを設定しない';
+      case 'fr':
+        return 'Ne déterminez pas d\'exclusion';
+      default:
+        return 'Do not use exclusions';
+    }
+  }
 }
-export function nameDuplicateValid(val: IEventUser[], lang: string): ValidatorFn {
+export function nameDuplicateValid(
+  val: IEventUser[],
+  lang: string
+): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     const errorKey = {};
     const nameArray: string[] = val.map((ele) => ele.name);

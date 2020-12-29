@@ -22,15 +22,15 @@ export class AppComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
-  loginWithG() {
+  loginWithG(): void  {
     this.loginService.GoogleAuth().finally(() => {});
   }
   logout(): void {
     this.loginService.logout();
   }
-  langSwitch(langCode){
+  langSwitch(langCode): string{
     return `${langCode}${this.router.url}`;
   }
 

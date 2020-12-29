@@ -46,7 +46,7 @@
       </trans-unit>
       <trans-unit id="25daf2091d213f567a896b8029efc9f87879fc0a" datatype="html">
         <source>Draw names with</source>
-        <target>Tirer des noms avec</target>
+        <target>Tirez des noms avec</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">88</context>
@@ -118,7 +118,7 @@
       </trans-unit>
       <trans-unit id="425ff0c8b460391d1d47b96754e84ab6f2df54de" datatype="html">
         <source> Submit </source>
-        <target>Confirmer</target>
+        <target>Confirmez</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">374,375</context>
@@ -126,7 +126,7 @@
       </trans-unit>
       <trans-unit id="7e1ab59b0bfa306ed6f69bc0dfe69ebef5d94fd4" datatype="html">
         <source> Sign in with your Google Account </source>
-        <target>Se connecter à un compte Google</target>
+        <target>Se connectez à un compte Google</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">16,17</context>
@@ -142,7 +142,7 @@
       </trans-unit>
       <trans-unit id="7d31bc3039a96d3a3c86a16e2fe4a3ae78b08b14" datatype="html">
         <source> Logout </source>
-        <target>Se déconnecter</target>
+        <target>Se déconnectez</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">22,23</context>
@@ -150,7 +150,7 @@
       </trans-unit>
       <trans-unit id="74c11391b93a610d26658613367a4b0f6211e15a" datatype="html">
         <source>Fill out your name</source>
-        <target>Entrer des noms</target>
+        <target>Entrez des noms</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">32</context>
@@ -206,7 +206,7 @@
       </trans-unit>
       <trans-unit id="9e0faa19d14408f2800c9c5ca0ab6d82d3b6f824" datatype="html">
         <source>Send out the invitations!</source>
-        <target>Envoyer vos invitations!</target>
+        <target>Envoyez vos invitations!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">367</context>
@@ -254,7 +254,7 @@
       </trans-unit>
       <trans-unit id="39c072fc520ac1181ec444043d77e5979f31f42f" datatype="html">
         <source>Leave a message!</source>
-        <target>Laisser un message!</target>
+        <target>Laissez un message!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">358</context>
@@ -306,7 +306,7 @@
       </trans-unit>
       <trans-unit id="c483007a5d2930bf15f807fd4262e9d97f6b6e5c" datatype="html">
         <source> Go to Page </source>
-        <target>Aller à la page</target>
+        <target>Allez à la page</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">388,389</context>
@@ -322,7 +322,7 @@
       </trans-unit>
       <trans-unit id="ca9cb94a6b49e7a4156ae08f8fd76ea4088cdfa3" datatype="html">
         <source> My drawn name </source>
-        <target>Mon nom drawn</target>
+        <target>Nom tiré au sort</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">18,19</context>
@@ -338,7 +338,7 @@
       </trans-unit>
       <trans-unit id="b2c74f2951bd196ac8db2cb62009db48422633a6" datatype="html">
         <source>Ideas for the gift exchange</source>
-        <target>Idéas pour le rapidement un tirage au sort</target>
+        <target>Idées pour l’échange de cadeau </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">49</context>
@@ -346,7 +346,7 @@
       </trans-unit>
       <trans-unit id="8747a9f3ba3f9f54d4831c5a38ebde36f79ea347" datatype="html">
         <source>Send a message to the group</source>
-        <target>Envoyer un message au groupe</target>
+        <target>Envoyez un message au groupe</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">78</context>
@@ -362,7 +362,7 @@
       </trans-unit>
       <trans-unit id="ed7f01680b5ca35dacf435c4b6cb696d0c2218f3" datatype="html">
         <source>hasn&apos;t check the drawn name yet!</source>
-        <target>Le lot n’a pas encore été vu par ils. Demandez à voir le lot.</target>
+        <target>Ces personnes n’ont pas encore vu le lot. Demandez à voir le lot.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">37</context>
@@ -376,12 +376,20 @@
           <context context-type="linenumber">125</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="e84d567dcd481efa24568308f8e4008017ab550f" datatype="html">
-        <source>Party Time🎉</source>
+      <trans-unit id="e02afe8266edbdb8545348a86c962b04954e9c9f" datatype="html">
+        <source>It&apos;s <x id="INTERPOLATION" equiv-text="{{ data.details.dateOfExchange.toDate() | date }}"/></source>
+        <target>C&apos;est <x id="INTERPOLATION" equiv-text="{{ data.details.dateOfExchange.toDate() | date }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">163</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0ca989664f5920b37b961aa41a7c596a6e30c96e" datatype="html">
+        <source> Party Time🎉 </source>
         <target>Faisons la fête🎉</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">152,153</context>
         </context-group>
       </trans-unit>
       <trans-unit id="87486550eafff32ae3b961565970ff2fc904573c" datatype="html">
@@ -410,7 +418,7 @@
       </trans-unit>
       <trans-unit id="ddedecfb6d16237f1b3547c396a5d2e776c82eb1" datatype="html">
         <source>Go check the results!</source>
-        <target>Vérifier les résultats !</target>
+        <target>Vérifiez les résultats !</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register.component.html</context>
           <context context-type="linenumber">5</context>
@@ -418,7 +426,7 @@
       </trans-unit>
       <trans-unit id="9ec57c4e6c0cac96c7b9105e19598ec42481467e" datatype="html">
         <source> Who would you like to re-send the drawn name notification email to? </source>
-        <target>Entrer ou Changer vos email</target>
+        <target>Entrez ou Changez vos email</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register.component.html</context>
           <context context-type="linenumber">7,8</context>
@@ -426,7 +434,7 @@
       </trans-unit>
        <trans-unit id="35d6fad327a46446c18602f80912499d3a9a9024" datatype="html">
         <source> Send </source>
-        <target>Confirmer</target>
+        <target>Confirmez</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register.component.html</context>
           <context context-type="linenumber">72,73</context>
@@ -434,7 +442,7 @@
       </trans-unit>
       <trans-unit id="2d4f477f91abd9224fbf886c78f667547f83ac26" datatype="html">
         <source> Change my email </source>
-        <target> Changer mon email </target>
+        <target> Changez mon email </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register.component.html</context>
           <context context-type="linenumber">62,63</context>
@@ -442,7 +450,7 @@
       </trans-unit>
       <trans-unit id="764d43e65c7dcb69d777d864b177d7d8d1670788" datatype="html">
         <source> Sign in with your Google Account </source>
-        <target>Se connecter à un compte Google</target>
+        <target>Se connectez à un compte Google</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
           <context context-type="linenumber">19,20</context>
@@ -454,6 +462,29 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
           <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="98d4589360a9c06e6b6e1cc9c72122db2f8e24b8" datatype="html">
+        <source>Add to calendar</source>
+        <target>Ajouter au calendrier</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3030048329037e35b04512dfd50f6d2e68e9af22" datatype="html">
+        <source> Draw the names now </source>
+        <source> Tirez des noms au sort </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="346a72212df675478038aa0a555c2b61c86e14ee" datatype="html">
+        <source> Attendez pour l'organisateur/trice tire des noms au sort </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
+          <context context-type="linenumber">40,41</context>
         </context-group>
       </trans-unit>
     </body>

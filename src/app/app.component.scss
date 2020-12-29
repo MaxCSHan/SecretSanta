@@ -34,5 +34,34 @@ p {
 
 .langlink{
   text-decoration: none;
+}
+
+.footer{
+  width: 100vw;
+  background: #2396f3;
+  height:10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-content{
   color:#ffffff;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.footericon{
+  width: 5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footericon a{
+  font-size: 1.5rem;
+  font-weight: 800;
+  color:#ffffff;
+  text-decoration: none;
 }
