@@ -24,8 +24,8 @@
         "destination": "/ja/index.html"
       },
       {
-        "source": "SecretSanta/",
-        "destination": "/index.html"
+        "source": "**",
+        "destination": "/en/index.html"
       }
     ]
   },

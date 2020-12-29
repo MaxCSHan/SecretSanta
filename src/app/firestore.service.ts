@@ -50,12 +50,12 @@ export class FirestoreService {
       // 重複新增bug
       userRef.collection('members').doc(ele.uid).set(ele);
     });
-
-    userRef.set(valueData, {
+    if(this.ls.isLoggedIn)  {
+      this.ls.userCaseUpadated(this.Id);
+    }
+    return userRef.set(valueData, {
       merge: true,
     });
-
-    return this.ls.userCaseUpadated(this.Id);
 
     // return userRef.set(valueData, {
     //   merge: true,

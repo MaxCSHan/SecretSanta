@@ -265,7 +265,28 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       }
       // this.justSendEmail();
       this.submitted = true;
-      this.openSnackBar('The event created successfully!', 'close');
+      let snackMes = 'The event created successfully!';
+      let snackBtn = 'close';
+
+      switch ( this.localeId){
+        case('zh'):
+        snackMes = '活動成功建立！';
+        snackBtn = '關閉';
+        break;
+        case('ja'):
+        snackMes = 'イベントが作成された！';
+        snackBtn = '閉める';
+        break;
+        case('fr'):
+        snackMes = 'L\'événement est créé！';
+        snackBtn = 'fermez';
+        break;
+        default:
+          break;
+
+      }
+
+      this.openSnackBar(snackMes, snackBtn);
       this.analytics.logEvent('submit_event', {
         submitData: submitData.details,
       });

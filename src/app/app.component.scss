@@ -21,6 +21,11 @@ p {
   margin: 0;
 }
 
+.title{
+  white-space: pre-wrap !important;
+}
+
+
 .spacer{
   flex: 1 1 auto;
 }
@@ -44,6 +49,9 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top:1rem;
+  padding-bottom:1rem;
+
 }
 
 .footer-content{
@@ -65,3 +73,41 @@ p {
   color:#ffffff;
   text-decoration: none;
 }
+
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    ::ng-deep  .toolbar{
+      height: 5rem;
+    }
+}
+
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    ::ng-deep  .toolbar{
+      height: 5rem;
+    }
+
+}
+
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 812px)
+  and (-webkit-min-device-pixel-ratio: 3) {
+    ::ng-deep  .toolbar{
+      height: 4rem;
+    }
+
+}
+
+@media only screen
+    and (max-device-width: 390px)
+    and (max-device-height: 844px)
+    and (-webkit-device-pixel-ratio: 3) {
+      ::ng-deep  .toolbar{
+        height: 5rem;
+      }
+    }
