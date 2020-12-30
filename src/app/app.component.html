@@ -17,8 +17,7 @@
           mat-raised-button
           color="primary"
           i18n
-        >
-          Sign in with your Google Account
+        >Sign in with your Google Account
         </button>
         <ng-container *ngIf="loginService.isLoggedIn && loginService.userData">
           <h2 i18n>Hello, {{ loginService.userData.displayName }}!</h2>
@@ -79,6 +78,7 @@
     </a></ng-container
   > -->
     <button
+      (click)="shareNotify()"
       [cdkCopyToClipboard]="siteurl"
       mat-icon-button
       class="icon"

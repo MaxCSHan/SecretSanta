@@ -7,7 +7,7 @@ import {  AngularFirestore,} from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { IEventUser } from '../interface/ievent-user';
 import firebase from 'firebase/app';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, ValidatorFn, Validators } from '@angular/forms';
 import { GoogleCalendar, CalendarOptions } from 'datebook';
 import * as FileSaver from 'file-saver';
 import { EventAttributes, createEvent } from 'ics';
@@ -64,7 +64,7 @@ export class EventpageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.messages = this.fb.control(['']);
+    this.messages = this.fb.control([''], required(this.localeId));
   }
 
   openSnackBar(message: string, action: string): void {
@@ -100,6 +100,9 @@ export class EventpageComponent implements OnInit {
   }
 
   leaveMessage(): void {
+    if(this.messages.invalid ){
+      return ;
+    }
     const groupRef = this.angularFirestore.collection('groups').doc(this.gid);
     groupRef.update({
       messages: firebase.firestore.FieldValue.arrayUnion({
@@ -168,4 +171,32 @@ export class EventpageComponent implements OnInit {
       console.log(value);
     });
   }
+}
+
+export function isNotBlank(val: string): boolean {
+  const regEx = /.*\S.*/;
+  return regEx.test(val) && val !== null;
+}
+export function required(lang: string): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    if (!isNotBlank(control.value)) {
+      let errorMes = 'A name is required';
+      switch (lang) {
+        case 'zh':
+          errorMes = '請填入姓名';
+          break;
+        case 'fr':
+          errorMes = 'Un nom est obligatoire';
+          break;
+        case 'ja':
+          errorMes = 'お名前を入力してください';
+          break;
+        default:
+          break;
+      }
+
+      return { ['requiredName']: errorMes, ['required']: true };
+    }
+    return null;
+  };
 }

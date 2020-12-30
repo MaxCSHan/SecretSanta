@@ -1,6 +1,7 @@
 import { LoginService } from './login.service';
 import { Component, OnInit, LOCALE_ID, Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,9 @@ export class AppComponent implements OnInit {
   constructor(
     public loginService: LoginService,
     @Inject(LOCALE_ID) protected localeId: string,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar,
+
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +39,15 @@ export class AppComponent implements OnInit {
 
   get siteurl(): string{
     return `${this.url}${this.localeId}/`;
+  }
+  openSnackBar(message: string, action: string): void {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+  shareNotify()
+  {
+    this.openSnackBar('The link is copied.','close')
   }
 }
 

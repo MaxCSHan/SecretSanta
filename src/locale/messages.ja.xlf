@@ -448,12 +448,12 @@
           <context context-type="linenumber">62,63</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="764d43e65c7dcb69d777d864b177d7d8d1670788" datatype="html">
-        <source> Sign in with your Google Account </source>
+     <trans-unit id="fa20fc56397b63835bbcd058e7649ecddb0dce96" datatype="html">
+        <source>Sign in with your Google Account </source>
         <target>Googleアカウントでログイン</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">19,20</context>
+          <context context-type="linenumber">20,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ea377b40aa4098c97e53c2f1922124c149c1dc58" datatype="html">
