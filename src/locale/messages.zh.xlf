@@ -481,7 +481,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="346a72212df675478038aa0a555c2b61c86e14ee" datatype="html">
-        <source>請等候主辦人開始抽籤</source>
+        <source> Wait for the organizer to draw the names </source>
+        <target> 請等候主辦人開始抽籤 </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">40,41</context>
