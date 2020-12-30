@@ -24,6 +24,10 @@
         "destination": "/ja/index.html"
       },
       {
+        "source": "th/**",
+        "destination": "/th/index.html"
+      },
+      {
         "source": "**",
         "destination": "/en/index.html"
       }
