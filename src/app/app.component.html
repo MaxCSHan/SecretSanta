@@ -1,46 +1,48 @@
-<mat-toolbar class="toolbar" color="primary">
-  <button
-    [matMenuTriggerFor]="menu"
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with menu icon"
-  >
-    <mat-icon>menu</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <div mat-menu-item>
-      <button
-        *ngIf="!loginService.isLoggedIn"
-        (click)="loginWithG()"
-        mat-raised-button
-        color="primary"
-        i18n
-      >
-        Sign in with your Google Account
-      </button>
-      <ng-container *ngIf="loginService.isLoggedIn && loginService.userData">
-        <h2 i18n>Hello, {{ loginService.userData.displayName }}!</h2>
-      </ng-container>
-    </div>
-    <ng-container *ngIf="loginService.isLoggedIn && loginService.userData">
+<div class="conatiner">
+  <div>
+  <mat-toolbar class="toolbar" color="primary">
+    <button
+      [matMenuTriggerFor]="menu"
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
       <div mat-menu-item>
         <button
-          class="logoutbtn"
-          i18n
-          (click)="logout()"
+          *ngIf="!loginService.isLoggedIn"
+          (click)="loginWithG()"
           mat-raised-button
           color="primary"
+          i18n
         >
-          Logout
+          Sign in with your Google Account
         </button>
+        <ng-container *ngIf="loginService.isLoggedIn && loginService.userData">
+          <h2 i18n>Hello, {{ loginService.userData.displayName }}!</h2>
+        </ng-container>
       </div>
-    </ng-container>
+      <ng-container *ngIf="loginService.isLoggedIn && loginService.userData">
+        <div mat-menu-item>
+          <button
+            class="logoutbtn"
+            i18n
+            (click)="logout()"
+            mat-raised-button
+            color="primary"
+          >
+            Logout
+          </button>
+        </div>
+      </ng-container>
 
-    <button [routerLink]="['']" mat-menu-item>
-      <mat-icon>star_border</mat-icon>
-      <span i18n>Secret Santa Generator</span>
-    </button>
-    <!-- <button [routerLink]="['account']" mat-menu-item>
+      <button [routerLink]="['']" mat-menu-item>
+        <mat-icon>star_border</mat-icon>
+        <span i18n>Secret Santa Generator</span>
+      </button>
+      <!-- <button [routerLink]="['account']" mat-menu-item>
       <mat-icon>face</mat-icon>
       <span i18n>My Account</span>
     </button>
@@ -48,46 +50,66 @@
       <mat-icon>dashboard</mat-icon>
       <span i18n>My groups</span>
     </button> -->
-  </mat-menu>
-  <span class="title" i18n>Secret Santa Generator</span>
-  <span class="spacer"></span>
+    </mat-menu>
+    <span class="title" i18n>Secret Santa Generator</span>
+    <span class="spacer"></span>
 
-  <button
-  [matMenuTriggerFor]="langMeu"
-  mat-button
-  class="example-icon"
-  aria-label="Example icon-button with menu icon"
->        <mat-icon>language</mat-icon>
-</button>
-  <mat-menu #langMeu="matMenu">
-    <ng-container  class="langOpt" *ngFor="let language of languageList">
-      <a mat-menu-item  class="langlink" href="/{{ langSwitch(language.code) }}">
-        {{ language.label }}
-      </a></ng-container
+    <button
+      [matMenuTriggerFor]="langMeu"
+      mat-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
     >
-  </mat-menu>
-  <!-- <ng-container class="langOpt" *ngFor="let language of languageList">
+      <mat-icon>language</mat-icon>
+    </button>
+    <mat-menu #langMeu="matMenu">
+      <ng-container class="langOpt" *ngFor="let language of languageList">
+        <a
+          mat-menu-item
+          class="langlink"
+          href="/{{ langSwitch(language.code) }}"
+        >
+          {{ language.label }}
+        </a></ng-container
+      >
+    </mat-menu>
+    <!-- <ng-container class="langOpt" *ngFor="let language of languageList">
     <a class="langlink" href="/{{ langSwitch(language.code) }}">
       <button mat-button class="button">{{ language.label }}</button>
     </a></ng-container
   > -->
-  <button
-    [cdkCopyToClipboard]="siteurl"
-    mat-icon-button
-    class="icon"
-    aria-label="Example icon-button with share icon"
-  >
-    <mat-icon>share</mat-icon>
-  </button>
-</mat-toolbar>
+    <button
+      [cdkCopyToClipboard]="siteurl"
+      mat-icon-button
+      class="icon"
+      aria-label="Example icon-button with share icon"
+    >
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar>
+</div>
 
-<router-outlet></router-outlet>
-<div class="footer">
-  <div class="footer-content">Created by Max Chen</div>
-  <div class="footericon">
-    <div><a class="iconlink" href="https://www.instagram.com/tsukasakasa1231/" target="_blank" ><i  class="fab fa-instagram"></i></a></div>
-    <div><a class="iconlink" href="https://github.com/MaxCSHan" target="_blank" ><i class="fab fa-github"></i></a></div>
+  <div class="outlet">
+    <router-outlet></router-outlet>
   </div>
+  <div class="spacer"></div>
 
-
+  <div class="footer">
+    <div class="footer-content">Created by Max Chen</div>
+    <div class="footericon">
+      <div>
+        <a
+          class="iconlink"
+          href="https://www.instagram.com/tsukasakasa1231/"
+          target="_blank"
+          ><i class="fab fa-instagram"></i
+        ></a>
+      </div>
+      <div>
+        <a class="iconlink" href="https://github.com/MaxCSHan" target="_blank"
+          ><i class="fab fa-github"></i
+        ></a>
+      </div>
+    </div>
+  </div>
 </div>

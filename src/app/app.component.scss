@@ -21,6 +21,16 @@ p {
   margin: 0;
 }
 
+.conatiner{
+  display: flex;
+  flex-direction: column;
+
+}
+
+::ng-deep  .toolbar{
+  height: 4rem;
+}
+
 .title{
   white-space: pre-wrap !important;
 }
@@ -41,7 +51,14 @@ p {
   text-decoration: none;
 }
 
+.outlet{
+  min-height: calc(90vh - 4rem);
+
+}
+
 .footer{
+
+  flex: 1;
   width: 100vw;
   background: #2396f3;
   height:10vh;
@@ -74,12 +91,17 @@ p {
   text-decoration: none;
 }
 
+
 @media only screen
   and (min-device-width: 320px)
   and (max-device-width: 568px)
   and (-webkit-min-device-pixel-ratio: 2) {
     ::ng-deep  .toolbar{
       height: 5rem;
+    }
+    .outlet{
+      min-height: calc(90vh - 5rem);
+
     }
 }
 
@@ -89,6 +111,10 @@ p {
   and (-webkit-min-device-pixel-ratio: 2) {
     ::ng-deep  .toolbar{
       height: 5rem;
+    }
+    .outlet{
+      min-height: calc(90vh - 5rem);
+
     }
 
 }
@@ -109,5 +135,8 @@ p {
     and (-webkit-device-pixel-ratio: 3) {
       ::ng-deep  .toolbar{
         height: 5rem;
+      }
+      .outlet{
+        min-height: calc(90vh - 5rem);
       }
     }
