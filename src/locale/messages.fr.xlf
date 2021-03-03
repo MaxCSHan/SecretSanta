@@ -67,6 +67,10 @@
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">364</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/showresult/showresult.component.html</context>
+          <context context-type="linenumber">182</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="de31685e1ee2f51b2d31b376653ad4a7e5406104" datatype="html">
         <source>Group Name</source>
@@ -481,7 +485,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="346a72212df675478038aa0a555c2b61c86e14ee" datatype="html">
-        <source> Attendez pour l'organisateur/trice tire des noms au sort </source>
+        <source> Wait for the organizer to draw the names </source>
+        <target> Attendez pour l'organisateur/trice tire des noms au sort </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">40,41</context>

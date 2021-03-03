@@ -7,7 +7,6 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
 import { IGroupInfo } from './interface/igroup-info';
-import { IEventUser } from './interface/ievent-user';
 
 @Injectable({
   providedIn: 'root',
@@ -96,6 +95,12 @@ export class FirestoreService {
       `groups/${groupId}`
     );
     return groupRef.collection('members').doc(userId).valueChanges();
+  }
+  async getDraws(groupId): Promise<Observable<any>> {
+    const groupRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `groups/${groupId}`
+    );
+    return groupRef.collection('members').valueChanges();
   }
 
   async getEventData(groupId): Promise<Observable<any>> {

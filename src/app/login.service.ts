@@ -1,4 +1,3 @@
-import { from } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { User } from '../app/shared/services/user';
 import firebase from 'firebase/app';
@@ -93,6 +92,7 @@ export class LoginService {
       managerList: firebase.firestore.FieldValue.arrayUnion('created'),
       groupList: firebase.firestore.FieldValue.arrayUnion('created'),
     };
+
     this.user = userData;
 
     return userRef.set(userData, {

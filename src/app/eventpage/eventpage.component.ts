@@ -74,7 +74,7 @@ export class EventpageComponent implements OnInit {
   }
 
   get goToResult(): string {
-    return `/show-result`;
+    return `/show-result/${this.gid}`;
   }
 
   checkDrawnName(): void {

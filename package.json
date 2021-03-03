@@ -37,7 +37,7 @@
     "@sendgrid/mail": "^7.4.0",
     "@types/file-saver": "^2.0.1",
     "cors": "^2.8.5",
-    "date-and-time": "^0.14.2",
+    "date-and-time": ">=0.14.2",
     "datebook": "^6.1.1",
     "file-saver": "^2.0.5",
     "firebase": "^8.2.0",

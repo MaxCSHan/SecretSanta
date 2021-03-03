@@ -107,3 +107,7 @@ p {
 .spacer{
   flex: 1 1 auto;
 }
+
+::ng-deep .prefix{
+  margin-right: 0.5rem;
+}

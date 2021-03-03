@@ -20,8 +20,8 @@ const routes: Routes = [
     children: [{ path: ':gid', component: RegisterComponent }],
   },
   {
-    path:'show-result',
-    component:ShowresultComponent
+    path: 'show-result',
+    children: [{ path: ':gid', component: ShowresultComponent }],
   }
 ];
 
