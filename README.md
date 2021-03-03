@@ -1,27 +1,15 @@
-# SecretSanta
+# Secret Santa Generator
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
-## Development server
+## Introduction
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The Secret Santa Generator is a small tool for holding the Secret Santa gift exchange party.
+With the Secret Santa Generator, it allows you to make the secret draws with friends remotely in the pandamic period.
 
-## Code scaffolding
+All you need is make a list of name, set up some details for the party and share the link with your friends to fill in their emails.
+Then, the result of Secret Santa will be send to each person privately, even the party organizer won't know the whole results!
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Technologies
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+This web app is built with the help of Angular, firebase and the Google cloud function.
