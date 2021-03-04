@@ -21,7 +21,7 @@
         <note priority="1" from="description">site header</note>
       </trans-unit>
       <trans-unit id="9d89e1206ff4fc2aa4e105e21529be2c615eae2e" datatype="html">
-        <source>Organize your Secret Santa using Email or Text Message.</source>
+        <source>Organize your Secret Santa using Email.</source>
         <target>輕鬆用Email建立一個秘密交換禮物派對！</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
