@@ -1,15 +1,15 @@
 import { ShowresultComponent } from './showresult/showresult.component';
 import { RegisterComponent } from './register/register.component';
 import { EventpageComponent } from './eventpage/eventpage.component';
-import { MyprofileComponent } from './myprofile/myprofile.component';
+import { MyaccountComponent } from './myaccount/myaccount.component';
 import { MygroupComponent } from './mygroup/mygroup.component';
 import { GeneratorComponent } from './generator/generator.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { AuthGuard } from './auth/auth.guard';
 const routes: Routes = [
   { path: '', component: GeneratorComponent },
-  { path: 'account', component: MyprofileComponent },
+  { path: 'account', component: MyaccountComponent },
   { path: 'groups', component: MygroupComponent },
   {
     path: 'overview',
@@ -23,6 +23,7 @@ const routes: Routes = [
     path: 'show-result',
     children: [{ path: ':gid', component: ShowresultComponent }],
   }
+
 ];
 
 @NgModule({

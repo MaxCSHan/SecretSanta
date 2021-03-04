@@ -63,7 +63,7 @@
         </context-group>
         <note priority="1" from="description">site header</note>
       </trans-unit>
-      <trans-unit id="9d89e1206ff4fc2aa4e105e21529be2c615eae2e" datatype="html">
+      <trans-unit id="870a0c4602db247ef6be1202f47a82fe25cb9780" datatype="html">
         <source>Organize your Secret Santa using Email.</source>
         <target>จับฉลากได้อย่างรวดเร็วทางอีเมลหรือข้อความ</target>
         <context-group purpose="location">

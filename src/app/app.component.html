@@ -23,7 +23,15 @@
           <h2 i18n>Hello, {{ loginService.userData.displayName }}!</h2>
         </ng-container>
       </div>
+      <button [routerLink]="['']" mat-menu-item>
+        <mat-icon>star_border</mat-icon>
+        <span i18n>Secret Santa Generator</span>
+      </button>
       <ng-container *ngIf="loginService.isLoggedIn && loginService.userData">
+        <!-- <button [routerLink]="['account']" mat-menu-item>
+          <mat-icon>star_border</mat-icon>
+          <span i18n>My Account</span>
+        </button> -->
         <div mat-menu-item>
           <button
             class="logoutbtn"
@@ -37,10 +45,7 @@
         </div>
       </ng-container>
 
-      <button [routerLink]="['']" mat-menu-item>
-        <mat-icon>star_border</mat-icon>
-        <span i18n>Secret Santa Generator</span>
-      </button>
+
       <!-- <button [routerLink]="['account']" mat-menu-item>
       <mat-icon>face</mat-icon>
       <span i18n>My Account</span>

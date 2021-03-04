@@ -176,3 +176,33 @@ ul li {
 .spacer{
   flex: 1 1 auto;
 }
+
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .card-content{
+      max-width: 80vw;
+    }
+
+}
+
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 812px)
+  and (-webkit-min-device-pixel-ratio: 3) {
+    .card-content{
+      max-width: 80vw;
+    }
+
+}
+
+@media only screen
+    and (max-device-width: 390px)
+    and (max-device-height: 844px)
+    and (-webkit-device-pixel-ratio: 3) {
+      .card-content{
+        max-width: 80vw;
+      }
+    }
+

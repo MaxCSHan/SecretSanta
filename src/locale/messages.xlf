@@ -54,7 +54,7 @@
         </context-group>
         <note priority="1" from="description">site header</note>
       </trans-unit>
-      <trans-unit id="9d89e1206ff4fc2aa4e105e21529be2c615eae2e" datatype="html">
+      <trans-unit id="870a0c4602db247ef6be1202f47a82fe25cb9780" datatype="html">
         <source>Organize your Secret Santa using Email.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
@@ -117,10 +117,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
           <context context-type="linenumber">149</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/generator/generator.component.html</context>
-          <context context-type="linenumber">221</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
@@ -209,7 +205,7 @@
         <source> Submit </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
-          <context context-type="linenumber">379,380</context>
+          <context context-type="linenumber">380,381</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7e1ab59b0bfa306ed6f69bc0dfe69ebef5d94fd4" datatype="html">
@@ -247,34 +243,6 @@
           <context context-type="linenumber">118</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="059e40e72429b0159709cf7ad0a36161a585f595" datatype="html">
-        <source>Set your exclusions </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/generator/generator.component.html</context>
-          <context context-type="linenumber">155</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="b0c017ebf3f9ec6276a117cc20184d6f5c9e6782" datatype="html">
-        <source>Any exlcusion?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/generator/generator.component.html</context>
-          <context context-type="linenumber">158</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="da0c5e95c9af1616cdded84500dead7d973b076c" datatype="html">
-        <source>Choose the member</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/generator/generator.component.html</context>
-          <context context-type="linenumber">195</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="c83543cb5ca2adfccb81dbbfd1e9a309fdc674e9" datatype="html">
-        <source>There are too few people for exclusions.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/generator/generator.component.html</context>
-          <context context-type="linenumber">217</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="5340f5d9d8936f710c2cb1a2c3f92e61d04a2754" datatype="html">
         <source>Set up gift exchange details</source>
         <context-group purpose="location">
@@ -293,7 +261,7 @@
         <source> Go to Page </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
-          <context context-type="linenumber">387,388</context>
+          <context context-type="linenumber">389,390</context>
         </context-group>
       </trans-unit>
       <trans-unit id="536c8bcf5596ff7a116e2d753537660c19692c43" datatype="html">

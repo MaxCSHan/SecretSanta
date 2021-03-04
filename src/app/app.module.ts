@@ -38,12 +38,12 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { environment } from '../environments/environment';
 import { GeneratorComponent } from './generator/generator.component';
 import { MygroupComponent } from './mygroup/mygroup.component';
-import { MyprofileComponent } from './myprofile/myprofile.component';
 import { DashComponent } from './dash/dash.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { EventpageComponent } from './eventpage/eventpage.component';
 import { RegisterComponent } from './register/register.component';
 import { ShowresultComponent } from './showresult/showresult.component';
+import { MyaccountComponent } from './myaccount/myaccount.component';
 
 
 @NgModule({
@@ -51,11 +51,11 @@ import { ShowresultComponent } from './showresult/showresult.component';
     AppComponent,
     GeneratorComponent,
     MygroupComponent,
-    MyprofileComponent,
     DashComponent,
     EventpageComponent,
     RegisterComponent,
-    ShowresultComponent
+    ShowresultComponent,
+    MyaccountComponent
   ],
   imports: [
     BrowserModule,

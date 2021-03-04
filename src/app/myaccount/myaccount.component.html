@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="header">
+    <img class="profile_pic" [src]="loginService.userData.photoURL">
+    <div class="profile_name">{{ loginService.userData.displayName }}</div>
+  </div>
+
+  <div>
+    <div>Participating Events : {{loginService.userData.groupList.length}}</div>
+    <div>{{loginService.userData.groupList}}</div>
+    <div>Organizing Events : {{loginService.userData.managerList.length}}</div>
+  </div>
+
+
+</div>
