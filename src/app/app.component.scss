@@ -1,4 +1,7 @@
 
+body{
+  min-height: 100vh;
+}
 :host {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
@@ -52,7 +55,7 @@ p {
 }
 
 .outlet{
-  min-height: calc(90vh - 4rem);
+  min-height: calc(100vh - 10rem);
 
 }
 
@@ -61,7 +64,7 @@ p {
   flex: 1;
   width: 100vw;
   background: #2396f3;
-  height:10vh;
+  height:6rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -100,7 +103,7 @@ p {
       height: 5rem;
     }
     .outlet{
-      min-height: calc(90vh - 5rem);
+      min-height: calc(100vh - 10rem);
 
     }
 }
@@ -113,7 +116,7 @@ p {
       height: 5rem;
     }
     .outlet{
-      min-height: calc(90vh - 5rem);
+      min-height: calc(100vh - 10rem);
 
     }
 
@@ -126,6 +129,10 @@ p {
     ::ng-deep  .toolbar{
       height: 4rem;
     }
+    .outlet{
+      min-height: calc(100vh - 10rem);
+    }
+
 
 }
 
@@ -137,6 +144,6 @@ p {
         height: 5rem;
       }
       .outlet{
-        min-height: calc(90vh - 5rem);
+        min-height: calc(100vh - 10rem);
       }
     }
