@@ -251,13 +251,14 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     submitData.members.forEach((ele) => {
       ele['uid'] = this.firestoreService.createRandomId;
     });
-    this.hostData = submitData.members[0];
+    this.hostData = submitData.members.filter(ele => ele.host)[0];
     this.submitData = submitData;
     // console.log(submitData);
     this.firestoreService.SetUserData(submitData, this.localeId).then((x) => {
       if (this.loginService.isLoggedIn) {
         this.firestoreService.updateUserInfo(
           this.loginService.userData.uid,
+          this.hostData.uid,
           this.secretSantaFromGroup.get('detailFormGroup').get('groupName')
             .value,
           this.secretSantaFromGroup.get('firstFormGroup').get('host').value.name

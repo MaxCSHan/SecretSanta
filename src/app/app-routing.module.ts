@@ -9,7 +9,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 const routes: Routes = [
   { path: '', component: GeneratorComponent },
-  { path: 'account', component: MyaccountComponent },
+  { path: 'account',canActivate:[AuthGuard], component: MyaccountComponent },
   { path: 'groups', component: MygroupComponent },
   {
     path: 'overview',

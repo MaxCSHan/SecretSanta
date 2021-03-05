@@ -4,11 +4,29 @@
     <div class="profile_name">{{ loginService.userData.displayName }}</div>
   </div>
 
-  <div>
-    <div>Participating Events : {{loginService.userData.groupList.length}}</div>
-    <div>{{loginService.userData.groupList}}</div>
-    <div>Organizing Events : {{loginService.userData.managerList.length}}</div>
-  </div>
+  <ng-container>
+    <div *ngIf="loginService.userData.groupList">
+      <div class="card-container">
+        <div class="card-container_title">Participating Events : {{groupList.length}}</div>
+
+        <ng-container *ngFor="let group of groupList"
+        >
+          <div  class="card-container_card"  [routerLink]="['/register/'+group.groupId]" > <div><span class="card-container_card_groupName">{{group.groupName+'  '}}</span> as  <span class="card-container_card_memberName">{{'  '+group.nameAsMember}}</span></div></div>
+        </ng-container>
+      </div>
+
+      <div class="card-container">
+        <div class="card-container_title">Organizing Events : {{managerList.length}}</div>
+
+        <ng-container *ngFor="let mGroup of managerList"
+        >
+          <div class="card-container_card" [routerLink]="['/overview/'+mGroup.groupId+'/'+mGroup.groupUid]" ><div><span class="card-container_card_groupName">{{mGroup.groupName}}</span></div></div>
+        </ng-container>
+      </div>
+
+    </div>
+  </ng-container>
+
 
 
 </div>
