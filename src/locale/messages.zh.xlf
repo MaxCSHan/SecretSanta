@@ -492,6 +492,14 @@
           <context context-type="linenumber">40,41</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2cd52e5f18028398264b6d78084b83bdc1c942c2" datatype="html">
+        <source>Organizing Events : <x id="INTERPOLATION" equiv-text="{{managerList.length}}"/></source>
+        <target> 主辦的活動 :  </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/myaccount/myaccount.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>
