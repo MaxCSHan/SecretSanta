@@ -5,15 +5,15 @@
   </div>
 
   <ng-container>
-    <div *ngIf="loginService.userData.groupList">
-      <div class="card-container">
+    <div *ngIf="loginService.userData.managerList">
+      <!-- <div class="card-container">
         <div class="card-container_title">Participating Events : {{groupList.length}}</div>
 
         <ng-container *ngFor="let group of groupList"
         >
           <div  class="card-container_card"  [routerLink]="['/register/'+group.groupId]" > <div><span class="card-container_card_groupName">{{group.groupName+'  '}}</span> as  <span class="card-container_card_memberName">{{'  '+group.nameAsMember}}</span></div></div>
         </ng-container>
-      </div>
+      </div> -->
 
       <div class="card-container">
         <div class="card-container_title">Organizing Events : {{managerList.length}}</div>
