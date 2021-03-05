@@ -20,8 +20,8 @@
         </context-group>
         <note priority="1" from="description">site header</note>
       </trans-unit>
-      <trans-unit id="9d89e1206ff4fc2aa4e105e21529be2c615eae2e" datatype="html">
-        <source>Organize your Secret Santa using Email or Text Message.</source>
+      <trans-unit id="870a0c4602db247ef6be1202f47a82fe25cb9780" datatype="html">
+        <source>Organize your Secret Santa using Email.</source>
         <target>輕鬆用Email建立一個秘密交換禮物派對！</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/generator/generator.component.html</context>
@@ -490,6 +490,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/eventpage/eventpage.component.html</context>
           <context context-type="linenumber">40,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2cd52e5f18028398264b6d78084b83bdc1c942c2" datatype="html">
+        <source>Organizing Events : <x id="INTERPOLATION" equiv-text="{{managerList.length}}"/></source>
+        <target> 主辦的活動 :  </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/myaccount/myaccount.component.html</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
     </body>

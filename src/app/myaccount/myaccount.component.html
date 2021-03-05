@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="header">
+    <img class="profile_pic" [src]="loginService.userData.photoURL">
+    <div class="profile_name">{{ loginService.userData.displayName }}</div>
+  </div>
+
+  <ng-container>
+    <div *ngIf="loginService.userData.managerList">
+      <!-- <div class="card-container">
+        <div class="card-container_title">Participating Events : {{groupList.length}}</div>
+
+        <ng-container *ngFor="let group of groupList"
+        >
+          <div  class="card-container_card"  [routerLink]="['/register/'+group.groupId]" > <div><span class="card-container_card_groupName">{{group.groupName+'  '}}</span> as  <span class="card-container_card_memberName">{{'  '+group.nameAsMember}}</span></div></div>
+        </ng-container>
+      </div> -->
+
+      <div class="card-container">
+        <div i18n class="card-container_title">Organizing Events : {{managerList.length}}</div>
+
+        <ng-container *ngFor="let mGroup of managerList"
+        >
+          <div class="card-container_card" [routerLink]="['/overview/'+mGroup.groupId+'/'+mGroup.groupUid]" ><div><span class="card-container_card_groupName">{{mGroup.groupName}}</span></div></div>
+        </ng-container>
+      </div>
+
+    </div>
+  </ng-container>
+
+
+
+</div>

@@ -60,13 +60,13 @@ export class FirestoreService {
     //   merge: true,
     // });
   }
-  updateUserInfo(userId, groupName, memberName): Promise<void> {
+  updateUserInfo(userId,uid, groupName, memberName): Promise<void> {
     const managerRef = this.afs
       .doc(`users/${userId}`)
       .collection('managerList')
       .doc(this.Id);
     managerRef.set(
-      { groupId: this.Id, groupName, nameAsMember: memberName },
+      { groupId: this.Id,groupUid:uid, groupName, nameAsMember: memberName },
       {
         merge: true,
       }
@@ -76,7 +76,7 @@ export class FirestoreService {
       .collection('groupList')
       .doc(this.Id);
     return grouprRef.set(
-      { groupId: this.Id, groupName, nameAsMember: memberName },
+      { groupId: this.Id,groupUid:uid, groupName, nameAsMember: memberName },
       {
         merge: true,
       }
@@ -88,6 +88,18 @@ export class FirestoreService {
     );
 
     return userRef.valueChanges();
+  }
+  async getUserGroupList(userId): Promise<Observable<any>> {
+    const groupRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${userId}`
+    );
+    return groupRef.collection('groupList').valueChanges();
+  }
+  async getUserManagerList(userId): Promise<Observable<any>> {
+    const groupRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${userId}`
+    );
+    return groupRef.collection('managerList').valueChanges();
   }
 
   async getEventUser(groupId, userId): Promise<Observable<any>> {

@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+}
+
+.header {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile {
+  &_pic {
+    border-radius: 50%;
+  }
+  &_name {
+    margin-top: 1rem;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+&_title{
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+  &_card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0.2rem 0.8rem;
+    margin-bottom: 0.5rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    background: #f0f0f0;
+    &_memberName {
+      font-weight: 500;
+    }
+    &_groupName {
+      font-weight: 900;
+    }
+  }
+  &_card:hover {
+    background: #d3d3d3;
+  }
+}

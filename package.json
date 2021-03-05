@@ -19,7 +19,7 @@
     "build-locale:ja": "ng build --prod --i18n-locale ja --i18n-format xlf --i18n-file src/locale/messages.ja.xlf --output-path=dist/ja --baseHref /ja/",
     "build-locale:fr": "ng build --prod --i18n-locale fr --i18n-format xlf --i18n-file src/locale/messages.fr.xlf --output-path=dist/fr --baseHref /fr/",
     "build-locale:th": "ng build --prod --i18n-locale th --i18n-format xlf --i18n-file src/locale/messages.th.xlf --output-path=dist/th --baseHref /th/",
-    "build-locale": "npm run build-locale:en && npm run build-locale:ja && npm run build-locale:fr && npm run build-locale:th"
+    "build-locale": "npm run build-locale:en && npm run build-locale:zh && npm run build-locale:ja && npm run build-locale:fr && npm run build-locale:th"
   },
   "private": true,
   "dependencies": {

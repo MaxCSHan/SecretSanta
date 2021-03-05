@@ -146,9 +146,9 @@ export class EventpageComponent implements OnInit {
       ],
       duration: { hours: 1 },
       title: this.data.details.groupName,
-      description: `${this.data.details.invitationMessage}\n Budget:${
+      description: `${this.data.details.invitationMessage}\n \nBudget:${
         this.data.details.currency
-      } ${this.data.details.budget}\n Theme: ${this.data.details.themes.map(
+      } ${this.data.details.budget}\nTheme: ${this.data.details.themes.map(
         (ele) => ele.name
       )}`,
       url: `https://secret-santa-gen.firebaseapp.com/${this.localeId}/overview/${this.gid}/${this.user.uid}`,

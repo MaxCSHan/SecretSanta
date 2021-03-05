@@ -2,7 +2,7 @@
   <div class="title">
     <h1 i18n="site header">Secret Santa</h1>
     <h1 i18n="site header">Generator</h1>
-    <p i18n>Organize your Secret Santa using Email or Text Message.</p>
+    <p i18n>Organize your Secret Santa using Email.</p>
   </div>
 
   <div class="block">
@@ -148,7 +148,7 @@
           </form>
           <button mat-raised-button matStepperNext i18n>Next</button>
         </mat-step>
-        <mat-step
+        <!-- <mat-step
           [stepControl]="secretSantaFromGroup.get('exclusiveFormGroup')"
         >
           <form [formGroup]="secretSantaFromGroup.get('exclusiveFormGroup')">
@@ -219,7 +219,7 @@
           </ng-template>
           </form>
           <button mat-raised-button matStepperNext i18n>Next</button>
-        </mat-step>
+        </mat-step> -->
 
         <mat-step [stepControl]="secretSantaFromGroup.get('detailFormGroup')">
           <form [formGroup]="secretSantaFromGroup.get('detailFormGroup')">
@@ -371,6 +371,7 @@
         <mat-step>
           <ng-template matStepLabel i18n>Send out the invitations!</ng-template>
             <button
+            class="btn"
             i18n
             (click)="submit()"
             [ngClass]="{ submit: secretSantaFromGroup.valid, submitted: submitted }"
@@ -379,6 +380,7 @@
             Submit
           </button>
           <button
+          class="btn"
           i18n
           *ngIf="submitted"
           [routerLink]="[pagePath]"
@@ -386,7 +388,9 @@
         >
           Go to Page
         </button>
-        <button           *ngIf="submitted"
+        <button
+        class="btn"
+        *ngIf="submitted"
          [cdkCopyToClipboard]="'secret-santa-gen.firebaseapp.com/'+pagePath" mat-raised-button color="primary">
           <mat-icon>content_copy</mat-icon>
         </button>

@@ -12,6 +12,7 @@ import {
 export class LoginService {
   user: any;
   loginData: object;
+  redirectUrl: string;
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
