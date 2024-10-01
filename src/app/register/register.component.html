@@ -53,7 +53,7 @@
         <div class="rowitem">
           <button
             (click)="changeEmail()"
-            *ngIf="hasEmail"
+            *ngIf="hasEmail && !registerForm.get('email').enabled"
             mat-raised-button
             color="primary"
             class="rounded"
@@ -62,12 +62,38 @@
             Change my email
           </button>
           <button
+            (click)="updateChangeEmail()"
+            *ngIf="hasEmail && registerForm.get('email').enabled"
+            mat-raised-button
+            [disabled]="registerForm.get('email').value === currentEmail"
+            color="primary"
+            class="rounded"
+            i18n
+          >
+            Save
+          </button>
+          <button
+            (click)="discardChangeEmail()"
+            *ngIf="hasEmail && registerForm.get('email').enabled"
+            mat-raised-button
+            color="error"
+            class="rounded"
+            i18n
+          >
+            Discard
+          </button>
+          <button
             (click)="temp()"
+            *ngIf="!registerForm.get('email').enabled || !hasEmail"
             mat-raised-button
             [disabled]="!registerForm.valid"
             color="primary"
             class="rounded"
             i18n
+            matTooltip="The mail has been sent, do you want to resend another one?"
+            [matTooltipDisabled]="!isSent"
+            matTooltipPosition="above"
+            matTooltipClass="tooltip-error"
           >
             Send
           </button>

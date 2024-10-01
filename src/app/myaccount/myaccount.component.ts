@@ -13,48 +13,48 @@ import { LoginService } from '../login.service';
 @Component({
   selector: 'app-myaccount',
   templateUrl: './myaccount.component.html',
-  styleUrls: ['./myaccount.component.scss']
+  styleUrls: ['./myaccount.component.scss'],
 })
 export class MyaccountComponent implements OnInit {
-  groupList:any[];
-  managerList:any[];
+  groupList: any[];
+  managerList: any[];
   constructor(
     public loginService: LoginService,
     private firestoreService: FirestoreService,
     @Inject(LOCALE_ID) public localeId: string
   ) {
-      this.firestoreService.getUserGroupList(this.loginService.userData.uid).then((x) => {
+    this.firestoreService
+      .getUserGroupList(this.loginService.userData.uid)
+      .then((x) => {
         x.subscribe((ele) => {
-          const holder:any[] = ele;
+          const holder: any[] = ele;
+          console.log(holder);
           this.groupList = holder;
         });
       });
-      this.firestoreService.getUserManagerList(this.loginService.userData.uid).then((x) => {
+    this.firestoreService
+      .getUserManagerList(this.loginService.userData.uid)
+      .then((x) => {
         x.subscribe((ele) => {
-          const holder:any[] = ele;
+          const holder: any[] = ele;
           this.managerList = holder;
         });
       });
-
-
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
   registerPath(uid): string {
     return `register/${uid}`;
   }
 
-  memberList(){
-    return this.loginService.userData.groupList.slice(1).map( gid =>{
+  memberList() {
+    return this.loginService.userData.groupList.slice(1).map((gid) => {
       this.firestoreService.getEventData(gid).then((x) => {
         x.subscribe((ele) => {
           const holder: IGroupInfo = ele;
           return holder.details;
         });
       });
-    })
+    });
   }
-
 }

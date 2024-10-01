@@ -1,13 +1,14 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from './../login.service';
 import { FirestoreService } from './../firestore.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, LOCALE_ID } from '@angular/core';
 import { IGroupInfo } from '../interface/igroup-info';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
 import { Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { AngularFireFunctions } from '@angular/fire/functions';
 
 @Component({
@@ -24,6 +25,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   name$ = new Subject<string>();
   queryObservable: Observable<any[]>;
   subscription = new Subscription();
+  currentEmail: string;
+  isSent: boolean;
 
   constructor(
     private firestoreService: FirestoreService,
@@ -33,7 +36,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     public loginService: LoginService,
     private _snackBar: MatSnackBar,
     private fb: FormBuilder,
-    private fun: AngularFireFunctions
+    private fun: AngularFireFunctions,
+    @Inject(LOCALE_ID) public localeId: string
   ) {
     this.route.params.subscribe((params) => {
       // console.log('params :',params);
@@ -50,34 +54,59 @@ export class RegisterComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.queryObservable = this.name$.pipe<any[]>(
+    this.queryObservable = this.name$.pipe(
+      debounceTime(2000),
       switchMap((name) =>
         this.angularFirestore
           .collection('groups')
           .doc(this.gid)
           .collection('members', (ref) => ref.where('name', '==', name))
           .valueChanges()
-      )
+      ),
+      debounceTime(1000)
     );
     // subscribe to changes
-    this.subscription = this.queryObservable
-      .pipe()
-      .subscribe((queriedItems) => {
-        // console.log(queriedItems[0]);
-        const uid = queriedItems[0].uid;
-        if (this.registerForm.get('email').dirty) {
-          this.firestoreService.updateEmail(
-            this.gid,
-            uid,
-            this.registerForm.get('email').value
-          );
+    this.subscription = this.queryObservable.subscribe((queriedItems) => {
+      // console.log(queriedItems[0]);
+      const uid = queriedItems[0].uid;
+      if (this.registerForm.get('email').dirty) {
+        this.firestoreService.updateEmail(
+          this.gid,
+          uid,
+          this.registerForm.get('email').value
+        );
+      }
+      // console.log('uid =>', this.uid);
+      const userInfo = queriedItems[0];
+      userInfo.email = this.registerForm.get('email').value;
+      this.sendMail(this.data, userInfo).then(() => {
+        if (!this.isSent) {
+          this.firestoreService.markEmailAsSent(this.gid, uid);
         }
-        // console.log('uid =>', this.uid);
-        const userInfo = queriedItems[0];
-        userInfo.email = this.registerForm.get('email').value;
-        this.sendMail(this.data, userInfo);
-        this.router.navigate([`overview/${this.gid}/${uid}`]);
+        let snackMes = 'The mail has been sent successfully!';
+        let snackBtn = 'close';
+
+        switch (this.localeId) {
+          case 'zh':
+            snackMes = '信件已寄出！';
+            snackBtn = '關閉';
+            break;
+          case 'ja':
+            snackMes = 'イベントが作成された！';
+            snackBtn = '閉める';
+            break;
+          case 'fr':
+            snackMes = "L'événement est créé！";
+            snackBtn = 'fermez';
+            break;
+          default:
+            break;
+        }
+
+        this.openSnackBar(snackMes, snackBtn);
       });
+      // this.router.navigate([`overview/${this.gid}/${uid}`]);
+    });
   }
 
   ngOnInit(): void {
@@ -91,10 +120,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
         .doc(this.gid)
         .collection('members', (ref) => ref.where('name', '==', ele))
         .valueChanges()
-        .subscribe((x) => {
-          if (x[0].email) {
+        .subscribe((res) => {
+          this.isSent = res[0].isSent ? true : false;
+          if (res[0].email) {
             this.hasEmail = true;
-            this.registerForm.get('email').setValue(x[0].email);
+            this.registerForm.get('email').setValue(res[0].email);
+            this.currentEmail = res[0].email;
             this.registerForm.get('email').disable();
           } else {
             this.hasEmail = false;
@@ -114,7 +145,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     //   }
     // });
   }
-  ngOnDestroy(): void{
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
@@ -131,6 +162,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
   changeEmail(): void {
     this.registerForm.get('email').enable();
   }
+  updateChangeEmail(): void {
+    this.registerForm.get('email').disable();
+    this.currentEmail = this.registerForm.get('email').value;
+  }
+  discardChangeEmail(): void {
+    this.registerForm.get('email').setValue(this.currentEmail);
+    this.registerForm.get('email').disable();
+  }
+
   async sendMail(groupinfo: IGroupInfo, user): Promise<any> {
     const collable = this.fun.httpsCallable('personalMail');
     const url = `overview/${this.gid}/${user.uid}`;
